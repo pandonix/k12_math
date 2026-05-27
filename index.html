@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>高一数学知识点检索</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./styles.css" />
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["$", "$"]],
+          displayMath: [["$$", "$$"]]
+        },
+        svg: { fontCache: "global" }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">函</span>
+        <div>
+          <h1>高一数学知识点检索</h1>
+          <p>人教A版必修一、必修二详版整理</p>
+        </div>
+      </div>
+      <div class="search-wrap">
+        <label class="visually-hidden" for="searchInput">搜索知识点</label>
+        <input id="searchInput" type="search" placeholder="搜索：向量、对数、易错、外接球..." autocomplete="off" />
+        <button id="clearSearch" type="button" title="清空搜索">清空</button>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <aside class="sidebar" aria-label="知识目录">
+        <section class="panel summary-panel">
+          <div class="stat">
+            <strong id="sectionCount">0</strong>
+            <span>知识点</span>
+          </div>
+          <div class="stat">
+            <strong id="chapterCount">0</strong>
+            <span>章节</span>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>范围</h2>
+          <div class="chip-group" id="bookFilters"></div>
+        </section>
+
+        <section class="panel nav-panel">
+          <h2>章节</h2>
+          <nav id="chapterNav" class="chapter-nav"></nav>
+        </section>
+      </aside>
+
+      <section class="workspace" aria-live="polite">
+        <div class="toolbar">
+          <div class="segmented" id="typeFilters" aria-label="内容筛选"></div>
+          <div class="result-meta">
+            <span id="resultCount">正在加载...</span>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <section class="results" id="results" aria-label="搜索结果"></section>
+          <article class="reader" id="reader" aria-label="知识点详情">
+            <div class="empty-state">
+              <strong>正在整理知识点...</strong>
+              <span>稍等片刻，页面会自动建立目录和检索索引。</span>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
