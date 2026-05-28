@@ -15,7 +15,13 @@ from backend.services.kp_sync import sync_knowledge_points
 async def lifespan(app: FastAPI):
     run_migrations()
     with Session(engine) as session:
-        sync_knowledge_points(session)
+        result = sync_knowledge_points(session)
+        if result.duplicate_ids:
+            raise RuntimeError(
+                "Knowledge point sync produced duplicate ids: "
+                f"{result.duplicate_ids}. Refusing to start — investigate "
+                "the markdown source before any question or attempt is written."
+            )
     yield
 
 

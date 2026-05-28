@@ -76,26 +76,49 @@ def run_migrations(
             continue
 
         _backup_db(path, version)
-        script = migration.read_text(encoding="utf-8")
-        applied_at = datetime.now(timezone.utc).isoformat()
-        transaction_script = "\n".join(
-            [
-                "BEGIN;",
-                script,
-                (
-                    "INSERT INTO schema_migrations(version, applied_at) "
-                    f"VALUES ('{version}', '{applied_at}');"
-                ),
-                "COMMIT;",
-            ]
-        )
-        with sqlite3.connect(path) as conn:
-            conn.execute("PRAGMA foreign_keys = ON")
-            try:
-                conn.executescript(transaction_script)
-            except Exception:
-                conn.rollback()
-                raise
+        _apply_migration(path, migration, version)
         applied_now.append(version)
 
     return applied_now
+
+
+def _apply_migration(db_path: Path, migration: Path, version: str) -> None:
+    """Apply one migration file atomically and record it in schema_migrations.
+
+    sqlite3.Cursor.executescript() implicitly COMMITs any open SQLite
+    transaction before running. The only way to get a single atomic unit
+    is therefore to embed BEGIN/COMMIT inside the script itself; migration
+    files must not declare their own BEGIN/COMMIT.
+    """
+    script = migration.read_text(encoding="utf-8")
+    applied_at = datetime.now(timezone.utc).isoformat()
+    # version comes from the [0-9]{4} filename prefix and applied_at is a
+    # generated ISO-8601 timestamp; neither can contain quote characters
+    # that would break the embedded INSERT below.
+    if "'" in version or "'" in applied_at:
+        raise RuntimeError(
+            f"Refusing to apply migration {migration.name}: "
+            "version or applied_at contains a quote character."
+        )
+    transaction_script = (
+        "BEGIN;\n"
+        f"{script}\n"
+        "INSERT INTO schema_migrations(version, applied_at) "
+        f"VALUES ('{version}', '{applied_at}');\n"
+        "COMMIT;\n"
+    )
+
+    with sqlite3.connect(db_path) as conn:
+        conn.execute("PRAGMA foreign_keys = ON")
+        try:
+            conn.executescript(transaction_script)
+        except Exception as exc:
+            # The BEGIN inside the script left a SQLite-level tx open;
+            # roll it back directly so partial DDL does not stick.
+            try:
+                conn.execute("ROLLBACK")
+            except sqlite3.OperationalError:
+                pass
+            raise RuntimeError(
+                f"Migration {migration.name} failed before COMMIT: {exc}"
+            ) from exc
