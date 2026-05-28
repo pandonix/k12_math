@@ -475,6 +475,33 @@ textarea {
   background: #fbfcfa;
 }
 
+.upload-panel {
+  border-top: 1px solid var(--line);
+  background: #fbfcfa;
+}
+
+.upload-panel h2 {
+  margin: 0;
+  padding: 18px 24px 0;
+  font-size: 17px;
+}
+
+.preview-pages {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.page-preview {
+  display: block;
+  max-width: 100%;
+  max-height: 460px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  object-fit: contain;
+  background: #fff;
+}
+
 .preview-panel h2,
 .preview-panel h3 {
   margin: 0 0 12px;

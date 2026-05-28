@@ -662,10 +662,25 @@ function renderIntakeView() {
           <button type="button" id="docxPreview">导入示例 DOCX 预览</button>
         </div>
       </form>
+      <section class="upload-panel">
+        <h2>批量录题 / 错题沉淀</h2>
+        <form id="uploadForm" class="question-form compact-form">
+          <div class="form-grid">
+            <label>文件<input name="file" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,.docx" required></label>
+            <label>解析目标<select name="schema_name"><option value="mistake">错题沉淀</option><option value="question">新题入库</option></select></label>
+            <label>关联知识点<select name="kp_id"><option value="">不关联</option>${state.items.map(item => `<option value="${escapeAttr(item.id)}">${escapeHtml(item.title)}</option>`).join("")}</select></label>
+          </div>
+          <div class="article-actions">
+            <button type="submit">上传并预览</button>
+          </div>
+        </form>
+        <div id="uploadPreview" class="preview-panel"></div>
+      </section>
       <section class="preview-panel" id="intakePreview"></section>
     </div>
   `;
   document.querySelector("#questionForm").addEventListener("submit", submitQuestionForm);
+  document.querySelector("#uploadForm").addEventListener("submit", uploadIntakeFile);
   document.querySelector("#docxPreview").addEventListener("click", previewDocxImport);
 }
 
@@ -715,6 +730,79 @@ async function previewDocxImport() {
     `;
   } catch (error) {
     preview.innerHTML = `<div class="no-results">DOCX 预览失败：${escapeHtml(error.message)}</div>`;
+  }
+}
+
+async function uploadIntakeFile(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const preview = document.querySelector("#uploadPreview");
+  const data = new FormData(form);
+  preview.innerHTML = `<div class="empty-state"><strong>正在上传并生成 manual 预览...</strong></div>`;
+  try {
+    const uploadResponse = await fetch(`${API_BASE}/intake/upload`, { method: "POST", body: data });
+    if (!uploadResponse.ok) throw new Error(await uploadResponse.text());
+    const upload = await uploadResponse.json();
+    const parsed = await api("/intake/parse", {
+      method: "POST",
+      body: JSON.stringify({ upload_id: upload.upload_id, schema_name: data.get("schema_name") })
+    });
+    renderUploadPreview(preview, upload, parsed, data.get("kp_id"));
+  } catch (error) {
+    preview.innerHTML = `<div class="no-results">上传失败：${escapeHtml(error.message)}</div>`;
+  }
+}
+
+function renderUploadPreview(container, upload, parsed, kpId) {
+  const pageHtml = parsed.pages.map(path => {
+    const url = path.startsWith("/") ? path : `/${path}`;
+    if (/\.(png|jpg|jpeg|webp)$/i.test(path)) return `<img class="page-preview" src="${escapeAttr(url)}" alt="上传预览">`;
+    return `<p class="snippet">${escapeHtml(path)}</p>`;
+  }).join("");
+  container.innerHTML = `
+    <h2>${escapeHtml(upload.filename)} · ${escapeHtml(upload.detected_kind)} · ${escapeHtml(parsed.provider)}</h2>
+    <div class="preview-pages">${pageHtml || `<p class="snippet">已上传，暂无可渲染页。</p>`}</div>
+    <form id="mistakeCommitForm" class="question-form compact-form">
+      <label>题干<textarea name="stem_md" rows="5" required placeholder="manual provider 不自动识别，请对照左侧图片手输"></textarea></label>
+      <label>我的作答<textarea name="user_answer_md" rows="3"></textarea></label>
+      <label>标准答案<textarea name="answer_md" rows="3"></textarea></label>
+      <label>解析<textarea name="solution_md" rows="4"></textarea></label>
+      <input type="hidden" name="kp_id" value="${escapeAttr(kpId || "")}">
+      <input type="hidden" name="answer_image_path" value="${escapeAttr(parsed.pages[0] || "")}">
+      <div class="article-actions">
+        <button type="submit">作为错题沉淀</button>
+      </div>
+    </form>
+  `;
+  document.querySelector("#mistakeCommitForm").addEventListener("submit", commitUploadedMistake);
+}
+
+async function commitUploadedMistake(event) {
+  event.preventDefault();
+  const data = new FormData(event.currentTarget);
+  const kpId = data.get("kp_id");
+  const payload = [{
+    question: {
+      source: "photo_intake",
+      stem_md: data.get("stem_md"),
+      answer_md: data.get("answer_md") || null,
+      solution_md: data.get("solution_md") || null,
+      image_path: data.get("answer_image_path") || null,
+      kp_ids: kpId ? [{ id: kpId, weight: 1, is_primary: true }] : []
+    },
+    user_answer_md: data.get("user_answer_md") || null,
+    answer_image_path: data.get("answer_image_path") || null,
+    is_correct: false,
+    mistake_hints: kpId ? [{ target_type: "kp", target_id: kpId, source: "manual" }] : []
+  }];
+  const preview = document.querySelector("#uploadPreview");
+  try {
+    const result = await api("/intake/mistakes/commit", { method: "POST", body: JSON.stringify(payload) });
+    preview.insertAdjacentHTML("beforeend", `<p class="filter-note">已沉淀 ${result.committed_n} 题，attempt #${escapeHtml(result.attempt_ids.join(", "))}</p>`);
+    await loadQuestions();
+    await loadMistakes();
+  } catch (error) {
+    preview.insertAdjacentHTML("beforeend", `<p class="filter-note">提交失败：${escapeHtml(error.message)}</p>`);
   }
 }
 

@@ -250,6 +250,19 @@ def create_question(session: Session, payload: QuestionCreate) -> QuestionRead:
     return get_question(session, question_id)
 
 
+def get_or_create_question(session: Session, payload: QuestionCreate) -> QuestionRead:
+    if not payload.stem_md.strip():
+        raise HTTPException(status_code=400, detail="stem_md is required")
+    q_hash = stem_hash(payload.stem_md)
+    existing = session.exec(
+        text("SELECT id FROM questions WHERE hash = :hash"),
+        params={"hash": q_hash},
+    ).first()
+    if existing:
+        return get_question(session, int(existing.id))
+    return create_question(session, payload)
+
+
 def update_question(session: Session, question_id: int, payload: QuestionUpdate) -> QuestionRead:
     question = session.get(Question, question_id)
     if not question:

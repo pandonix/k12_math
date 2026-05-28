@@ -1,6 +1,6 @@
 # 高一数学知识库 → 个人薄弱图谱 + 题库 + 自适应训练 重构实施方案
 
-> 状态：方案稿（v2） · M2 做题 + 错题集已完成 · M3 待执行
+> 状态：方案稿（v2） · M3 OCR 批量录题 + 错题拍照沉淀已完成（manual provider） · M4 待执行
 > 决策：单设备自用 / 基础学习图谱 + 个人薄弱图谱 / PDF 图片 OCR 录题 / 本地后端 / 自适应推荐 / 暂无 ANTHROPIC_API_KEY（M3 提供降级）
 
 ---
@@ -1144,6 +1144,29 @@ math/
 **验证（无 key 降级情况）**
 - 至少能拆页、把图按题分块、左右对照手输
 - 错题沉淀 sub-tab 在 `supports_handwriting=false` 时仍可走完：user_answer_md 留空，主流程不卡
+
+**实际结果（2026-05-28）**
+- 已新增 `services/intake_store.py`：本地 upload 存储、PDF 拆页 PNG 预览、manual parse 结果、`questions/commit` 与 `mistakes/commit`。
+- 已扩展 `routers/intake.py`：`GET /api/intake/capabilities`、`POST /api/intake/upload`、`POST /api/intake/parse`、`GET /api/intake/parse/{task_id}`、`POST /api/intake/questions/commit`、`POST /api/intake/mistakes/commit`。
+- 已新增依赖 `python-multipart` 与 `PyMuPDF`，用于 multipart 上传和本地 PDF 页面渲染；当前默认 provider 为 `manual`，`supports_handwriting=false`。
+- 错题沉淀 commit 复用 M2 的 `practice_store.create_attempt` 与 `weakness_engine`，写入 `attempts(source='photo_intake')`、`mistakes`、`mistake_diagnoses`、`personal_weaknesses`。
+- 前端 `[录题]` 页新增批量/错题沉淀上传区域：PDF/图片/DOCX 上传、manual 预览、对照手输题干/作答/答案/解析、提交错题沉淀。
+
+**实际验证（2026-05-28）**
+- `.venv/bin/python -m pytest backend/tests -q` → 15 passed。
+- `.venv/bin/python -m compileall backend` → passed。
+- `node --check app.js` → passed。
+- `GET /api/intake/capabilities` → `provider=manual`，`supports_handwriting=false`，支持 pdf/images/docx。
+- `POST /api/intake/upload` 上传测试 PDF → `detected_kind=pdf`，保存原文件并渲染 1 页 PNG。
+- `POST /api/intake/parse {"schema_name":"mistake"}` → `provider=manual`，返回 1 个预览页。
+- `POST /api/intake/mistakes/commit` → 写入 1 道 photo_intake 错题，返回 question id 与 attempt id。
+- `GET /api/mistakes?include_mastered=true` → 能看到 M3 沉淀错题。
+- 前端资源 `app.js` / `styles.css` 正常返回，包含 upload preview 和 `/intake/mistakes/commit` 入口。
+
+**剩余风险 / M4 注意**
+- 当前 M3 完成的是无 key manual 降级路径；Claude/Mathpix provider 仍未实现真实识别。
+- manual parse 不自动切题或 OCR，用户需要对照预览手输；这符合无 key 验收，但后续接入视觉 provider 时需保留相同预览/校对/commit 边界。
+- 批量多题 commit 的前端目前是单题表单；后续若要一次提交多题，应扩展为卡片栈并保持逐题确认。
 
 **预计**：有 key 2–3 天（新题入库 + 错题沉淀双路径）；无 key 1 天（拆页 + 对照录入双路径骨架）
 

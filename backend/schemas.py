@@ -274,3 +274,49 @@ class MistakeRead(BaseModel):
 class MistakeListResponse(BaseModel):
     total: int
     items: list[MistakeRead]
+
+
+class IntakeCapabilities(BaseModel):
+    provider: str
+    supports_handwriting: bool
+    supports_pdf: bool
+    supports_images: bool
+    supports_docx: bool
+
+
+class UploadResponse(BaseModel):
+    upload_id: str
+    detected_kind: str
+    filename: str
+    files: list[str]
+
+
+class IntakeParseRequest(BaseModel):
+    upload_id: str
+    schema_name: str = "question"
+
+
+class ManualParseResult(BaseModel):
+    task_id: str
+    upload_id: str
+    schema_name: str
+    provider: str
+    pages: list[str]
+    questions: list[QuestionCreate] = []
+    mistakes: list["ParsedMistakeInput"] = []
+
+
+class ParsedMistakeInput(BaseModel):
+    question: QuestionCreate
+    user_answer_md: str | None = None
+    answer_image_path: str | None = None
+    is_correct: bool = False
+    mistake_hints: list[DiagnosisInput] = []
+    attempted_at: datetime | None = None
+
+
+class IntakeCommitResponse(BaseModel):
+    committed_n: int
+    question_ids: list[int]
+    attempt_ids: list[int] = []
+    matched_weaknesses: list[WeaknessRead] = []
