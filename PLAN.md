@@ -1,6 +1,6 @@
 # 高一数学知识库 → 个人薄弱图谱 + 题库 + 自适应训练 重构实施方案
 
-> 状态：方案稿（v2） · M0 后端骨架 + 知识点同步已完成 · M1 待执行
+> 状态：方案稿（v2） · M1 题库 + 手动录题已完成 · M2 待执行
 > 决策：单设备自用 / 基础学习图谱 + 个人薄弱图谱 / PDF 图片 OCR 录题 / 本地后端 / 自适应推荐 / 暂无 ANTHROPIC_API_KEY（M3 提供降级）
 
 ---
@@ -1044,6 +1044,28 @@ math/
 - 知识点详情页能列出该知识点关联的题目
 - 同一题可挂多个图谱节点，且主考点/主题型可标记
 - 能对 POC docx 讲义重复抽取题型、技巧、易错点和典例/变式，结果进入可审预览
+
+**实际结果（2026-05-28）**
+- 已新增 `routers/questions.py` 与 `services/question_store.py`：支持题目 CRUD、按知识点/题型/技巧/易错点/难度/关键词筛选、精确 `hash(stem_md)` 去重，以及题目与知识点/题型/技巧/通用易错点/标签的写入。
+- 已扩展 `routers/graph.py`：支持题型列表/详情、新建题型、白名单 `POST /api/graph/edges`，并让 `GET /api/graph/kp/{id}` 汇总直接图谱边和题目关联边。
+- 已沉淀 DOCX 讲义导入雏形到 `backend/services/importers/docx_handout.py`，`POST /api/intake/import/docx` 返回 `ParsedLearningMaterial` 预览数据。
+- 前端 `app.js` 已改为无构建工具 tab 应用：知识点从 `/api/kp` 读取；新增题库筛选/详情、手动录题表单、DOCX 预览、局部图谱题型维护入口；练习/学情保留为 M2/M4 占位入口。
+
+**实际验证（2026-05-28）**
+- `.venv/bin/python -m pytest backend/tests -q` → 9 passed。
+- `.venv/bin/python -m compileall backend` → passed。
+- `node --check app.js` → passed。
+- `curl http://127.0.0.1:8001/api/kp` → 56 个知识点。
+- `POST /api/questions` 写入 M1 验收题，返回题目 ID、知识点、题型、技巧、易错点和标签。
+- `GET /api/questions?kp=k-lrltj6` → 能按知识点命中验收题。
+- `GET /api/graph/kp/k-lrltj6` → 返回关联题目、题型“集合元素判定”、技巧“符号识别”、易错点“混淆属于和包含”。
+- `POST /api/intake/import/docx {}` → 380 段、24 题、8 个题型。
+- `curl http://127.0.0.1:8000/index.html` 与 `curl http://127.0.0.1:8000/app.js` → 前端资源正常返回。
+
+**剩余风险 / M2 注意**
+- M1 前端实现为单文件 vanilla SPA，先保证无构建工具和可用闭环；M2 若继续扩大交互，应拆出 `core/api.js`、`views/*.js`，避免 `app.js` 继续膨胀。
+- M1 只做题库与图谱边维护，尚未写入 `attempts`、`mistakes`、`mistake_diagnoses` 或 `personal_weaknesses`；这些必须在 M2 做题/错题流中落地。
+- DOCX 导入目前是可审预览，不直接批量入库；M3 再统一到 OCR/DOCX 的提交事务。
 
 **预计**：1–2 天
 
