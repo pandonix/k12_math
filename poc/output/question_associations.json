@@ -1,0 +1,971 @@
+[
+  {
+    "question_source": "POC样例卷A-第1题",
+    "stem_md": "已知集合 $A=\\{1,2,a\\}$，若 $a=1$ 时集合是否成立？若不成立，请说明原因。",
+    "expected_kp": "1.1 集合的概念与表示",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 21.3352,
+        "kp_id": "k-ckoh6l",
+        "book": "必修第一册",
+        "chapter": "第一章 集合与常用逻辑用语",
+        "section": "1.2 集合间的基本关系",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 19.2318,
+        "kp_id": "k-lrltj6",
+        "book": "必修第一册",
+        "chapter": "第一章 集合与常用逻辑用语",
+        "section": "1.1 集合的概念与表示",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 3,
+        "score": 16.4431,
+        "kp_id": "k-i1q0ge",
+        "book": "必修第一册",
+        "chapter": "第一章 集合与常用逻辑用语",
+        "section": "1.3 集合的基本运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 15.2077,
+        "kp_id": "k-u3u9y6",
+        "book": "必修第一册",
+        "chapter": "第一章 集合与常用逻辑用语",
+        "section": "1.4 充分条件与必要条件",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 13.8231,
+        "kp_id": "k-9s2h5e",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "集合与逻辑",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "POC样例卷A-第2题",
+    "stem_md": "已知集合 $A=\\{x\\mid x^2-3x+2=0\\}$，$B=\\{1,2,3\\}$，求 $A\\cap B$ 与 $A\\cup B$。",
+    "expected_kp": "1.3 集合的基本运算",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 19.5541,
+        "kp_id": "k-ckoh6l",
+        "book": "必修第一册",
+        "chapter": "第一章 集合与常用逻辑用语",
+        "section": "1.2 集合间的基本关系",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 18.9334,
+        "kp_id": "k-i1q0ge",
+        "book": "必修第一册",
+        "chapter": "第一章 集合与常用逻辑用语",
+        "section": "1.3 集合的基本运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 3,
+        "score": 15.203,
+        "kp_id": "k-9s2h5e",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "集合与逻辑",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 15.0999,
+        "kp_id": "k-u3u9y6",
+        "book": "必修第一册",
+        "chapter": "第一章 集合与常用逻辑用语",
+        "section": "1.4 充分条件与必要条件",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 14.5254,
+        "kp_id": "k-lrltj6",
+        "book": "必修第一册",
+        "chapter": "第一章 集合与常用逻辑用语",
+        "section": "1.1 集合的概念与表示",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "POC样例卷A-第3题",
+    "stem_md": "已知命题 $p:x>2$，命题 $q:x>0$，判断 $p$ 是 $q$ 的什么条件。",
+    "expected_kp": "1.4 充分条件与必要条件",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 32.1778,
+        "kp_id": "k-u3u9y6",
+        "book": "必修第一册",
+        "chapter": "第一章 集合与常用逻辑用语",
+        "section": "1.4 充分条件与必要条件",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 2,
+        "score": 13.9965,
+        "kp_id": "k-6vqa4z",
+        "book": "必修第一册",
+        "chapter": "第一章 集合与常用逻辑用语",
+        "section": "1.5 全称量词与存在量词",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 0.1676,
+        "kp_id": "k-lf1iug",
+        "book": "必修第一册",
+        "chapter": "第四章 指数函数与对数函数",
+        "section": "4.5 不同函数增长差异",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "question_source": "POC样例卷A-第4题",
+    "stem_md": "解不等式 $x^2-5x+6\\le 0$。",
+    "expected_kp": "2.3 二次函数与一元二次方程、不等式",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 29.0566,
+        "kp_id": "k-px1iqh",
+        "book": "必修第一册",
+        "chapter": "第二章 一元二次函数、方程和不等式",
+        "section": "2.3 二次函数与一元二次方程、不等式",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 2,
+        "score": 26.3468,
+        "kp_id": "k-bdtgkk",
+        "book": "必修第一册",
+        "chapter": "第二章 一元二次函数、方程和不等式",
+        "section": "2.1 等式性质与不等式性质",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 23.1868,
+        "kp_id": "k-9va2w4",
+        "book": "必修第一册",
+        "chapter": "第二章 一元二次函数、方程和不等式",
+        "section": "2.2 基本不等式",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 12.7916,
+        "kp_id": "k-z1k3ii",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "不等式与二次函数",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 8.7366,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "POC样例卷A-第5题",
+    "stem_md": "求函数 $f(x)=\\sqrt{x-1}+\\frac{1}{x-3}$ 的定义域。",
+    "expected_kp": "3.1 函数的概念及其表示",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 23.4014,
+        "kp_id": "k-ytcddl",
+        "book": "必修第一册",
+        "chapter": "第五章 三角函数",
+        "section": "5.4 三角函数的图象和性质",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 22.4707,
+        "kp_id": "k-bj40xw",
+        "book": "必修第一册",
+        "chapter": "第三章 函数的概念与性质",
+        "section": "3.1 函数的概念及其表示",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 3,
+        "score": 19.6864,
+        "kp_id": "k-9il6od",
+        "book": "必修第一册",
+        "chapter": "第四章 指数函数与对数函数",
+        "section": "4.2 指数函数",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 19.6788,
+        "kp_id": "k-crgom2",
+        "book": "必修第一册",
+        "chapter": "第三章 函数的概念与性质",
+        "section": "3.3 幂函数",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 19.5486,
+        "kp_id": "k-7dwt4z",
+        "book": "必修第一册",
+        "chapter": "第四章 指数函数与对数函数",
+        "section": "4.4 对数函数",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "POC样例卷A-第6题",
+    "stem_md": "判断函数 $f(x)=x+\\frac{1}{x}$ 在区间 $(0,1]$ 上的单调性，并说明理由。",
+    "expected_kp": "3.2 函数的基本性质",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 31.0017,
+        "kp_id": "k-ytcddl",
+        "book": "必修第一册",
+        "chapter": "第五章 三角函数",
+        "section": "5.4 三角函数的图象和性质",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 28.0672,
+        "kp_id": "k-a8qd9c",
+        "book": "必修第一册",
+        "chapter": "第三章 函数的概念与性质",
+        "section": "3.2 函数的基本性质",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 3,
+        "score": 27.1179,
+        "kp_id": "k-8vo9o6",
+        "book": "必修第一册",
+        "chapter": "第三章 函数的概念与性质",
+        "section": "3.4 函数的应用",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 25.2603,
+        "kp_id": "k-9il6od",
+        "book": "必修第一册",
+        "chapter": "第四章 指数函数与对数函数",
+        "section": "4.2 指数函数",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 23.8986,
+        "kp_id": "k-7dwt4z",
+        "book": "必修第一册",
+        "chapter": "第四章 指数函数与对数函数",
+        "section": "4.4 对数函数",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "POC样例卷A-第7题",
+    "stem_md": "已知 $a>0$ 且 $a\\ne1$，若 $\\log_a 2<\\log_a 3$，求 $a$ 的取值范围。",
+    "expected_kp": "4.4 对数函数",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 28.6146,
+        "kp_id": "k-y1vpq8",
+        "book": "必修第一册",
+        "chapter": "第四章 指数函数与对数函数",
+        "section": "4.3 对数与对数运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 25.9437,
+        "kp_id": "k-7dwt4z",
+        "book": "必修第一册",
+        "chapter": "第四章 指数函数与对数函数",
+        "section": "4.4 对数函数",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 3,
+        "score": 18.2991,
+        "kp_id": "k-lf1iug",
+        "book": "必修第一册",
+        "chapter": "第四章 指数函数与对数函数",
+        "section": "4.5 不同函数增长差异",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 16.4537,
+        "kp_id": "k-9il6od",
+        "book": "必修第一册",
+        "chapter": "第四章 指数函数与对数函数",
+        "section": "4.2 指数函数",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 16.362,
+        "kp_id": "k-s8pnae",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "指数与对数",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "POC样例卷A-第8题",
+    "stem_md": "求函数 $y=2\\sin(3x+\\frac{\\pi}{6})$ 的最小正周期。",
+    "expected_kp": "5.6 函数 y=Asin(ωx+φ)",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 45.4493,
+        "kp_id": "k-kg9iva",
+        "book": "必修第一册",
+        "chapter": "第五章 三角函数",
+        "section": "5.6 函数 $y=A\\sin(\\omega x+\\varphi)$",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 36.6137,
+        "kp_id": "k-ytcddl",
+        "book": "必修第一册",
+        "chapter": "第五章 三角函数",
+        "section": "5.4 三角函数的图象和性质",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 35.5879,
+        "kp_id": "k-louy5x",
+        "book": "必修第一册",
+        "chapter": "第五章 三角函数",
+        "section": "5.2 三角函数的概念",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 28.6215,
+        "kp_id": "k-6atcja",
+        "book": "必修第一册",
+        "chapter": "第五章 三角函数",
+        "section": "5.3 诱导公式",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 23.5735,
+        "kp_id": "k-a11sgo",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "三角函数",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "POC样例卷A-第9题",
+    "stem_md": "已知向量 $\\vec a=(1,2)$，$\\vec b=(3,-1)$，求 $\\vec a\\cdot\\vec b$。",
+    "expected_kp": "6.2 平面向量的运算",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 30.1244,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 21.3679,
+        "kp_id": "k-yp9x7c",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "平面向量",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 3,
+        "score": 20.7292,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 18.3708,
+        "kp_id": "k-pmsa2q",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.3 平面向量基本定理及坐标表示",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 17.0637,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "question_source": "POC样例卷A-第10题",
+    "stem_md": "已知复数 $z=3-4i$，求 $|z|$ 与它的共轭复数。",
+    "expected_kp": "7.1 复数的概念",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 43.6028,
+        "kp_id": "k-obnlwo",
+        "book": "必修第二册",
+        "chapter": "第七章 复数",
+        "section": "7.2 复数的几何意义",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 32.7114,
+        "kp_id": "k-w75t81",
+        "book": "必修第二册",
+        "chapter": "第七章 复数",
+        "section": "7.1 复数的概念",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 3,
+        "score": 28.9749,
+        "kp_id": "k-v3q804",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "复数",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 4,
+        "score": 28.4946,
+        "kp_id": "k-evj0s2",
+        "book": "必修第二册",
+        "chapter": "第七章 复数",
+        "section": "7.3 复数的四则运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 20.3216,
+        "kp_id": "k-n4vfek",
+        "book": "必修第二册",
+        "chapter": "第七章 复数",
+        "section": "7.4 复数的三角表示",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "question_source": "POC样例卷A-第11题",
+    "stem_md": "在正方体中，判断一条棱与不相交的侧面所在平面是否平行，并说明线面平行判定依据。",
+    "expected_kp": "8.4 空间点、直线、平面之间的位置关系",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 58.1511,
+        "kp_id": "k-aq46wv",
+        "book": "必修第二册",
+        "chapter": "第八章 立体几何初步",
+        "section": "8.5 空间直线、平面的平行",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 18.7755,
+        "kp_id": "k-6but60",
+        "book": "必修第二册",
+        "chapter": "第八章 立体几何初步",
+        "section": "8.6 空间直线、平面的垂直",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 18.4371,
+        "kp_id": "k-gunwfi",
+        "book": "必修第二册",
+        "chapter": "第八章 立体几何初步",
+        "section": "8.4 空间点、直线、平面之间的位置关系",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 4,
+        "score": 18.0731,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 17.966,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "question_source": "POC样例卷A-第12题",
+    "stem_md": "从一组样本数据 $2,4,4,6,9$ 中求平均数与方差。",
+    "expected_kp": "9.2 用样本估计总体",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 24.496,
+        "kp_id": "k-w93oaf",
+        "book": "必修第二册",
+        "chapter": "第九章 统计",
+        "section": "9.2 用样本估计总体",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 2,
+        "score": 9.8223,
+        "kp_id": "k-f8rxf4",
+        "book": "必修第二册",
+        "chapter": "第九章 统计",
+        "section": "9.1 随机抽样",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 9.2127,
+        "kp_id": "k-tkxquc",
+        "book": "必修第二册",
+        "chapter": "第十章 概率",
+        "section": "10.1 随机事件与概率",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 6.1213,
+        "kp_id": "k-kb7h7v",
+        "book": "必修第二册",
+        "chapter": "第九章 统计",
+        "section": "9.3 统计案例与数据分析意识",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 4.8516,
+        "kp_id": "k-jh50zo",
+        "book": "必修第二册",
+        "chapter": "第十章 概率",
+        "section": "10.2 古典概型",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "question_source": "POC样例卷A-第13题",
+    "stem_md": "从装有 3 个红球、2 个白球的袋中任取 1 个球，求取到红球的概率。",
+    "expected_kp": "10.1 随机事件与概率",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 21.3084,
+        "kp_id": "k-tkxquc",
+        "book": "必修第二册",
+        "chapter": "第十章 概率",
+        "section": "10.1 随机事件与概率",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 2,
+        "score": 21.0318,
+        "kp_id": "k-jh50zo",
+        "book": "必修第二册",
+        "chapter": "第十章 概率",
+        "section": "10.2 古典概型",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 18.9143,
+        "kp_id": "k-vl279g",
+        "book": "必修第二册",
+        "chapter": "第十章 概率",
+        "section": "10.4 频率与概率",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 15.7629,
+        "kp_id": "k-kgrl9m",
+        "book": "必修第二册",
+        "chapter": "第八章 立体几何初步",
+        "section": "8.7 外接球与内切球",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 15.684,
+        "kp_id": "k-7c2awq",
+        "book": "必修第二册",
+        "chapter": "第十章 概率",
+        "section": "10.3 事件的相互独立性",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  }
+]

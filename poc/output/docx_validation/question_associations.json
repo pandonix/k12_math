@@ -1,0 +1,1877 @@
+[
+  {
+    "question_source": "题型一 平面向量的有关概念-典例1",
+    "stem_md": "【典例1】（25-26高一下·江西南昌·月考）给出下列四个说法：①若，则；②若，则或；③若，则的方向相同或相反；④ 若，，则. 其中错误的说法有（ ）个\nA．1B．2C．3D．4",
+    "expected_kp": "6.1 平面向量的概念",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 28.1713,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 2,
+        "score": 24.1721,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 18.8532,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 14.6965,
+        "kp_id": "k-yp9x7c",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "平面向量",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 5,
+        "score": 12.3538,
+        "kp_id": "k-pmsa2q",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.3 平面向量基本定理及坐标表示",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "题型一 平面向量的有关概念-变式1",
+    "stem_md": "【变式1】（25-26高一下·吉林长春·月考）下列说法正确的是（ ）\nA．若，则B．长度相等的向量叫相等向量\nC．零向量的长度是0D．共线向量一定是在同一条直线上的向量",
+    "expected_kp": "6.1 平面向量的概念",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 48.8873,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 2,
+        "score": 44.5699,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 35.183,
+        "kp_id": "k-aq46wv",
+        "book": "必修第二册",
+        "chapter": "第八章 立体几何初步",
+        "section": "8.5 空间直线、平面的平行",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 34.2343,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 25.1679,
+        "kp_id": "k-pmsa2q",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.3 平面向量基本定理及坐标表示",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "题型一 平面向量的有关概念-变式2",
+    "stem_md": "【变式2】（25-26高一下·江西赣州·期中）下列说法正确的是（ ）\nA．若，则与共线B．若与是平行向量，则\nC．若，则D．共线向量方向必相同",
+    "expected_kp": "6.1 平面向量的概念",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 45.634,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 44.9422,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 3,
+        "score": 37.5702,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 25.5389,
+        "kp_id": "k-pmsa2q",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.3 平面向量基本定理及坐标表示",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 22.2663,
+        "kp_id": "k-aq46wv",
+        "book": "必修第二册",
+        "chapter": "第八章 立体几何初步",
+        "section": "8.5 空间直线、平面的平行",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "题型二 平面向量的模-典例1",
+    "stem_md": "【典例1】（25-26高二下·江西抚州·期中）已知，若，则________.",
+    "expected_kp": "6.1 平面向量的概念",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 10.8534,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 1.9412,
+        "kp_id": "k-4z7ig0",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "统计与概率",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 1.9032,
+        "kp_id": "k-yp9x7c",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "平面向量",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 4,
+        "score": 1.5304,
+        "kp_id": "k-7c2awq",
+        "book": "必修第二册",
+        "chapter": "第十章 概率",
+        "section": "10.3 事件的相互独立性",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 1.4477,
+        "kp_id": "k-kj8kr5",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.5 平面向量在几何中的应用",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "题型二 平面向量的模-变式1",
+    "stem_md": "【变式1】（25-26高一下·浙江金华·期中）若为单位向量，，则可用表示__________.",
+    "expected_kp": "6.1 平面向量的概念",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 27.3724,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 22.5159,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 3,
+        "score": 18.6143,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 17.8302,
+        "kp_id": "k-pmsa2q",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.3 平面向量基本定理及坐标表示",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 16.8565,
+        "kp_id": "k-yp9x7c",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "平面向量",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": true
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "题型三 平面向量的加减法运算-典例1",
+    "stem_md": "【典例1】（2026·宁夏银川·二模）下列四个式子中可以化简为的是（ ）\n①；②；③；④\nA．①④B．①②C．②③D．③④",
+    "expected_kp": "6.2 平面向量的线性运算",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 31.5451,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 23.3288,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 3,
+        "score": 21.2829,
+        "kp_id": "k-aq46wv",
+        "book": "必修第二册",
+        "chapter": "第八章 立体几何初步",
+        "section": "8.5 空间直线、平面的平行",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 17.6986,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 14.6965,
+        "kp_id": "k-yp9x7c",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "平面向量",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": true
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "question_source": "题型三 平面向量的加减法运算-典例2",
+    "stem_md": "【典例2】（2026·宁夏银川·二模）如图所示，已知，，分别是的边，，的中点，则下列等式中不正确的是（ ）\nA．B．\nC．D．",
+    "expected_kp": "6.2 平面向量的线性运算",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 34.7442,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 2,
+        "score": 32.9783,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 21.2829,
+        "kp_id": "k-aq46wv",
+        "book": "必修第二册",
+        "chapter": "第八章 立体几何初步",
+        "section": "8.5 空间直线、平面的平行",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 16.7644,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 14.6965,
+        "kp_id": "k-yp9x7c",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "平面向量",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": true
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "题型三 平面向量的加减法运算-变式1",
+    "stem_md": "【变式1】（2026·福建漳州·模拟预测）如图，在中，，则（ ）\nA．B．\nC．D．",
+    "expected_kp": "6.2 平面向量的线性运算",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 17.1445,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 8.5105,
+        "kp_id": "k-vl279g",
+        "book": "必修第二册",
+        "chapter": "第十章 概率",
+        "section": "10.4 频率与概率",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 7.9754,
+        "kp_id": "k-obnlwo",
+        "book": "必修第二册",
+        "chapter": "第七章 复数",
+        "section": "7.2 复数的几何意义",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 7.3101,
+        "kp_id": "k-8vo9o6",
+        "book": "必修第一册",
+        "chapter": "第三章 函数的概念与性质",
+        "section": "3.4 函数的应用",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 4.7635,
+        "kp_id": "k-evj0s2",
+        "book": "必修第二册",
+        "chapter": "第七章 复数",
+        "section": "7.3 复数的四则运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "题型四 平面向量的数乘运算-典例1",
+    "stem_md": "【典例1】（2026·广东湛江·一模）已知，，则在下列各命题中，正确的命题有（ ）\n①，时，与的方向一定相反；\n②，时，与的方向一定相同；\n③，时，与的方向一定相同；\n④，时，与的方向一定相反．\nA．1个B．2个C．3个D．4个",
+    "expected_kp": "6.2 平面向量的线性运算",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 28.6636,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 22.6891,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 21.5224,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 4,
+        "score": 14.6965,
+        "kp_id": "k-yp9x7c",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "平面向量",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 5,
+        "score": 13.9965,
+        "kp_id": "k-6vqa4z",
+        "book": "必修第一册",
+        "chapter": "第一章 集合与常用逻辑用语",
+        "section": "1.5 全称量词与存在量词",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "question_source": "题型四 平面向量的数乘运算-典例2",
+    "stem_md": "【典例2】（2026高三·全国·专题练习）下列各式计算正确的有（ ）\n①；\n②；\n③；\n④．\nA．1个B．2个C．3个D．4个",
+    "expected_kp": "6.2 平面向量的线性运算",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 10.8534,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 1.9412,
+        "kp_id": "k-4z7ig0",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "统计与概率",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 1.9032,
+        "kp_id": "k-yp9x7c",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "平面向量",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 4,
+        "score": 1.6703,
+        "kp_id": "k-7c2awq",
+        "book": "必修第二册",
+        "chapter": "第十章 概率",
+        "section": "10.3 事件的相互独立性",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 1.4423,
+        "kp_id": "k-fugtur",
+        "book": "必修第一册",
+        "chapter": "第五章 三角函数",
+        "section": "5.1 任意角和弧度制",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "题型四 平面向量的数乘运算-变式1",
+    "stem_md": "【变式1】（24-25高一下·江西南昌·月考）设向量满足，则（ ）\nA．B．C．D．",
+    "expected_kp": "6.2 平面向量的线性运算",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 27.3724,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 18.4287,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 3,
+        "score": 16.8565,
+        "kp_id": "k-yp9x7c",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "平面向量",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 4,
+        "score": 16.8476,
+        "kp_id": "k-pmsa2q",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.3 平面向量基本定理及坐标表示",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 16.0525,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "question_source": "题型四 平面向量的数乘运算-变式2",
+    "stem_md": "【变式2】（25-26高三上·贵州铜仁·期末）若，其中，，为已知向量，则未知向量___________．",
+    "expected_kp": "6.2 平面向量的线性运算",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 62.6287,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 2,
+        "score": 45.9939,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 44.0835,
+        "kp_id": "k-pmsa2q",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.3 平面向量基本定理及坐标表示",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 43.4888,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 41.6312,
+        "kp_id": "k-yp9x7c",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "平面向量",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": true
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "question_source": "题型五 向量模的最值或取值范围-典例1",
+    "stem_md": "【典例1】（2026·河南鹤壁·二模）若向量，满足，且向量与向量的夹角为，则的最小值是（ ）\nA．2B．C．3D．4",
+    "expected_kp": "6.2 平面向量的线性运算",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 42.4872,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 25.0712,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 3,
+        "score": 24.489,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 19.2951,
+        "kp_id": "k-kj8kr5",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.5 平面向量在几何中的应用",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 17.4238,
+        "kp_id": "k-e7njc6",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.6 解三角形",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "question_source": "题型五 向量模的最值或取值范围-典例2",
+    "stem_md": "【典例2】（2026·云南大理·模拟预测）如图，矩形中，，，、分别为边、上的动点，且.则的最小值为（ ）\nA．B．C．D．",
+    "expected_kp": "6.2 平面向量的线性运算",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 17.7196,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 9.901,
+        "kp_id": "k-a8qd9c",
+        "book": "必修第一册",
+        "chapter": "第三章 函数的概念与性质",
+        "section": "3.2 函数的基本性质",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 8.8457,
+        "kp_id": "k-9va2w4",
+        "book": "必修第一册",
+        "chapter": "第二章 一元二次函数、方程和不等式",
+        "section": "2.2 基本不等式",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 8.5105,
+        "kp_id": "k-vl279g",
+        "book": "必修第二册",
+        "chapter": "第十章 概率",
+        "section": "10.4 频率与概率",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 8.1333,
+        "kp_id": "k-obnlwo",
+        "book": "必修第二册",
+        "chapter": "第七章 复数",
+        "section": "7.2 复数的几何意义",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "题型五 向量模的最值或取值范围-变式1",
+    "stem_md": "【变式1】（2026·黑龙江·二模）已知向量，满足，，则的最大值为________，最小值为______",
+    "expected_kp": "6.2 平面向量的线性运算",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 33.6636,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 23.0031,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 3,
+        "score": 21.7058,
+        "kp_id": "k-a8qd9c",
+        "book": "必修第一册",
+        "chapter": "第三章 函数的概念与性质",
+        "section": "3.2 函数的基本性质",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 20.5936,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 18.4116,
+        "kp_id": "k-pmsa2q",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.3 平面向量基本定理及坐标表示",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "question_source": "题型六 利用向量共线证明三点共线-典例1",
+    "stem_md": "【典例1】（25-26高三上·天津红桥·期中）已知向量，不共线，且，，，则一定共线的三点是（ ）\nA．，，B．，，C．，，D．，，",
+    "expected_kp": "6.3 平面向量基本定理及坐标表示",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 31.2306,
+        "kp_id": "k-pmsa2q",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.3 平面向量基本定理及坐标表示",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 2,
+        "score": 27.3724,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 24.005,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 18.6957,
+        "kp_id": "k-kj8kr5",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.5 平面向量在几何中的应用",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 16.8859,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "题型六 利用向量共线证明三点共线-典例2",
+    "stem_md": "【典例2】（25-26高三上·南昌·期中）已知向量，不共线，，，其中，，那么三点共线的充要条件为（ ）\nA．B．C．D．",
+    "expected_kp": "6.3 平面向量基本定理及坐标表示",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 31.713,
+        "kp_id": "k-pmsa2q",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.3 平面向量基本定理及坐标表示",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 2,
+        "score": 27.3724,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 26.4655,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 21.2308,
+        "kp_id": "k-kj8kr5",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.5 平面向量在几何中的应用",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 16.8859,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "题型六 利用向量共线证明三点共线-变式1",
+    "stem_md": "【变式1】（2026·河北·一模）已知向量不共线，，则（ ）\nA．三点共线B．三点共线\nC．三点共线D．三点共线",
+    "expected_kp": "6.3 平面向量基本定理及坐标表示",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 35.5456,
+        "kp_id": "k-pmsa2q",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.3 平面向量基本定理及坐标表示",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 2,
+        "score": 33.6636,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 31.2839,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 23.3527,
+        "kp_id": "k-kj8kr5",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.5 平面向量在几何中的应用",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 21.2675,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "题型七 利用共线向量基本定理求参数-典例1",
+    "stem_md": "【典例1】（2026·河南许昌·开学检测）如图，在中，，的平分线交于点，若，且，则的长为（ ）\nA．B．C．D．",
+    "expected_kp": "6.3 平面向量基本定理及坐标表示",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 23.2997,
+        "kp_id": "k-aq46wv",
+        "book": "必修第二册",
+        "chapter": "第八章 立体几何初步",
+        "section": "8.5 空间直线、平面的平行",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 12.1656,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 8.1489,
+        "kp_id": "k-pmsa2q",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.3 平面向量基本定理及坐标表示",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 4,
+        "score": 5.1081,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 4.8259,
+        "kp_id": "k-kj8kr5",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.5 平面向量在几何中的应用",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "question_source": "题型七 利用共线向量基本定理求参数-典例2",
+    "stem_md": "【典例2】（2026高三·全国·专题练习）已知向量，是两个不共线的向量，若向量与共线，则实数的值为（ ）\nA．-4B．C．D．4",
+    "expected_kp": "6.3 平面向量基本定理及坐标表示",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 27.3724,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 20.2672,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 19.8232,
+        "kp_id": "k-pmsa2q",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.3 平面向量基本定理及坐标表示",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 4,
+        "score": 17.9503,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 16.8565,
+        "kp_id": "k-yp9x7c",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "平面向量",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": true
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "question_source": "题型七 利用共线向量基本定理求参数-变式1",
+    "stem_md": "【变式1】（2026高三·全国·专题练习）已知平面四边形中，，，，，，则（ ）\nA．或B．C．D．",
+    "expected_kp": "6.3 平面向量基本定理及坐标表示",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 22.9981,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 15.3167,
+        "kp_id": "k-pmsa2q",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.3 平面向量基本定理及坐标表示",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 3,
+        "score": 13.612,
+        "kp_id": "k-yp9x7c",
+        "book": "附录",
+        "chapter": "附录一：高频公式速查",
+        "section": "平面向量",
+        "tags": [
+          "公式"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 4,
+        "score": 13.5672,
+        "kp_id": "k-qhiyx0",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.2 平面向量的线性运算",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 13.4213,
+        "kp_id": "k-3ygqtc",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.1 平面向量的概念",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "high"
+  },
+  {
+    "question_source": "题型八 共线向量基本定理的推论及应用-典例1",
+    "stem_md": "【典例1】（25-26高三上·山东德州·开学考试）如图，在中，，E为线段AD上的动点，且，则的最小值为（ ）\nA．8B．12C．32D．16",
+    "expected_kp": "6.3 平面向量基本定理及坐标表示",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 10.8534,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 9.901,
+        "kp_id": "k-a8qd9c",
+        "book": "必修第一册",
+        "chapter": "第三章 函数的概念与性质",
+        "section": "3.2 函数的基本性质",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 8.6678,
+        "kp_id": "k-pmsa2q",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.3 平面向量基本定理及坐标表示",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 4,
+        "score": 8.0322,
+        "kp_id": "k-9va2w4",
+        "book": "必修第一册",
+        "chapter": "第二章 一元二次函数、方程和不等式",
+        "section": "2.2 基本不等式",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 3.2506,
+        "kp_id": "k-kj8kr5",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.5 平面向量在几何中的应用",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "题型八 共线向量基本定理的推论及应用-典例2",
+    "stem_md": "【典例2】（2026·浙江·高三月考）在中，点O满足，过点O的直线分别交射线AB，AC于点M，N，且，，则的最小值为（ ）\nA．B．C．3D．4",
+    "expected_kp": "6.3 平面向量基本定理及坐标表示",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 14.105,
+        "kp_id": "k-a8qd9c",
+        "book": "必修第一册",
+        "chapter": "第三章 函数的概念与性质",
+        "section": "3.2 函数的基本性质",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 11.8235,
+        "kp_id": "k-aq46wv",
+        "book": "必修第二册",
+        "chapter": "第八章 立体几何初步",
+        "section": "8.5 空间直线、平面的平行",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 3,
+        "score": 11.3838,
+        "kp_id": "k-6but60",
+        "book": "必修第二册",
+        "chapter": "第八章 立体几何初步",
+        "section": "8.6 空间直线、平面的垂直",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 11.108,
+        "kp_id": "k-gunwfi",
+        "book": "必修第二册",
+        "chapter": "第八章 立体几何初步",
+        "section": "8.4 空间点、直线、平面之间的位置关系",
+        "tags": [
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 11.0366,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "question_source": "题型八 共线向量基本定理的推论及应用-变式1",
+    "stem_md": "【变式1】（2026·江西·一模）（多选）在中，D为AB上一点满足，若P为线段CD上一点，且，（为正实数），则下列结论正确的是（ ）\nA．B．\nC．的最大值为D．",
+    "expected_kp": "6.3 平面向量基本定理及坐标表示",
+    "top_matches": [
+      {
+        "rank": 1,
+        "score": 17.9722,
+        "kp_id": "k-j0q7ev",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.4 平面向量数量积",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 2,
+        "score": 9.9874,
+        "kp_id": "k-pmsa2q",
+        "book": "必修第二册",
+        "chapter": "第六章 平面向量及其应用",
+        "section": "6.3 平面向量基本定理及坐标表示",
+        "tags": [
+          "公式",
+          "考点",
+          "易错",
+          "二级结论"
+        ],
+        "expected_hit": true
+      },
+      {
+        "rank": 3,
+        "score": 9.0263,
+        "kp_id": "k-a8qd9c",
+        "book": "必修第一册",
+        "chapter": "第三章 函数的概念与性质",
+        "section": "3.2 函数的基本性质",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 4,
+        "score": 8.926,
+        "kp_id": "k-9va2w4",
+        "book": "必修第一册",
+        "chapter": "第二章 一元二次函数、方程和不等式",
+        "section": "2.2 基本不等式",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      },
+      {
+        "rank": 5,
+        "score": 7.9754,
+        "kp_id": "k-obnlwo",
+        "book": "必修第二册",
+        "chapter": "第七章 复数",
+        "section": "7.2 复数的几何意义",
+        "tags": [
+          "公式",
+          "考点",
+          "易错"
+        ],
+        "expected_hit": false
+      }
+    ],
+    "confidence": "medium"
+  }
+]

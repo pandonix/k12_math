@@ -1,0 +1,36 @@
+{
+  "inputs": {
+    "knowledge_md": "/Users/insunny/Documents/workspace/math/高一数学知识点总整理（人教A版必修一二详版）.md",
+    "questions": "poc/output/docx_typical_questions.md"
+  },
+  "knowledge_points": {
+    "count": 56,
+    "books": [
+      "必修第一册",
+      "必修第二册",
+      "附录"
+    ],
+    "chapters": 11,
+    "level_counts": {
+      "3": 47,
+      "2": 9
+    },
+    "tag_counts": {
+      "考点": 47,
+      "易错": 47,
+      "公式": 50,
+      "二级结论": 4
+    },
+    "with_facets": 47,
+    "duplicate_ids": []
+  },
+  "association": {
+    "question_count": 24,
+    "confidence_counts": {
+      "medium": 15,
+      "high": 9
+    },
+    "expected_top3_hits": 21,
+    "expected_top3_hit_rate": 0.875
+  }
+}

@@ -1,0 +1,1386 @@
+[
+  {
+    "id": "k-lrltj6",
+    "book": "必修第一册",
+    "chapter": "第一章 集合与常用逻辑用语",
+    "section": "1.1 集合的概念与表示",
+    "title": "1.1 集合的概念与表示",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 核心概念\n\n集合是由一些确定的、互不相同的对象组成的整体。组成集合的对象叫做元素。\n\n集合的三个特征：\n\n- 确定性：一个对象是否属于集合必须能明确判断。\n- 互异性：集合中的元素不能重复。\n- 无序性：元素排列顺序不影响集合。\n\n常用数集：\n\n| 符号 | 含义 |\n| --- | --- |\n| $\\mathbb N$ | 自然数集 |\n| $\\mathbb N^*$ 或 $\\mathbb N_+$ | 正整数集 |\n| $\\mathbb Z$ | 整数集 |\n| $\\mathbb Q$ | 有理数集 |\n| $\\mathbb R$ | 实数集 |\n\n集合与元素的关系：\n\n- $a \\in A$：元素 $a$ 属于集合 $A$。\n- $a \\notin A$：元素 $a$ 不属于集合 $A$。\n\n#### 表示方法\n\n列举法：把元素一一列出，如 $A=\\{1,2,3\\}$。\n\n描述法：用元素满足的共同性质表示，如 $A=\\{x\\mid x>0\\}$。\n\n图示法：用 Venn 图表示集合之间关系。\n\n#### 高频考点\n\n- 根据集合元素互异性求参数。\n- 区分数集、点集、解集。\n- 描述法中代表元素不同，集合含义不同。\n\n例：\n\n- $\\{x\\mid y=x^2\\}$ 表示满足条件的 $x$ 的集合。\n- $\\{(x,y)\\mid y=x^2\\}$ 表示抛物线上的点集。\n\n#### 易错提醒\n\n- 集合中元素不能重复，含参数的集合必须先检验互异性。\n- 空集 $\\varnothing$ 不含任何元素，不能写成 $\\{0\\}$。\n- 描述法要关注隐含条件，例如分母不为零、根式有意义。",
+    "tags": [
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "核心概念",
+      "表示方法",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 0,
+    "content_md5": "8e8cc5e20c4da9c5eae3da59bdfaee4d",
+    "legacy_id_formula": "必修第一册-第一章 集合与常用逻辑用语-1.1 集合的概念与表示-0",
+    "updated_at": "2026-05-28T03:03:23.014717+00:00"
+  },
+  {
+    "id": "k-ckoh6l",
+    "book": "必修第一册",
+    "chapter": "第一章 集合与常用逻辑用语",
+    "section": "1.2 集合间的基本关系",
+    "title": "1.2 集合间的基本关系",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 子集与真子集\n\n若集合 $A$ 中任意元素都是集合 $B$ 的元素，则 $A$ 是 $B$ 的子集，记作 $A\\subseteq B$。\n\n若 $A\\subseteq B$ 且 $A\\ne B$，则 $A$ 是 $B$ 的真子集，记作 $A\\subsetneqq B$。\n\n空集性质：\n\n- $\\varnothing \\subseteq A$。\n- 若 $A\\ne \\varnothing$，则 $\\varnothing \\subsetneqq A$。\n\n集合相等：\n\n$$\nA=B \\Longleftrightarrow A\\subseteq B \\text{ 且 } B\\subseteq A\n$$\n\n#### 有限集合子集个数\n\n若集合 $A$ 有 $n$ 个元素，则：\n\n| 类型 | 个数 |\n| --- | --- |\n| 子集 | $2^n$ |\n| 真子集 | $2^n-1$ |\n| 非空子集 | $2^n-1$ |\n| 非空真子集 | $2^n-2$ |\n\n#### 高频考点\n\n- 利用 $A\\subseteq B$ 建立参数不等式。\n- 子集个数问题。\n- 空集作为特殊情况的分类讨论。\n\n#### 易错提醒\n\n当题目给出 $A\\subseteq B$，且 $A$ 是含参数的解集时，要先考虑 $A=\\varnothing$ 的可能。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "子集与真子集",
+      "有限集合子集个数",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 1,
+    "content_md5": "c12e65caa070b533d95878bae9463910",
+    "legacy_id_formula": "必修第一册-第一章 集合与常用逻辑用语-1.2 集合间的基本关系-1",
+    "updated_at": "2026-05-28T03:03:23.014918+00:00"
+  },
+  {
+    "id": "k-i1q0ge",
+    "book": "必修第一册",
+    "chapter": "第一章 集合与常用逻辑用语",
+    "section": "1.3 集合的基本运算",
+    "title": "1.3 集合的基本运算",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 交集、并集、补集\n\n交集：\n\n$$\nA\\cap B=\\{x\\mid x\\in A \\text{ 且 } x\\in B\\}\n$$\n\n并集：\n\n$$\nA\\cup B=\\{x\\mid x\\in A \\text{ 或 } x\\in B\\}\n$$\n\n补集：\n\n$$\n\\complement_U A=\\{x\\mid x\\in U \\text{ 且 } x\\notin A\\}\n$$\n\n其中 $U$ 是全集。\n\n#### 运算性质\n\n| 性质 | 公式 |\n| --- | --- |\n| 交换律 | $A\\cap B=B\\cap A$，$A\\cup B=B\\cup A$ |\n| 结合律 | $(A\\cap B)\\cap C=A\\cap(B\\cap C)$ |\n| 幂等律 | $A\\cap A=A$，$A\\cup A=A$ |\n| 空集律 | $A\\cap \\varnothing=\\varnothing$，$A\\cup\\varnothing=A$ |\n| 吸收关系 | 若 $A\\subseteq B$，则 $A\\cap B=A$，$A\\cup B=B$ |\n\n德摩根公式：\n\n$$\n\\complement_U(A\\cap B)=(\\complement_U A)\\cup(\\complement_U B)\n$$\n\n$$\n\\complement_U(A\\cup B)=(\\complement_U A)\\cap(\\complement_U B)\n$$\n\n容斥原理：\n\n$$\nn(A\\cup B)=n(A)+n(B)-n(A\\cap B)\n$$\n\n$$\nn(A\\cup B\\cup C)=n(A)+n(B)+n(C)-n(A\\cap B)-n(A\\cap C)-n(B\\cap C)+n(A\\cap B\\cap C)\n$$\n\n#### 高频考点\n\n- 区间形式下求交、并、补。\n- Venn 图解决集合计数。\n- 将集合关系转化为交并关系。\n\n常用转化：\n\n$$\nA\\subseteq B \\Longleftrightarrow A\\cap B=A \\Longleftrightarrow A\\cup B=B\n$$\n\n#### 易错提醒\n\n- 补集必须先明确全集。\n- 区间端点的开闭不能随意改变。\n- “或”在集合中通常表示并集，包含两者都满足的情况。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "交集、并集、补集",
+      "运算性质",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 2,
+    "content_md5": "0bd2283a8c1101a3c88011b19ffd9494",
+    "legacy_id_formula": "必修第一册-第一章 集合与常用逻辑用语-1.3 集合的基本运算-2",
+    "updated_at": "2026-05-28T03:03:23.014965+00:00"
+  },
+  {
+    "id": "k-u3u9y6",
+    "book": "必修第一册",
+    "chapter": "第一章 集合与常用逻辑用语",
+    "section": "1.4 充分条件与必要条件",
+    "title": "1.4 充分条件与必要条件",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 命题与真假\n\n能判断真假的陈述句叫命题。命题通常写成“若 $p$，则 $q$”。\n\n四种命题：\n\n| 类型 | 形式 |\n| --- | --- |\n| 原命题 | 若 $p$，则 $q$ |\n| 逆命题 | 若 $q$，则 $p$ |\n| 否命题 | 若非 $p$，则非 $q$ |\n| 逆否命题 | 若非 $q$，则非 $p$ |\n\n原命题与逆否命题同真同假；逆命题与否命题同真同假。\n\n#### 充分、必要、充要\n\n若 $p\\Rightarrow q$，则：\n\n- $p$ 是 $q$ 的充分条件。\n- $q$ 是 $p$ 的必要条件。\n\n若 $p\\Rightarrow q$ 且 $q\\Rightarrow p$，则 $p$ 是 $q$ 的充要条件。\n\n判断类型：\n\n| 推出关系 | 条件类型 |\n| --- | --- |\n| $p\\Rightarrow q$，$q\\nRightarrow p$ | $p$ 是 $q$ 的充分不必要条件 |\n| $p\\nRightarrow q$，$q\\Rightarrow p$ | $p$ 是 $q$ 的必要不充分条件 |\n| $p\\Rightarrow q$，$q\\Rightarrow p$ | 充要条件 |\n| $p\\nRightarrow q$，$q\\nRightarrow p$ | 既不充分也不必要 |\n\n#### 集合视角\n\n若命题 $p$ 对应集合 $A$，命题 $q$ 对应集合 $B$，则：\n\n$$\np\\Rightarrow q \\Longleftrightarrow A\\subseteq B\n$$\n\n#### 高频考点\n\n- 用集合包含关系判断充分必要。\n- 参数范围题中求“使 $p$ 是 $q$ 的充分条件”的参数。\n- 原命题与逆否命题真假判断。\n\n#### 易错提醒\n\n- “$p$ 是 $q$ 的充分条件”看的是 $p\\Rightarrow q$，方向不能反。\n- 否命题和命题的否定不同。否命题同时否定条件和结论；命题的否定是否定整个结论。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "命题与真假",
+      "充分、必要、充要",
+      "集合视角",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 3,
+    "content_md5": "cbe1dddd937e930e198565178410f555",
+    "legacy_id_formula": "必修第一册-第一章 集合与常用逻辑用语-1.4 充分条件与必要条件-3",
+    "updated_at": "2026-05-28T03:03:23.015011+00:00"
+  },
+  {
+    "id": "k-6vqa4z",
+    "book": "必修第一册",
+    "chapter": "第一章 集合与常用逻辑用语",
+    "section": "1.5 全称量词与存在量词",
+    "title": "1.5 全称量词与存在量词",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 两类量词命题\n\n全称量词命题：\n\n$$\n\\forall x\\in M,\\ p(x)\n$$\n\n含义是“对任意 $x\\in M$，命题 $p(x)$ 成立”。\n\n存在量词命题：\n\n$$\n\\exists x\\in M,\\ p(x)\n$$\n\n含义是“存在 $x\\in M$，使 $p(x)$ 成立”。\n\n#### 命题否定\n\n$$\n\\neg(\\forall x\\in M,\\ p(x)) \\Longleftrightarrow \\exists x\\in M,\\ \\neg p(x)\n$$\n\n$$\n\\neg(\\exists x\\in M,\\ p(x)) \\Longleftrightarrow \\forall x\\in M,\\ \\neg p(x)\n$$\n\n常见否定：\n\n| 原表述 | 否定 |\n| --- | --- |\n| 等于 | 不等于 |\n| 大于 | 小于或等于 |\n| 小于 | 大于或等于 |\n| 都是 | 不都是 |\n| 至少一个 | 一个也没有 |\n| 至多一个 | 至少两个 |\n\n#### 高频考点\n\n- 写出含量词命题的否定。\n- 判断“恒成立”“存在成立”问题。\n- 将恒成立问题转化为函数最值或不等式包含。\n\n#### 易错提醒\n\n否定含量词命题时，量词要变，结论也要否定。\n\n---",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "两类量词命题",
+      "命题否定",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 4,
+    "content_md5": "5c332072d49130f33210b40c1a229a06",
+    "legacy_id_formula": "必修第一册-第一章 集合与常用逻辑用语-1.5 全称量词与存在量词-4",
+    "updated_at": "2026-05-28T03:03:23.015045+00:00"
+  },
+  {
+    "id": "k-bdtgkk",
+    "book": "必修第一册",
+    "chapter": "第二章 一元二次函数、方程和不等式",
+    "section": "2.1 等式性质与不等式性质",
+    "title": "2.1 等式性质与不等式性质",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 等式性质\n\n若 $a=b$，则：\n\n$$\na+c=b+c\n$$\n\n$$\nac=bc\n$$\n\n若 $c\\ne0$，则：\n\n$$\n\\frac ac=\\frac bc\n$$\n\n#### 不等式性质\n\n若 $a>b$，则：\n\n$$\na+c>b+c\n$$\n\n若 $c>0$，则：\n\n$$\nac>bc\n$$\n\n若 $c<0$，则：\n\n$$\nac<bc\n$$\n\n同向不等式相加：\n\n$$\na>b,\\ c>d \\Longrightarrow a+c>b+d\n$$\n\n正数同向不等式相乘：\n\n$$\na>b>0,\\ c>d>0 \\Longrightarrow ac>bd\n$$\n\n#### 高频考点\n\n- 不等式变形时判断乘除数正负。\n- 利用作差法比较大小。\n- 利用作商法比较正数大小。\n\n#### 易错提醒\n\n不等式两边同乘或同除负数，不等号方向必须改变。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "等式性质",
+      "不等式性质",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 5,
+    "content_md5": "ed259788615e2cd902480aa675487136",
+    "legacy_id_formula": "必修第一册-第二章 一元二次函数、方程和不等式-2.1 等式性质与不等式性质-5",
+    "updated_at": "2026-05-28T03:03:23.015080+00:00"
+  },
+  {
+    "id": "k-9va2w4",
+    "book": "必修第一册",
+    "chapter": "第二章 一元二次函数、方程和不等式",
+    "section": "2.2 基本不等式",
+    "title": "2.2 基本不等式",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 核心公式\n\n若 $a>0,b>0$，则：\n\n$$\n\\frac{a+b}{2}\\ge \\sqrt{ab}\n$$\n\n等号成立当且仅当 $a=b$。\n\n常见变形：\n\n$$\na+b\\ge 2\\sqrt{ab}\n$$\n\n$$\nab\\le \\left(\\frac{a+b}{2}\\right)^2\n$$\n\n若 $x>0$，则：\n\n$$\nx+\\frac ax\\ge 2\\sqrt a \\quad (a>0)\n$$\n\n#### 使用条件\n\n基本不等式要满足三个条件：\n\n- 正：参与基本不等式的量为正。\n- 定：和或积中有一个是定值。\n- 等：等号条件能够取到。\n\n#### 高频考点\n\n- 已知积求和的最小值。\n- 已知和求积的最大值。\n- 通过配凑构造基本不等式。\n- 多变量条件下求最值。\n\n#### 易错提醒\n\n- 忽略变量正值条件会导致结论错误。\n- 等号条件必须能在题目条件下实现。\n- 不能看到 $x+\\frac1x$ 就机械套用，要先看 $x$ 的符号。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "核心公式",
+      "使用条件",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 6,
+    "content_md5": "7c393830b1b712880e08fa1d446e95c6",
+    "legacy_id_formula": "必修第一册-第二章 一元二次函数、方程和不等式-2.2 基本不等式-6",
+    "updated_at": "2026-05-28T03:03:23.015115+00:00"
+  },
+  {
+    "id": "k-px1iqh",
+    "book": "必修第一册",
+    "chapter": "第二章 一元二次函数、方程和不等式",
+    "section": "2.3 二次函数与一元二次方程、不等式",
+    "title": "2.3 二次函数与一元二次方程、不等式",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 二次函数\n\n一般式：\n\n$$\nf(x)=ax^2+bx+c\\quad (a\\ne0)\n$$\n\n顶点式：\n\n$$\nf(x)=a(x-h)^2+k\n$$\n\n其中顶点为 $(h,k)$，对称轴为 $x=h$。\n\n配方：\n\n$$\nax^2+bx+c=a\\left(x+\\frac b{2a}\\right)^2+\\frac{4ac-b^2}{4a}\n$$\n\n顶点坐标：\n\n$$\n\\left(-\\frac b{2a},\\frac{4ac-b^2}{4a}\\right)\n$$\n\n#### 一元二次方程\n\n方程：\n\n$$\nax^2+bx+c=0\\quad (a\\ne0)\n$$\n\n判别式：\n\n$$\n\\Delta=b^2-4ac\n$$\n\n| 判别式 | 根的情况 |\n| --- | --- |\n| $\\Delta>0$ | 两个不相等实根 |\n| $\\Delta=0$ | 两个相等实根 |\n| $\\Delta<0$ | 无实根 |\n\n求根公式：\n\n$$\nx=\\frac{-b\\pm\\sqrt{\\Delta}}{2a}\n$$\n\n韦达定理：\n\n若 $x_1,x_2$ 是 $ax^2+bx+c=0$ 的两个根，则：\n\n$$\nx_1+x_2=-\\frac ba,\\quad x_1x_2=\\frac ca\n$$\n\n#### 一元二次不等式\n\n解一元二次不等式的基本步骤：\n\n1. 化为标准形式 $ax^2+bx+c>0$ 或 $<0$。\n2. 求对应方程的根。\n3. 结合开口方向画数轴。\n4. 写出解集。\n\n若 $a>0$ 且 $\\Delta>0$，设两根 $x_1<x_2$：\n\n$$\nax^2+bx+c>0 \\Longleftrightarrow x<x_1 \\text{ 或 } x>x_2\n$$\n\n$$\nax^2+bx+c<0 \\Longleftrightarrow x_1<x<x_2\n$$\n\n#### 高频考点\n\n- 二次函数在区间上的最值。\n- 二次方程根的分布。\n- 一元二次不等式恒成立。\n- 二次函数、方程、不等式三者互相转化。\n\n#### 易错提醒\n\n- 二次函数区间最值要看对称轴是否落在区间内。\n- 解不等式时注意端点开闭。\n- 恒成立问题常转化为函数最值，而不是只看判别式。\n\n---",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "二次函数",
+      "一元二次方程",
+      "一元二次不等式",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 7,
+    "content_md5": "d243667d54e8ece4990cd59cc67ecf2b",
+    "legacy_id_formula": "必修第一册-第二章 一元二次函数、方程和不等式-2.3 二次函数与一元二次方程、不等式-7",
+    "updated_at": "2026-05-28T03:03:23.015169+00:00"
+  },
+  {
+    "id": "k-bj40xw",
+    "book": "必修第一册",
+    "chapter": "第三章 函数的概念与性质",
+    "section": "3.1 函数的概念及其表示",
+    "title": "3.1 函数的概念及其表示",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 核心概念\n\n设 $A,B$ 是非空数集，若按照某种确定的对应关系 $f$，使得集合 $A$ 中任意一个数 $x$，在集合 $B$ 中都有唯一确定的数 $f(x)$ 与之对应，则称 $f:A\\to B$ 为从 $A$ 到 $B$ 的函数。\n\n函数三要素：\n\n- 定义域\n- 对应关系\n- 值域\n\n其中定义域和对应关系决定值域。\n\n#### 定义域\n\n常见限制：\n\n| 形式 | 条件 |\n| --- | --- |\n| 分式 $\\frac1{g(x)}$ | $g(x)\\ne0$ |\n| 偶次根式 $\\sqrt{g(x)}$ | $g(x)\\ge0$ |\n| 对数 $\\log_a g(x)$ | $g(x)>0,\\ a>0,\\ a\\ne1$ |\n| 零指数 $g(x)^0$ | $g(x)\\ne0$ |\n\n#### 值域常用方法\n\n- 观察法\n- 配方法\n- 换元法\n- 单调性法\n- 图象法\n- 基本不等式法\n\n#### 函数表示法\n\n- 解析法\n- 图象法\n- 列表法\n\n#### 分段函数\n\n分段函数是在定义域不同部分用不同解析式表示的函数。求值时要先判断自变量所在区间。\n\n#### 高频考点\n\n- 复合函数定义域。\n- 抽象函数求值。\n- 分段函数求值、解不等式。\n- 由函数关系求解析式。\n\n#### 易错提醒\n\n- 求解析式后要写定义域。\n- 分段函数在分界点处使用哪一段，要看等号归属。\n- 复合函数 $f(g(x))$ 的定义域必须保证 $g(x)$ 落入 $f$ 的定义域。",
+    "tags": [
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "核心概念",
+      "定义域",
+      "值域常用方法",
+      "函数表示法",
+      "分段函数",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 8,
+    "content_md5": "455734038da9ca3e1786841af3133dfb",
+    "legacy_id_formula": "必修第一册-第三章 函数的概念与性质-3.1 函数的概念及其表示-8",
+    "updated_at": "2026-05-28T03:03:23.015210+00:00"
+  },
+  {
+    "id": "k-a8qd9c",
+    "book": "必修第一册",
+    "chapter": "第三章 函数的概念与性质",
+    "section": "3.2 函数的基本性质",
+    "title": "3.2 函数的基本性质",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 单调性\n\n设函数 $f(x)$ 在区间 $I$ 上有定义。\n\n若对任意 $x_1,x_2\\in I$，当 $x_1<x_2$ 时都有：\n\n$$\nf(x_1)<f(x_2)\n$$\n\n则 $f(x)$ 在 $I$ 上单调递增。\n\n若对任意 $x_1,x_2\\in I$，当 $x_1<x_2$ 时都有：\n\n$$\nf(x_1)>f(x_2)\n$$\n\n则 $f(x)$ 在 $I$ 上单调递减。\n\n常用判定方法：\n\n- 定义法\n- 图象法\n- 基本初等函数性质\n- 复合函数“同增异减”\n\n#### 最大值与最小值\n\n若存在 $x_0\\in D$，使得对任意 $x\\in D$：\n\n$$\nf(x)\\le f(x_0)\n$$\n\n则 $f(x_0)$ 是最大值。\n\n若存在 $x_0\\in D$，使得对任意 $x\\in D$：\n\n$$\nf(x)\\ge f(x_0)\n$$\n\n则 $f(x_0)$ 是最小值。\n\n#### 奇偶性\n\n判断前提：定义域关于原点对称。\n\n偶函数：\n\n$$\nf(-x)=f(x)\n$$\n\n图象关于 $y$ 轴对称。\n\n奇函数：\n\n$$\nf(-x)=-f(x)\n$$\n\n图象关于原点对称。\n\n若奇函数在 $x=0$ 处有定义，则：\n\n$$\nf(0)=0\n$$\n\n#### 周期性\n\n若存在非零常数 $T$，使定义域内任意 $x$ 都有：\n\n$$\nf(x+T)=f(x)\n$$\n\n则 $T$ 是函数的周期。\n\n常见结论：\n\n- 若 $f(x+a)=f(x)$，则周期为 $a$ 或 $a$ 的约数。\n- 若 $f(x+a)=-f(x)$，则 $2a$ 是周期。\n- 若 $f(x+a)=\\frac1{f(x)}$，在有意义时常推出 $2a$ 周期。\n\n#### 对称性\n\n函数自身对称：\n\n- $f(-x)=f(x)$：关于 $y$ 轴对称。\n- $f(a+x)=f(a-x)$：关于直线 $x=a$ 对称。\n- $f(a+x)+f(a-x)=2b$：关于点 $(a,b)$ 中心对称。\n\n两个函数图象对称：\n\n- $y=f(x)$ 与 $y=-f(x)$ 关于 $x$ 轴对称。\n- $y=f(x)$ 与 $y=f(-x)$ 关于 $y$ 轴对称。\n- $y=f(x)$ 与 $y=-f(-x)$ 关于原点对称。\n- $y=f(x)$ 与其反函数 $y=f^{-1}(x)$ 关于直线 $y=x$ 对称。\n\n#### 图象变换\n\n平移：\n\n- $y=f(x-a)$：向右平移 $a$ 个单位。\n- $y=f(x+a)$：向左平移 $a$ 个单位。\n- $y=f(x)+b$：向上平移 $b$ 个单位。\n- $y=f(x)-b$：向下平移 $b$ 个单位。\n\n伸缩：\n\n- $y=Af(x)$：纵向伸缩，纵坐标变为原来的 $A$ 倍。\n- $y=f(\\omega x)$：横向伸缩，横坐标变为原来的 $\\frac1\\omega$ 倍。\n\n翻折：\n\n- $y=|f(x)|$：把 $x$ 轴下方图象翻到上方。\n- $y=f(|x|)$：保留右半部分，并关于 $y$ 轴对称到左半部分。\n\n#### 高频考点\n\n- 单调性与不等式结合。\n- 奇偶性求参数、求解析式。\n- 周期性与抽象函数求值。\n- 图象变换与零点个数。\n\n#### 易错提醒\n\n- 多个单调区间不能用并集符号表示单调性。\n- 判断奇偶性必须先看定义域。\n- 平移中“左加右减”指自变量整体，而不是只看 $x$ 的系数。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "单调性",
+      "最大值与最小值",
+      "奇偶性",
+      "周期性",
+      "对称性",
+      "图象变换",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 9,
+    "content_md5": "64e8d1dde420e0e46b69e5f15fb8d49a",
+    "legacy_id_formula": "必修第一册-第三章 函数的概念与性质-3.2 函数的基本性质-9",
+    "updated_at": "2026-05-28T03:03:23.015275+00:00"
+  },
+  {
+    "id": "k-crgom2",
+    "book": "必修第一册",
+    "chapter": "第三章 函数的概念与性质",
+    "section": "3.3 幂函数",
+    "title": "3.3 幂函数",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 核心形式\n\n幂函数一般形如：\n\n$$\ny=x^\\alpha\n$$\n\n其中 $\\alpha$ 为常数。\n\n高一重点掌握：\n\n| 函数 | 定义域 | 性质简述 |\n| --- | --- | --- |\n| $y=x$ | $\\mathbb R$ | 奇函数，增函数 |\n| $y=x^2$ | $\\mathbb R$ | 偶函数，先减后增 |\n| $y=x^3$ | $\\mathbb R$ | 奇函数，增函数 |\n| $y=x^{-1}$ | $(-\\infty,0)\\cup(0,\\infty)$ | 奇函数，各象限内减 |\n| $y=x^{1/2}$ | $[0,\\infty)$ | 增函数 |\n\n#### 高频考点\n\n- 根据幂函数定义求参数。\n- 比较幂函数值大小。\n- 幂函数图象与性质判断。\n\n#### 易错提醒\n\n幂函数必须是 $y=x^\\alpha$ 的形式，系数不是 1 或底数不是 $x$ 时通常不是幂函数。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "核心形式",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 10,
+    "content_md5": "d3a483a520cfcc503e94451932dd68a2",
+    "legacy_id_formula": "必修第一册-第三章 函数的概念与性质-3.3 幂函数-10",
+    "updated_at": "2026-05-28T03:03:23.015300+00:00"
+  },
+  {
+    "id": "k-8vo9o6",
+    "book": "必修第一册",
+    "chapter": "第三章 函数的概念与性质",
+    "section": "3.4 函数的应用",
+    "title": "3.4 函数的应用",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 函数零点\n\n若 $f(x_0)=0$，则 $x_0$ 是函数 $f(x)$ 的零点。\n\n函数零点、方程根、图象交点关系：\n\n$$\nf(x)=0 \\text{ 的根 } \\Longleftrightarrow f(x) \\text{ 的零点 } \\Longleftrightarrow y=f(x) \\text{ 与 } x \\text{ 轴交点横坐标}\n$$\n\n零点存在性定理：\n\n若函数 $f(x)$ 在区间 $[a,b]$ 上连续，且：\n\n$$\nf(a)f(b)<0\n$$\n\n则 $f(x)$ 在 $(a,b)$ 内至少有一个零点。\n\n#### 函数模型\n\n常见模型：\n\n- 一次函数模型\n- 二次函数模型\n- 指数增长或衰减模型\n- 对数模型\n- 分段函数模型\n\n#### 高频考点\n\n- 判断零点个数。\n- 用二分法求近似解。\n- 建立函数模型解决实际问题。\n\n#### 易错提醒\n\n$f(a)f(b)<0$ 只能保证至少一个零点，不能保证只有一个零点；若要唯一性，还要结合单调性。\n\n---",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "函数零点",
+      "函数模型",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 11,
+    "content_md5": "2fc10477f330818ad7ec48eab641c311",
+    "legacy_id_formula": "必修第一册-第三章 函数的概念与性质-3.4 函数的应用-11",
+    "updated_at": "2026-05-28T03:03:23.015330+00:00"
+  },
+  {
+    "id": "k-160i2o",
+    "book": "必修第一册",
+    "chapter": "第四章 指数函数与对数函数",
+    "section": "4.1 指数与指数运算",
+    "title": "4.1 指数与指数运算",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 根式与分数指数幂\n\n若 $a\\ge0$，则：\n\n$$\n\\sqrt[n]{a^n}=a \\quad (n\\text{ 为偶数})\n$$\n\n若 $n$ 为奇数，则：\n\n$$\n\\sqrt[n]{a^n}=a\n$$\n\n分数指数幂：\n\n$$\na^{\\frac mn}=\\sqrt[n]{a^m}\\quad (a>0,\\ m,n\\in\\mathbb N^*,\\ n>1)\n$$\n\n负指数幂：\n\n$$\na^{-r}=\\frac1{a^r}\\quad (a>0)\n$$\n\n#### 指数运算性质\n\n对 $a>0,b>0$：\n\n$$\na^m a^n=a^{m+n}\n$$\n\n$$\n\\frac{a^m}{a^n}=a^{m-n}\n$$\n\n$$\n(a^m)^n=a^{mn}\n$$\n\n$$\n(ab)^m=a^m b^m\n$$\n\n$$\n\\left(\\frac ab\\right)^m=\\frac{a^m}{b^m}\n$$\n\n#### 高频考点\n\n- 根式化简。\n- 指数幂运算。\n- 指数方程与指数不等式。\n\n#### 易错提醒\n\n偶次根式化简时：\n\n$$\n\\sqrt{x^2}=|x|\n$$\n\n不能直接写成 $x$。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "根式与分数指数幂",
+      "指数运算性质",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 12,
+    "content_md5": "75b21716011a6582985b6ba1e1691b2a",
+    "legacy_id_formula": "必修第一册-第四章 指数函数与对数函数-4.1 指数与指数运算-12",
+    "updated_at": "2026-05-28T03:03:23.015366+00:00"
+  },
+  {
+    "id": "k-9il6od",
+    "book": "必修第一册",
+    "chapter": "第四章 指数函数与对数函数",
+    "section": "4.2 指数函数",
+    "title": "4.2 指数函数",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 定义\n\n函数：\n\n$$\ny=a^x\\quad (a>0,\\ a\\ne1)\n$$\n\n叫做指数函数。\n\n#### 图象与性质\n\n| 性质 | $a>1$ | $0<a<1$ |\n| --- | --- | --- |\n| 定义域 | $\\mathbb R$ | $\\mathbb R$ |\n| 值域 | $(0,+\\infty)$ | $(0,+\\infty)$ |\n| 定点 | $(0,1)$ | $(0,1)$ |\n| 单调性 | 增函数 | 减函数 |\n\n#### 高频考点\n\n- 指数函数单调性比较大小。\n- 指数方程、不等式。\n- 指数型函数图象过定点。\n- 指数函数与复合函数单调性。\n\n#### 易错提醒\n\n比较 $a^m$ 与 $a^n$ 时，底数大于 1 和介于 0 到 1 的单调性相反。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "定义",
+      "图象与性质",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 13,
+    "content_md5": "4ce5f38c45cd1306ca7bd77f50449cfe",
+    "legacy_id_formula": "必修第一册-第四章 指数函数与对数函数-4.2 指数函数-13",
+    "updated_at": "2026-05-28T03:03:23.015391+00:00"
+  },
+  {
+    "id": "k-y1vpq8",
+    "book": "必修第一册",
+    "chapter": "第四章 指数函数与对数函数",
+    "section": "4.3 对数与对数运算",
+    "title": "4.3 对数与对数运算",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 对数定义\n\n若：\n\n$$\na^x=N\\quad (a>0,\\ a\\ne1,\\ N>0)\n$$\n\n则：\n\n$$\nx=\\log_a N\n$$\n\n其中 $a$ 是底数，$N$ 是真数。\n\n#### 基本恒等式\n\n$$\na^{\\log_a N}=N\n$$\n\n$$\n\\log_a a^x=x\n$$\n\n$$\n\\log_a 1=0,\\quad \\log_a a=1\n$$\n\n#### 运算性质\n\n对 $M>0,N>0$：\n\n$$\n\\log_a(MN)=\\log_a M+\\log_a N\n$$\n\n$$\n\\log_a\\frac MN=\\log_a M-\\log_a N\n$$\n\n$$\n\\log_a M^r=r\\log_a M\n$$\n\n换底公式：\n\n$$\n\\log_a b=\\frac{\\log_c b}{\\log_c a}\\quad (c>0,\\ c\\ne1)\n$$\n\n常用结论：\n\n$$\n\\log_a b=\\frac1{\\log_b a}\n$$\n\n#### 高频考点\n\n- 对数式与指数式互化。\n- 对数运算化简。\n- 对数方程与对数不等式。\n- 换底公式。\n\n#### 易错提醒\n\n对数中真数必须大于 0，底数必须大于 0 且不等于 1。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "对数定义",
+      "基本恒等式",
+      "运算性质",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 14,
+    "content_md5": "183275acb43da2420db51865bd20ecd6",
+    "legacy_id_formula": "必修第一册-第四章 指数函数与对数函数-4.3 对数与对数运算-14",
+    "updated_at": "2026-05-28T03:03:23.015426+00:00"
+  },
+  {
+    "id": "k-7dwt4z",
+    "book": "必修第一册",
+    "chapter": "第四章 指数函数与对数函数",
+    "section": "4.4 对数函数",
+    "title": "4.4 对数函数",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 定义\n\n函数：\n\n$$\ny=\\log_a x\\quad (a>0,\\ a\\ne1)\n$$\n\n叫做对数函数。\n\n#### 图象与性质\n\n| 性质 | $a>1$ | $0<a<1$ |\n| --- | --- | --- |\n| 定义域 | $(0,+\\infty)$ | $(0,+\\infty)$ |\n| 值域 | $\\mathbb R$ | $\\mathbb R$ |\n| 定点 | $(1,0)$ | $(1,0)$ |\n| 单调性 | 增函数 | 减函数 |\n\n指数函数 $y=a^x$ 与对数函数 $y=\\log_a x$ 互为反函数，图象关于直线 $y=x$ 对称。\n\n#### 高频考点\n\n- 对数函数图象判断。\n- 利用单调性解不等式。\n- 指数、对数互化。\n- 定义域和值域综合。\n\n#### 易错提醒\n\n解对数不等式时，若底数 $0<a<1$，不等号方向会改变。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "定义",
+      "图象与性质",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 15,
+    "content_md5": "11c5be92fad88ac6cf982c6bde5c05bf",
+    "legacy_id_formula": "必修第一册-第四章 指数函数与对数函数-4.4 对数函数-15",
+    "updated_at": "2026-05-28T03:03:23.015451+00:00"
+  },
+  {
+    "id": "k-lf1iug",
+    "book": "必修第一册",
+    "chapter": "第四章 指数函数与对数函数",
+    "section": "4.5 不同函数增长差异",
+    "title": "4.5 不同函数增长差异",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 增长速度\n\n当 $x$ 充分大时，一般有：\n\n$$\n\\log_a x \\ll x^m \\ll a^x\\quad (a>1,\\ m>0)\n$$\n\n即对数增长最慢，指数增长最快。\n\n#### 高频考点\n\n- 比较指数型、对数型、幂函数型增长。\n- 实际问题中选择合适模型。\n\n#### 易错提醒\n\n增长快慢是“大范围趋势”，不是所有小范围数值都满足简单大小顺序。\n\n---",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "增长速度",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 16,
+    "content_md5": "b4dba513b5bc6a1867cca249602b6ac0",
+    "legacy_id_formula": "必修第一册-第四章 指数函数与对数函数-4.5 不同函数增长差异-16",
+    "updated_at": "2026-05-28T03:03:23.015473+00:00"
+  },
+  {
+    "id": "k-fugtur",
+    "book": "必修第一册",
+    "chapter": "第五章 三角函数",
+    "section": "5.1 任意角和弧度制",
+    "title": "5.1 任意角和弧度制",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 任意角\n\n以射线绕端点旋转形成角：\n\n- 逆时针旋转为正角。\n- 顺时针旋转为负角。\n- 不旋转为零角。\n\n终边相同的角：\n\n$$\n\\beta=\\alpha+2k\\pi,\\quad k\\in\\mathbb Z\n$$\n\n若用角度制：\n\n$$\n\\beta=\\alpha+k\\cdot360^\\circ,\\quad k\\in\\mathbb Z\n$$\n\n#### 象限角\n\n终边落在第几象限，就是第几象限角。终边落在坐标轴上的角不属于任何象限。\n\n#### 弧度制\n\n弧长等于半径的弧所对的圆心角为 $1$ 弧度。\n\n角度与弧度换算：\n\n$$\n180^\\circ=\\pi\\text{ rad}\n$$\n\n$$\n1^\\circ=\\frac{\\pi}{180}\\text{ rad}\n$$\n\n$$\n1\\text{ rad}=\\frac{180^\\circ}{\\pi}\n$$\n\n弧长公式：\n\n$$\nl=|\\alpha|r\n$$\n\n扇形面积公式：\n\n$$\nS=\\frac12lr=\\frac12|\\alpha|r^2\n$$\n\n其中 $\\alpha$ 用弧度制。\n\n#### 高频考点\n\n- 终边相同角的表示。\n- 象限角判断。\n- 弧长和扇形面积。\n\n#### 易错提醒\n\n使用 $l=|\\alpha|r$ 和 $S=\\frac12|\\alpha|r^2$ 时，角必须是弧度制。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "任意角",
+      "象限角",
+      "弧度制",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 17,
+    "content_md5": "fe0b5d7f96036dc12df5f743a9e1eabb",
+    "legacy_id_formula": "必修第一册-第五章 三角函数-5.1 任意角和弧度制-17",
+    "updated_at": "2026-05-28T03:03:23.015513+00:00"
+  },
+  {
+    "id": "k-louy5x",
+    "book": "必修第一册",
+    "chapter": "第五章 三角函数",
+    "section": "5.2 三角函数的概念",
+    "title": "5.2 三角函数的概念",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 任意角三角函数\n\n设角 $\\alpha$ 终边上一点 $P(x,y)$，$r=\\sqrt{x^2+y^2}$，则：\n\n$$\n\\sin\\alpha=\\frac yr\n$$\n\n$$\n\\cos\\alpha=\\frac xr\n$$\n\n$$\n\\tan\\alpha=\\frac yx\\quad (x\\ne0)\n$$\n\n#### 符号规律\n\n| 象限 | $\\sin\\alpha$ | $\\cos\\alpha$ | $\\tan\\alpha$ |\n| --- | --- | --- | --- |\n| 第一象限 | $+$ | $+$ | $+$ |\n| 第二象限 | $+$ | $-$ | $-$ |\n| 第三象限 | $-$ | $-$ | $+$ |\n| 第四象限 | $-$ | $+$ | $-$ |\n\n#### 同角三角函数关系\n\n$$\n\\sin^2\\alpha+\\cos^2\\alpha=1\n$$\n\n$$\n\\tan\\alpha=\\frac{\\sin\\alpha}{\\cos\\alpha}\\quad (\\cos\\alpha\\ne0)\n$$\n\n$$\n1+\\tan^2\\alpha=\\frac1{\\cos^2\\alpha}\n$$\n\n#### 高频考点\n\n- 已知一点坐标求三角函数值。\n- 已知一个三角函数值求另外两个。\n- 根据角范围判断符号。\n\n#### 易错提醒\n\n开方求 $\\sin\\alpha$ 或 $\\cos\\alpha$ 时，要由象限确定正负号。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "任意角三角函数",
+      "符号规律",
+      "同角三角函数关系",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 18,
+    "content_md5": "22a36ff426fbbc75d056d9b469b77ea4",
+    "legacy_id_formula": "必修第一册-第五章 三角函数-5.2 三角函数的概念-18",
+    "updated_at": "2026-05-28T03:03:23.015550+00:00"
+  },
+  {
+    "id": "k-6atcja",
+    "book": "必修第一册",
+    "chapter": "第五章 三角函数",
+    "section": "5.3 诱导公式",
+    "title": "5.3 诱导公式",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 核心口诀\n\n奇变偶不变，符号看象限。\n\n“奇、偶”指 $\\frac\\pi2$ 的奇数倍或偶数倍。\n\n#### 常用公式\n\n周期：\n\n$$\n\\sin(\\alpha+2k\\pi)=\\sin\\alpha\n$$\n\n$$\n\\cos(\\alpha+2k\\pi)=\\cos\\alpha\n$$\n\n$$\n\\tan(\\alpha+k\\pi)=\\tan\\alpha\n$$\n\n$\\pi+\\alpha$：\n\n$$\n\\sin(\\pi+\\alpha)=-\\sin\\alpha\n$$\n\n$$\n\\cos(\\pi+\\alpha)=-\\cos\\alpha\n$$\n\n$$\n\\tan(\\pi+\\alpha)=\\tan\\alpha\n$$\n\n$-\\alpha$：\n\n$$\n\\sin(-\\alpha)=-\\sin\\alpha\n$$\n\n$$\n\\cos(-\\alpha)=\\cos\\alpha\n$$\n\n$$\n\\tan(-\\alpha)=-\\tan\\alpha\n$$\n\n$\\frac\\pi2\\pm\\alpha$：\n\n$$\n\\sin\\left(\\frac\\pi2-\\alpha\\right)=\\cos\\alpha\n$$\n\n$$\n\\cos\\left(\\frac\\pi2-\\alpha\\right)=\\sin\\alpha\n$$\n\n$$\n\\sin\\left(\\frac\\pi2+\\alpha\\right)=\\cos\\alpha\n$$\n\n$$\n\\cos\\left(\\frac\\pi2+\\alpha\\right)=-\\sin\\alpha\n$$\n\n#### 高频考点\n\n- 化任意角为锐角三角函数。\n- 诱导公式与同角关系联用。\n- 三角函数式化简求值。\n\n#### 易错提醒\n\n“奇变偶不变”只决定函数名是否改变，符号还要看原角整体所在象限。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "核心口诀",
+      "常用公式",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 19,
+    "content_md5": "2907e2e93f549345e4ea042d358034a7",
+    "legacy_id_formula": "必修第一册-第五章 三角函数-5.3 诱导公式-19",
+    "updated_at": "2026-05-28T03:03:23.015588+00:00"
+  },
+  {
+    "id": "k-ytcddl",
+    "book": "必修第一册",
+    "chapter": "第五章 三角函数",
+    "section": "5.4 三角函数的图象和性质",
+    "title": "5.4 三角函数的图象和性质",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 正弦函数\n\n$$\ny=\\sin x\n$$\n\n| 性质 | 内容 |\n| --- | --- |\n| 定义域 | $\\mathbb R$ |\n| 值域 | $[-1,1]$ |\n| 周期 | $2\\pi$ |\n| 奇偶性 | 奇函数 |\n| 对称轴 | $x=\\frac\\pi2+k\\pi$ |\n| 对称中心 | $(k\\pi,0)$ |\n\n单调递增区间：\n\n$$\n\\left[-\\frac\\pi2+2k\\pi,\\frac\\pi2+2k\\pi\\right]\n$$\n\n单调递减区间：\n\n$$\n\\left[\\frac\\pi2+2k\\pi,\\frac{3\\pi}2+2k\\pi\\right]\n$$\n\n#### 余弦函数\n\n$$\ny=\\cos x\n$$\n\n| 性质 | 内容 |\n| --- | --- |\n| 定义域 | $\\mathbb R$ |\n| 值域 | $[-1,1]$ |\n| 周期 | $2\\pi$ |\n| 奇偶性 | 偶函数 |\n| 对称轴 | $x=k\\pi$ |\n| 对称中心 | $\\left(\\frac\\pi2+k\\pi,0\\right)$ |\n\n单调递增区间：\n\n$$\n[-\\pi+2k\\pi,2k\\pi]\n$$\n\n单调递减区间：\n\n$$\n[2k\\pi,\\pi+2k\\pi]\n$$\n\n#### 正切函数\n\n$$\ny=\\tan x\n$$\n\n| 性质 | 内容 |\n| --- | --- |\n| 定义域 | $\\{x\\mid x\\ne \\frac\\pi2+k\\pi,\\ k\\in\\mathbb Z\\}$ |\n| 值域 | $\\mathbb R$ |\n| 周期 | $\\pi$ |\n| 奇偶性 | 奇函数 |\n| 单调性 | 在每个 $\\left(-\\frac\\pi2+k\\pi,\\frac\\pi2+k\\pi\\right)$ 上递增 |\n| 对称中心 | $(k\\pi,0)$ |\n\n#### 高频考点\n\n- 三角函数图象识别。\n- 求周期、最值、单调区间。\n- 解三角不等式。\n- 利用对称性求参数。\n\n#### 易错提醒\n\n- 正切函数的定义域不能漏掉间断点。\n- 写单调区间时要带 $k\\in\\mathbb Z$。\n- 三角函数单调区间不能跨越多个周期随意合并。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "正弦函数",
+      "余弦函数",
+      "正切函数",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 20,
+    "content_md5": "95613fde0e6fd3b9ebbfe3923907cc32",
+    "legacy_id_formula": "必修第一册-第五章 三角函数-5.4 三角函数的图象和性质-20",
+    "updated_at": "2026-05-28T03:03:23.015631+00:00"
+  },
+  {
+    "id": "k-f83goj",
+    "book": "必修第一册",
+    "chapter": "第五章 三角函数",
+    "section": "5.5 三角恒等变换",
+    "title": "5.5 三角恒等变换",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 两角和与差公式\n\n$$\n\\sin(\\alpha\\pm\\beta)=\\sin\\alpha\\cos\\beta\\pm\\cos\\alpha\\sin\\beta\n$$\n\n$$\n\\cos(\\alpha\\pm\\beta)=\\cos\\alpha\\cos\\beta\\mp\\sin\\alpha\\sin\\beta\n$$\n\n$$\n\\tan(\\alpha\\pm\\beta)=\\frac{\\tan\\alpha\\pm\\tan\\beta}{1\\mp\\tan\\alpha\\tan\\beta}\n$$\n\n#### 二倍角公式\n\n$$\n\\sin2\\alpha=2\\sin\\alpha\\cos\\alpha\n$$\n\n$$\n\\cos2\\alpha=\\cos^2\\alpha-\\sin^2\\alpha=2\\cos^2\\alpha-1=1-2\\sin^2\\alpha\n$$\n\n$$\n\\tan2\\alpha=\\frac{2\\tan\\alpha}{1-\\tan^2\\alpha}\n$$\n\n#### 降幂公式\n\n$$\n\\sin^2\\alpha=\\frac{1-\\cos2\\alpha}{2}\n$$\n\n$$\n\\cos^2\\alpha=\\frac{1+\\cos2\\alpha}{2}\n$$\n\n#### 辅助角公式\n\n$$\na\\sin x+b\\cos x=\\sqrt{a^2+b^2}\\sin(x+\\varphi)\n$$\n\n其中：\n\n$$\n\\cos\\varphi=\\frac a{\\sqrt{a^2+b^2}},\\quad \\sin\\varphi=\\frac b{\\sqrt{a^2+b^2}}\n$$\n\n也可写成：\n\n$$\na\\sin x+b\\cos x=\\sqrt{a^2+b^2}\\cos(x-\\theta)\n$$\n\n#### 常用思路\n\n- 切化弦。\n- 弦化切。\n- 升幂、降幂。\n- 角的配凑。\n- 化为同名、同角、同次。\n\n#### 高频考点\n\n- 三角函数式化简。\n- 给值求值。\n- 给值求角。\n- 恒等证明。\n- 与 $y=A\\sin(\\omega x+\\varphi)$ 结合求性质。\n\n#### 易错提醒\n\n给值求角时必须结合角的范围，否则会漏解或多解。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "两角和与差公式",
+      "二倍角公式",
+      "降幂公式",
+      "辅助角公式",
+      "常用思路",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 21,
+    "content_md5": "2580fcdcb38f6014adfe78be9e4dfacd",
+    "legacy_id_formula": "必修第一册-第五章 三角函数-5.5 三角恒等变换-21",
+    "updated_at": "2026-05-28T03:03:23.015671+00:00"
+  },
+  {
+    "id": "k-kg9iva",
+    "book": "必修第一册",
+    "chapter": "第五章 三角函数",
+    "section": "5.6 函数 $y=A\\sin(\\omega x+\\varphi)$",
+    "title": "5.6 函数 $y=A\\sin(\\omega x+\\varphi)$",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 基本量\n\n对：\n\n$$\ny=A\\sin(\\omega x+\\varphi)\\quad (A>0,\\omega>0)\n$$\n\n有：\n\n- 振幅：$A$\n- 周期：$T=\\frac{2\\pi}{\\omega}$\n- 相位：$\\omega x+\\varphi$\n- 初相：$\\varphi$\n\n若有：\n\n$$\ny=A\\sin(\\omega x+\\varphi)+k\n$$\n\n则值域为：\n\n$$\n[k-A,k+A]\n$$\n\n#### 图象变换\n\n由 $y=\\sin x$ 到 $y=A\\sin(\\omega x+\\varphi)+k$，可以按：\n\n1. 相位平移\n2. 横向伸缩\n3. 纵向伸缩\n4. 上下平移\n\n处理。\n\n注意：\n\n$$\n\\omega x+\\varphi=\\omega\\left(x+\\frac{\\varphi}{\\omega}\\right)\n$$\n\n因此水平平移量是 $-\\frac{\\varphi}{\\omega}$。\n\n#### 五点法\n\n令：\n\n$$\n\\omega x+\\varphi=0,\\frac\\pi2,\\pi,\\frac{3\\pi}2,2\\pi\n$$\n\n求出五个关键点。\n\n#### 高频考点\n\n- 求解析式。\n- 求周期、单调区间、对称轴、对称中心。\n- 图象平移伸缩。\n- 根据图象确定 $A,\\omega,\\varphi,k$。\n\n#### 易错提醒\n\n水平平移一定要先把括号中 $x$ 的系数提出。\n\n---",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "基本量",
+      "图象变换",
+      "五点法",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 22,
+    "content_md5": "b44f7d24b3a4f627118333a797b7afa1",
+    "legacy_id_formula": "必修第一册-第五章 三角函数-5.6 函数 $y=A\\sin(\\omega x+\\varphi)$-22",
+    "updated_at": "2026-05-28T03:03:23.015712+00:00"
+  },
+  {
+    "id": "k-3ygqtc",
+    "book": "必修第二册",
+    "chapter": "第六章 平面向量及其应用",
+    "section": "6.1 平面向量的概念",
+    "title": "6.1 平面向量的概念",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 核心概念\n\n既有大小又有方向的量叫向量。向量的大小叫向量的模，记作 $|\\vec a|$。\n\n常见向量：\n\n- 零向量：模为 $0$ 的向量，记作 $\\vec0$，方向任意。\n- 单位向量：模为 $1$ 的向量。\n- 相等向量：方向相同且模相等。\n- 相反向量：方向相反且模相等。\n- 平行向量或共线向量：方向相同或相反的非零向量；零向量与任意向量平行。\n\n#### 高频考点\n\n- 向量与数量的区别。\n- 相等向量、共线向量判断。\n- 零向量参与的特殊判断。\n\n#### 易错提醒\n\n向量可以自由平移，只看大小和方向，不看起点位置。",
+    "tags": [
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "核心概念",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 23,
+    "content_md5": "25fdb03854928cfd09f76a09dabd2d2f",
+    "legacy_id_formula": "必修第二册-第六章 平面向量及其应用-6.1 平面向量的概念-23",
+    "updated_at": "2026-05-28T03:03:23.015737+00:00"
+  },
+  {
+    "id": "k-qhiyx0",
+    "book": "必修第二册",
+    "chapter": "第六章 平面向量及其应用",
+    "section": "6.2 平面向量的线性运算",
+    "title": "6.2 平面向量的线性运算",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 加法\n\n三角形法则：\n\n$$\n\\overrightarrow{AB}+\\overrightarrow{BC}=\\overrightarrow{AC}\n$$\n\n平行四边形法则：\n\n若 $\\vec a,\\vec b$ 起点相同，则以它们为邻边的平行四边形对角线表示 $\\vec a+\\vec b$。\n\n运算律：\n\n$$\n\\vec a+\\vec b=\\vec b+\\vec a\n$$\n\n$$\n(\\vec a+\\vec b)+\\vec c=\\vec a+(\\vec b+\\vec c)\n$$\n\n#### 减法\n\n$$\n\\vec a-\\vec b=\\vec a+(-\\vec b)\n$$\n\n常用结论：\n\n$$\n\\overrightarrow{AB}=\\vec b-\\vec a\n$$\n\n其中 $\\vec a,\\vec b$ 分别是点 $A,B$ 的位置向量。\n\n#### 数乘\n\n$$\n\\lambda \\vec a\n$$\n\n模长：\n\n$$\n|\\lambda\\vec a|=|\\lambda||\\vec a|\n$$\n\n方向：\n\n- $\\lambda>0$：与 $\\vec a$ 同向。\n- $\\lambda<0$：与 $\\vec a$ 反向。\n- $\\lambda=0$：为零向量。\n\n运算律：\n\n$$\n\\lambda(\\mu\\vec a)=(\\lambda\\mu)\\vec a\n$$\n\n$$\n(\\lambda+\\mu)\\vec a=\\lambda\\vec a+\\mu\\vec a\n$$\n\n$$\n\\lambda(\\vec a+\\vec b)=\\lambda\\vec a+\\lambda\\vec b\n$$\n\n#### 共线向量定理\n\n若 $\\vec a\\ne\\vec0$，则：\n\n$$\n\\vec b\\parallel \\vec a \\Longleftrightarrow \\exists \\lambda\\in\\mathbb R,\\ \\vec b=\\lambda\\vec a\n$$\n\n#### 高频考点\n\n- 用向量法证明三点共线。\n- 向量线性表示。\n- 参数形式判断共线。\n\n#### 易错提醒\n\n共线向量定理中作为基准的向量必须是非零向量。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "加法",
+      "减法",
+      "数乘",
+      "共线向量定理",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 24,
+    "content_md5": "28289471a0b27dcd8cc56fa20df1896b",
+    "legacy_id_formula": "必修第二册-第六章 平面向量及其应用-6.2 平面向量的线性运算-24",
+    "updated_at": "2026-05-28T03:03:23.015782+00:00"
+  },
+  {
+    "id": "k-pmsa2q",
+    "book": "必修第二册",
+    "chapter": "第六章 平面向量及其应用",
+    "section": "6.3 平面向量基本定理及坐标表示",
+    "title": "6.3 平面向量基本定理及坐标表示",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 平面向量基本定理\n\n若 $\\vec e_1,\\vec e_2$ 是同一平面内两个不共线向量，则对于该平面内任一向量 $\\vec a$，存在唯一实数 $\\lambda,\\mu$，使得：\n\n$$\n\\vec a=\\lambda\\vec e_1+\\mu\\vec e_2\n$$\n\n#### 坐标表示\n\n若：\n\n$$\n\\vec a=(x_1,y_1),\\quad \\vec b=(x_2,y_2)\n$$\n\n则：\n\n$$\n\\vec a+\\vec b=(x_1+x_2,y_1+y_2)\n$$\n\n$$\n\\vec a-\\vec b=(x_1-x_2,y_1-y_2)\n$$\n\n$$\n\\lambda\\vec a=(\\lambda x_1,\\lambda y_1)\n$$\n\n若 $A(x_1,y_1),B(x_2,y_2)$，则：\n\n$$\n\\overrightarrow{AB}=(x_2-x_1,y_2-y_1)\n$$\n\n#### 共线坐标条件\n\n若 $\\vec a=(x_1,y_1),\\vec b=(x_2,y_2)$，则：\n\n$$\n\\vec a\\parallel\\vec b \\Longleftrightarrow x_1y_2-x_2y_1=0\n$$\n\n#### 中点公式\n\n若 $A(x_1,y_1),B(x_2,y_2)$，中点 $M$ 为：\n\n$$\nM\\left(\\frac{x_1+x_2}{2},\\frac{y_1+y_2}{2}\\right)\n$$\n\n向量形式：\n\n$$\n\\overrightarrow{OM}=\\frac{\\overrightarrow{OA}+\\overrightarrow{OB}}2\n$$\n\n#### 重心公式\n\n三角形 $ABC$ 的重心 $G$：\n\n$$\n\\overrightarrow{OG}=\\frac{\\overrightarrow{OA}+\\overrightarrow{OB}+\\overrightarrow{OC}}3\n$$\n\n坐标形式：\n\n$$\nG\\left(\\frac{x_A+x_B+x_C}{3},\\frac{y_A+y_B+y_C}{3}\\right)\n$$\n\n#### 三点共线二级结论\n\n点 $A,P,B$ 共线，当且仅当存在实数 $t$，使：\n\n$$\n\\overrightarrow{OP}=(1-t)\\overrightarrow{OA}+t\\overrightarrow{OB}\n$$\n\n也可写成：\n\n$$\n\\overrightarrow{OP}=x\\overrightarrow{OA}+y\\overrightarrow{OB},\\quad x+y=1\n$$\n\n#### 高频考点\n\n- 基底表示。\n- 坐标运算。\n- 三点共线。\n- 中点、重心、定比分点。\n\n#### 易错提醒\n\n向量坐标和点坐标不能混淆，$\\overrightarrow{AB}$ 的坐标是终点坐标减起点坐标。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错",
+      "二级结论"
+    ],
+    "facets": [
+      "平面向量基本定理",
+      "坐标表示",
+      "共线坐标条件",
+      "中点公式",
+      "重心公式",
+      "三点共线二级结论",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 25,
+    "content_md5": "2fd4d6cd59a3490ce8cf5d8a9a7df174",
+    "legacy_id_formula": "必修第二册-第六章 平面向量及其应用-6.3 平面向量基本定理及坐标表示-25",
+    "updated_at": "2026-05-28T03:03:23.015833+00:00"
+  },
+  {
+    "id": "k-j0q7ev",
+    "book": "必修第二册",
+    "chapter": "第六章 平面向量及其应用",
+    "section": "6.4 平面向量数量积",
+    "title": "6.4 平面向量数量积",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 定义\n\n设 $\\vec a,\\vec b$ 的夹角为 $\\theta$，$\\theta\\in[0,\\pi]$，则：\n\n$$\n\\vec a\\cdot\\vec b=|\\vec a||\\vec b|\\cos\\theta\n$$\n\n数量积结果是数量，不是向量。\n\n#### 基本性质\n\n$$\n\\vec a\\cdot\\vec a=|\\vec a|^2\n$$\n\n若 $\\vec a,\\vec b$ 为非零向量：\n\n$$\n\\vec a\\perp\\vec b \\Longleftrightarrow \\vec a\\cdot\\vec b=0\n$$\n\n夹角公式：\n\n$$\n\\cos\\theta=\\frac{\\vec a\\cdot\\vec b}{|\\vec a||\\vec b|}\n$$\n\n数量积不等式：\n\n$$\n|\\vec a\\cdot\\vec b|\\le |\\vec a||\\vec b|\n$$\n\n#### 运算律\n\n$$\n\\vec a\\cdot\\vec b=\\vec b\\cdot\\vec a\n$$\n\n$$\n(\\lambda\\vec a)\\cdot\\vec b=\\lambda(\\vec a\\cdot\\vec b)\n$$\n\n$$\n(\\vec a+\\vec b)\\cdot\\vec c=\\vec a\\cdot\\vec c+\\vec b\\cdot\\vec c\n$$\n\n#### 坐标公式\n\n若：\n\n$$\n\\vec a=(x_1,y_1),\\quad \\vec b=(x_2,y_2)\n$$\n\n则：\n\n$$\n\\vec a\\cdot\\vec b=x_1x_2+y_1y_2\n$$\n\n模长：\n\n$$\n|\\vec a|=\\sqrt{x_1^2+y_1^2}\n$$\n\n夹角：\n\n$$\n\\cos\\theta=\\frac{x_1x_2+y_1y_2}{\\sqrt{x_1^2+y_1^2}\\sqrt{x_2^2+y_2^2}}\n$$\n\n垂直：\n\n$$\n\\vec a\\perp\\vec b \\Longleftrightarrow x_1x_2+y_1y_2=0\n$$\n\n#### 二级结论：极化恒等式\n\n对任意向量 $\\vec a,\\vec b$：\n\n$$\n\\vec a\\cdot\\vec b=\\frac{|\\vec a+\\vec b|^2-|\\vec a-\\vec b|^2}{4}\n$$\n\n平行四边形模型：若 $\\vec a,\\vec b$ 为邻边，则数量积可以由两条对角线长度平方差求出。\n\n三角形中线模型：在 $\\triangle ABC$ 中，若 $M$ 是 $BC$ 中点，则：\n\n$$\n\\overrightarrow{AB}\\cdot\\overrightarrow{AC}=AM^2-\\left(\\frac{BC}{2}\\right)^2\n$$\n\n#### 二级结论：向量模长不等式\n\n$$\n\\big||\\vec a|-|\\vec b|\\big|\\le |\\vec a\\pm\\vec b|\\le |\\vec a|+|\\vec b|\n$$\n\n#### 二级结论：夹角与数量积符号\n\n- 若 $\\vec a\\cdot\\vec b>0$，则夹角为锐角或 $0$。\n- 若 $\\vec a\\cdot\\vec b=0$，则两个非零向量垂直。\n- 若 $\\vec a\\cdot\\vec b<0$，则夹角为钝角或 $\\pi$。\n\n#### 高频考点\n\n- 求模长、夹角、投影。\n- 判断垂直。\n- 向量数量积最值。\n- 极化恒等式解决几何长度问题。\n\n#### 易错提醒\n\n数量积满足分配律，但不满足普通代数中的“约分”习惯，不能随意两边除以向量。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错",
+      "二级结论"
+    ],
+    "facets": [
+      "定义",
+      "基本性质",
+      "运算律",
+      "坐标公式",
+      "二级结论：极化恒等式",
+      "二级结论：向量模长不等式",
+      "二级结论：夹角与数量积符号",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 26,
+    "content_md5": "72707adfa76955aa516035da50348243",
+    "legacy_id_formula": "必修第二册-第六章 平面向量及其应用-6.4 平面向量数量积-26",
+    "updated_at": "2026-05-28T03:03:23.015892+00:00"
+  },
+  {
+    "id": "k-kj8kr5",
+    "book": "必修第二册",
+    "chapter": "第六章 平面向量及其应用",
+    "section": "6.5 平面向量在几何中的应用",
+    "title": "6.5 平面向量在几何中的应用",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 解题基本路径\n\n1. 建立基底或坐标系。\n2. 用向量表示几何对象。\n3. 把平行、垂直、夹角、长度转化为向量关系。\n4. 运算求解。\n\n#### 常见转化\n\n平行：\n\n$$\n\\vec a\\parallel\\vec b \\Longleftrightarrow \\vec a=\\lambda\\vec b\n$$\n\n垂直：\n\n$$\n\\vec a\\perp\\vec b \\Longleftrightarrow \\vec a\\cdot\\vec b=0\n$$\n\n长度：\n\n$$\n|\\overrightarrow{AB}|=\\sqrt{(x_B-x_A)^2+(y_B-y_A)^2}\n$$\n\n夹角：\n\n$$\n\\cos\\theta=\\frac{\\vec a\\cdot\\vec b}{|\\vec a||\\vec b|}\n$$\n\n#### 二级结论：等和线\n\n设 $\\vec e_1,\\vec e_2$ 为一组不共线基底，若点 $P$ 满足：\n\n$$\n\\overrightarrow{OP}=x\\vec e_1+y\\vec e_2\n$$\n\n当 $x+y$ 为定值时，点 $P$ 的轨迹是一条与基底端点连线平行的直线。常用于向量线性表示、面积比和轨迹问题。\n\n#### 二级结论：奔驰定理\n\n若 $O$ 是 $\\triangle ABC$ 内一点，且：\n\n$$\nS_{\\triangle OBC}:S_{\\triangle OCA}:S_{\\triangle OAB}=x:y:z\n$$\n\n则常有向量平衡关系：\n\n$$\nx\\overrightarrow{OA}+y\\overrightarrow{OB}+z\\overrightarrow{OC}=\\vec0\n$$\n\n特别地，当三块面积相等时，$O$ 是重心。\n\n#### 高频考点\n\n- 中线、重心、面积比。\n- 向量证明平行四边形、三点共线。\n- 向量法求长度和夹角。\n- 与解三角形结合。\n\n#### 易错提醒\n\n使用面积比型结论时要注意点在三角形内外；若在外部，可能出现有向面积或符号变化。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错",
+      "二级结论"
+    ],
+    "facets": [
+      "解题基本路径",
+      "常见转化",
+      "二级结论：等和线",
+      "二级结论：奔驰定理",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 27,
+    "content_md5": "80ef4053556cc6653383a38112dec446",
+    "legacy_id_formula": "必修第二册-第六章 平面向量及其应用-6.5 平面向量在几何中的应用-27",
+    "updated_at": "2026-05-28T03:03:23.015933+00:00"
+  },
+  {
+    "id": "k-e7njc6",
+    "book": "必修第二册",
+    "chapter": "第六章 平面向量及其应用",
+    "section": "6.6 解三角形",
+    "title": "6.6 解三角形",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 正弦定理\n\n在 $\\triangle ABC$ 中，边 $a,b,c$ 分别对角 $A,B,C$，外接圆半径为 $R$，则：\n\n$$\n\\frac a{\\sin A}=\\frac b{\\sin B}=\\frac c{\\sin C}=2R\n$$\n\n常用变形：\n\n$$\na=2R\\sin A,\\quad b=2R\\sin B,\\quad c=2R\\sin C\n$$\n\n$$\n\\sin A:\\sin B:\\sin C=a:b:c\n$$\n\n#### 余弦定理\n\n$$\na^2=b^2+c^2-2bc\\cos A\n$$\n\n$$\nb^2=a^2+c^2-2ac\\cos B\n$$\n\n$$\nc^2=a^2+b^2-2ab\\cos C\n$$\n\n变形：\n\n$$\n\\cos A=\\frac{b^2+c^2-a^2}{2bc}\n$$\n\n$$\n\\cos B=\\frac{a^2+c^2-b^2}{2ac}\n$$\n\n$$\n\\cos C=\\frac{a^2+b^2-c^2}{2ab}\n$$\n\n#### 面积公式\n\n$$\nS_{\\triangle ABC}=\\frac12bc\\sin A=\\frac12ac\\sin B=\\frac12ab\\sin C\n$$\n\n海伦公式：\n\n$$\nS=\\sqrt{p(p-a)(p-b)(p-c)}\n$$\n\n其中：\n\n$$\np=\\frac{a+b+c}{2}\n$$\n\n外接圆半径：\n\n$$\nS=\\frac{abc}{4R}\n$$\n\n内切圆半径：\n\n$$\nS=pr\n$$\n\n#### 常用判定\n\n- 已知两角一边：用正弦定理。\n- 已知两边及夹角：用余弦定理。\n- 已知三边：用余弦定理求角。\n- 已知两边及一边对角：可能有一解、两解或无解。\n\n#### 高频考点\n\n- 边角互化。\n- 三角形面积最值。\n- 正余弦定理综合。\n- 与三角恒等变换、平面向量结合。\n- 实际测量问题。\n\n#### 易错提醒\n\n已知两边和其中一边对角时，不能默认唯一解，需要讨论三角形存在性。\n\n---",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "正弦定理",
+      "余弦定理",
+      "面积公式",
+      "常用判定",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 28,
+    "content_md5": "7523b894bc83da6893b93905523bac04",
+    "legacy_id_formula": "必修第二册-第六章 平面向量及其应用-6.6 解三角形-28",
+    "updated_at": "2026-05-28T03:03:23.015977+00:00"
+  },
+  {
+    "id": "k-w75t81",
+    "book": "必修第二册",
+    "chapter": "第七章 复数",
+    "section": "7.1 复数的概念",
+    "title": "7.1 复数的概念",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 核心形式\n\n形如：\n\n$$\nz=a+bi\\quad (a,b\\in\\mathbb R)\n$$\n\n的数叫复数，其中：\n\n- $a$ 是实部。\n- $b$ 是虚部。\n- $i$ 是虚数单位，满足 $i^2=-1$。\n\n#### 复数分类\n\n| 条件 | 类型 |\n| --- | --- |\n| $b=0$ | 实数 |\n| $b\\ne0$ | 虚数 |\n| $a=0,b\\ne0$ | 纯虚数 |\n\n#### 复数相等\n\n$$\na+bi=c+di \\Longleftrightarrow a=c,\\ b=d\n$$\n\n#### 虚数单位周期\n\n$$\ni^{4n}=1\n$$\n\n$$\ni^{4n+1}=i\n$$\n\n$$\ni^{4n+2}=-1\n$$\n\n$$\ni^{4n+3}=-i\n$$\n\n#### 高频考点\n\n- 由复数相等求参数。\n- 判断实数、虚数、纯虚数。\n- $i$ 的幂运算。\n\n#### 易错提醒\n\n虚部是 $b$，不是 $bi$。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "核心形式",
+      "复数分类",
+      "复数相等",
+      "虚数单位周期",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 29,
+    "content_md5": "f3e2ed098a68eef034213efc5ae26a44",
+    "legacy_id_formula": "必修第二册-第七章 复数-7.1 复数的概念-29",
+    "updated_at": "2026-05-28T03:03:23.016008+00:00"
+  },
+  {
+    "id": "k-obnlwo",
+    "book": "必修第二册",
+    "chapter": "第七章 复数",
+    "section": "7.2 复数的几何意义",
+    "title": "7.2 复数的几何意义",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 复平面\n\n复数 $z=a+bi$ 对应复平面上的点：\n\n$$\nZ(a,b)\n$$\n\n也对应向量：\n\n$$\n\\overrightarrow{OZ}=(a,b)\n$$\n\n#### 模\n\n$$\n|z|=|a+bi|=\\sqrt{a^2+b^2}\n$$\n\n几何意义：点 $Z(a,b)$ 到原点的距离。\n\n#### 共轭复数\n\n若：\n\n$$\nz=a+bi\n$$\n\n则共轭复数：\n\n$$\n\\bar z=a-bi\n$$\n\n性质：\n\n$$\nz\\bar z=|z|^2\n$$\n\n$$\n|z_1z_2|=|z_1||z_2|\n$$\n\n$$\n\\left|\\frac{z_1}{z_2}\\right|=\\frac{|z_1|}{|z_2|}\\quad (z_2\\ne0)\n$$\n\n#### 高频考点\n\n- 复数对应点所在象限。\n- 复数模的几何意义。\n- 共轭复数化简。\n- 复数轨迹问题。\n\n#### 易错提醒\n\n$|z-z_0|$ 表示复平面上点 $z$ 到点 $z_0$ 的距离。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "复平面",
+      "模",
+      "共轭复数",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 30,
+    "content_md5": "e71439b1c2cc18d6d50fd4d65fb13c66",
+    "legacy_id_formula": "必修第二册-第七章 复数-7.2 复数的几何意义-30",
+    "updated_at": "2026-05-28T03:03:23.016039+00:00"
+  },
+  {
+    "id": "k-evj0s2",
+    "book": "必修第二册",
+    "chapter": "第七章 复数",
+    "section": "7.3 复数的四则运算",
+    "title": "7.3 复数的四则运算",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 加减法\n\n$$\n(a+bi)+(c+di)=(a+c)+(b+d)i\n$$\n\n$$\n(a+bi)-(c+di)=(a-c)+(b-d)i\n$$\n\n#### 乘法\n\n$$\n(a+bi)(c+di)=(ac-bd)+(ad+bc)i\n$$\n\n#### 除法\n\n$$\n\\frac{a+bi}{c+di}=\\frac{(a+bi)(c-di)}{c^2+d^2}\\quad (c+di\\ne0)\n$$\n\n即分母同乘共轭复数，将分母实数化。\n\n#### 高频考点\n\n- 复数四则混合运算。\n- 分母实数化。\n- 求实部、虚部、模。\n\n#### 易错提醒\n\n复数除法不能分别除实部和虚部，必须整体分母实数化。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "加减法",
+      "乘法",
+      "除法",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 31,
+    "content_md5": "aa216934ce65e37648b89eb391b129ce",
+    "legacy_id_formula": "必修第二册-第七章 复数-7.3 复数的四则运算-31",
+    "updated_at": "2026-05-28T03:03:23.016063+00:00"
+  },
+  {
+    "id": "k-n4vfek",
+    "book": "必修第二册",
+    "chapter": "第七章 复数",
+    "section": "7.4 复数的三角表示",
+    "title": "7.4 复数的三角表示",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 三角形式\n\n非零复数 $z=a+bi$ 可表示为：\n\n$$\nz=r(\\cos\\theta+i\\sin\\theta)\n$$\n\n其中：\n\n$$\nr=|z|=\\sqrt{a^2+b^2}\n$$\n\n$\\theta$ 是辐角。通常取 $0\\le\\theta<2\\pi$ 的辐角主值。\n\n#### 乘除运算\n\n若：\n\n$$\nz_1=r_1(\\cos\\theta_1+i\\sin\\theta_1)\n$$\n\n$$\nz_2=r_2(\\cos\\theta_2+i\\sin\\theta_2)\n$$\n\n则：\n\n$$\nz_1z_2=r_1r_2[\\cos(\\theta_1+\\theta_2)+i\\sin(\\theta_1+\\theta_2)]\n$$\n\n$$\n\\frac{z_1}{z_2}=\\frac{r_1}{r_2}[\\cos(\\theta_1-\\theta_2)+i\\sin(\\theta_1-\\theta_2)]\n$$\n\n#### 高频考点\n\n- 代数形式与三角形式互化。\n- 复数乘除的几何意义。\n- 利用辐角判断复数位置。\n\n#### 易错提醒\n\n辐角不是唯一的，主值需要落在规定范围内。\n\n---",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "三角形式",
+      "乘除运算",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 32,
+    "content_md5": "b57d5c90e2b6ec60cc265be0dfe90a2b",
+    "legacy_id_formula": "必修第二册-第七章 复数-7.4 复数的三角表示-32",
+    "updated_at": "2026-05-28T03:03:23.016098+00:00"
+  },
+  {
+    "id": "k-3bj9n9",
+    "book": "必修第二册",
+    "chapter": "第八章 立体几何初步",
+    "section": "8.1 基本立体图形",
+    "title": "8.1 基本立体图形",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 多面体\n\n棱柱：有两个面互相平行，其余各面都是四边形，且每相邻两个四边形公共边互相平行。\n\n棱锥：有一个面是多边形，其余各面是有公共顶点的三角形。\n\n棱台：用平行于棱锥底面的平面截棱锥，截面与底面之间的部分。\n\n#### 旋转体\n\n圆柱：矩形绕一边所在直线旋转形成。\n\n圆锥：直角三角形绕一条直角边所在直线旋转形成。\n\n圆台：用平行于圆锥底面的平面截圆锥，截面与底面之间的部分。\n\n球：半圆绕直径所在直线旋转一周形成。\n\n#### 高频考点\n\n- 识别空间几何体。\n- 棱柱、棱锥、棱台的结构特征。\n- 旋转体的轴截面。\n\n#### 易错提醒\n\n棱台的侧棱延长线必须交于一点，不能把任意两个相似多边形连接形成的几何体都叫棱台。",
+    "tags": [
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "多面体",
+      "旋转体",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 33,
+    "content_md5": "e67d21e9f0fc913e0abb8bd516c7e64f",
+    "legacy_id_formula": "必修第二册-第八章 立体几何初步-8.1 基本立体图形-33",
+    "updated_at": "2026-05-28T03:03:23.016124+00:00"
+  },
+  {
+    "id": "k-9rrcr1",
+    "book": "必修第二册",
+    "chapter": "第八章 立体几何初步",
+    "section": "8.2 立体图形的直观图",
+    "title": "8.2 立体图形的直观图",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 斜二测画法\n\n基本规则：\n\n- 与 $x$ 轴平行的线段长度不变。\n- 与 $y$ 轴平行的线段长度变为原来的一半。\n- $x'y'$ 轴夹角通常画成 $45^\\circ$ 或 $135^\\circ$。\n\n面积关系：\n\n$$\nS_{\\text{直观图}}=\\frac{\\sqrt2}{4}S_{\\text{原图}}\n$$\n\n因此：\n\n$$\nS_{\\text{原图}}=2\\sqrt2\\,S_{\\text{直观图}}\n$$\n\n#### 高频考点\n\n- 由原图画直观图。\n- 由直观图还原面积。\n- 判断几何体三视图与直观图。\n\n#### 易错提醒\n\n斜二测画法中只有与 $y$ 轴平行方向的长度缩短为一半，不是所有斜线都缩短一半。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "斜二测画法",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 34,
+    "content_md5": "1de5d728bc29c042ef2eb95a839233ce",
+    "legacy_id_formula": "必修第二册-第八章 立体几何初步-8.2 立体图形的直观图-34",
+    "updated_at": "2026-05-28T03:03:23.016148+00:00"
+  },
+  {
+    "id": "k-81ehcz",
+    "book": "必修第二册",
+    "chapter": "第八章 立体几何初步",
+    "section": "8.3 简单几何体的表面积与体积",
+    "title": "8.3 简单几何体的表面积与体积",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 柱体\n\n体积：\n\n$$\nV=S_{\\text{底}}h\n$$\n\n圆柱侧面积：\n\n$$\nS_{\\text{侧}}=2\\pi rh\n$$\n\n圆柱表面积：\n\n$$\nS=2\\pi r^2+2\\pi rh\n$$\n\n#### 锥体\n\n体积：\n\n$$\nV=\\frac13S_{\\text{底}}h\n$$\n\n圆锥侧面积：\n\n$$\nS_{\\text{侧}}=\\pi rl\n$$\n\n圆锥表面积：\n\n$$\nS=\\pi r^2+\\pi rl\n$$\n\n其中 $l$ 是母线长。\n\n#### 台体\n\n体积：\n\n$$\nV=\\frac13h(S_{\\text{上}}+S_{\\text{下}}+\\sqrt{S_{\\text{上}}S_{\\text{下}}})\n$$\n\n圆台侧面积：\n\n$$\nS_{\\text{侧}}=\\pi(r_1+r_2)l\n$$\n\n#### 球\n\n表面积：\n\n$$\nS=4\\pi R^2\n$$\n\n体积：\n\n$$\nV=\\frac43\\pi R^3\n$$\n\n#### 高频考点\n\n- 表面积与体积计算。\n- 展开图求侧面积。\n- 与外接球、内切球结合。\n- 最值问题中的体积函数。\n\n#### 易错提醒\n\n圆锥、圆台侧面积中的 $l$ 是母线长，不是高。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "柱体",
+      "锥体",
+      "台体",
+      "球",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 35,
+    "content_md5": "1f475668631aba6fff943740d1cfdefa",
+    "legacy_id_formula": "必修第二册-第八章 立体几何初步-8.3 简单几何体的表面积与体积-35",
+    "updated_at": "2026-05-28T03:03:23.016189+00:00"
+  },
+  {
+    "id": "k-gunwfi",
+    "book": "必修第二册",
+    "chapter": "第八章 立体几何初步",
+    "section": "8.4 空间点、直线、平面之间的位置关系",
+    "title": "8.4 空间点、直线、平面之间的位置关系",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 平面的基本事实\n\n常用事实：\n\n- 过不在一条直线上的三点，有且只有一个平面。\n- 若一条直线上的两个点在一个平面内，则这条直线在这个平面内。\n- 若两个不重合平面有一个公共点，则它们有且只有一条过该点的公共直线。\n\n#### 线线关系\n\n空间两条直线的位置关系：\n\n- 平行\n- 相交\n- 异面\n\n异面直线：不同在任何一个平面内的两条直线。\n\n异面直线所成角：过空间任一点分别作两条异面直线的平行线，所得相交直线所成的锐角或直角，范围为 $(0^\\circ,90^\\circ]$。\n\n#### 线面关系\n\n直线与平面的位置关系：\n\n- 直线在平面内\n- 直线与平面相交\n- 直线与平面平行\n\n#### 面面关系\n\n平面与平面的位置关系：\n\n- 平行\n- 相交\n\n#### 高频考点\n\n- 判断线线、线面、面面位置关系。\n- 异面直线所成角。\n- 空间图形中的存在性判断。\n\n#### 易错提醒\n\n两条直线没有公共点，不一定平行，也可能异面。",
+    "tags": [
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "平面的基本事实",
+      "线线关系",
+      "线面关系",
+      "面面关系",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 36,
+    "content_md5": "179968f87a1417a7ddcb4453e8372ee2",
+    "legacy_id_formula": "必修第二册-第八章 立体几何初步-8.4 空间点、直线、平面之间的位置关系-36",
+    "updated_at": "2026-05-28T03:03:23.016223+00:00"
+  },
+  {
+    "id": "k-aq46wv",
+    "book": "必修第二册",
+    "chapter": "第八章 立体几何初步",
+    "section": "8.5 空间直线、平面的平行",
+    "title": "8.5 空间直线、平面的平行",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 线面平行判定\n\n若平面外一条直线与平面内一条直线平行，则该直线与这个平面平行。\n\n符号表达：\n\n$$\na\\not\\subset \\alpha,\\ b\\subset\\alpha,\\ a\\parallel b \\Longrightarrow a\\parallel \\alpha\n$$\n\n#### 线面平行性质\n\n若一条直线与一个平面平行，过这条直线的平面与已知平面相交，则交线与该直线平行。\n\n$$\na\\parallel\\alpha,\\ a\\subset\\beta,\\ \\alpha\\cap\\beta=b \\Longrightarrow a\\parallel b\n$$\n\n#### 面面平行判定\n\n若一个平面内两条相交直线都平行于另一个平面，则这两个平面平行。\n\n#### 面面平行性质\n\n若两个平行平面同时与第三个平面相交，则交线平行。\n\n#### 高频考点\n\n- 证明线面平行。\n- 证明面面平行。\n- 平行性质找辅助线。\n\n#### 易错提醒\n\n证明线面平行时，必须保证用于判定的直线在平面内，且原直线不在该平面内。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "线面平行判定",
+      "线面平行性质",
+      "面面平行判定",
+      "面面平行性质",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 37,
+    "content_md5": "df4c17b8f36c29671e715902a032322f",
+    "legacy_id_formula": "必修第二册-第八章 立体几何初步-8.5 空间直线、平面的平行-37",
+    "updated_at": "2026-05-28T03:03:23.016252+00:00"
+  },
+  {
+    "id": "k-6but60",
+    "book": "必修第二册",
+    "chapter": "第八章 立体几何初步",
+    "section": "8.6 空间直线、平面的垂直",
+    "title": "8.6 空间直线、平面的垂直",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 线面垂直判定\n\n若一条直线垂直于平面内两条相交直线，则该直线垂直于这个平面。\n\n$$\nl\\perp a,\\ l\\perp b,\\ a\\cap b=P,\\ a,b\\subset\\alpha \\Longrightarrow l\\perp\\alpha\n$$\n\n#### 线面垂直性质\n\n若一条直线垂直于一个平面，则它垂直于平面内任意一条直线。\n\n若两条直线垂直于同一平面，则这两条直线平行。\n\n#### 面面垂直判定\n\n若一个平面经过另一个平面的一条垂线，则这两个平面垂直。\n\n#### 面面垂直性质\n\n若两个平面垂直，则在一个平面内垂直于交线的直线垂直于另一个平面。\n\n#### 线面角\n\n直线与平面所成角是直线与它在平面内射影所成的角，范围为 $[0^\\circ,90^\\circ]$。\n\n#### 二面角\n\n从一条直线出发的两个半平面组成二面角。二面角大小用平面角度量。\n\n#### 高频考点\n\n- 证明线面垂直、面面垂直。\n- 求线面角。\n- 求二面角。\n- 用垂直关系推出长度和角度。\n\n#### 易错提醒\n\n证明线面垂直时，平面内两条被垂直的直线必须相交。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "线面垂直判定",
+      "线面垂直性质",
+      "面面垂直判定",
+      "面面垂直性质",
+      "线面角",
+      "二面角",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 38,
+    "content_md5": "b1f6fc7d42361a79ca9e6f4522f19d09",
+    "legacy_id_formula": "必修第二册-第八章 立体几何初步-8.6 空间直线、平面的垂直-38",
+    "updated_at": "2026-05-28T03:03:23.016282+00:00"
+  },
+  {
+    "id": "k-kgrl9m",
+    "book": "必修第二册",
+    "chapter": "第八章 立体几何初步",
+    "section": "8.7 外接球与内切球",
+    "title": "8.7 外接球与内切球",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 外接球\n\n一个几何体的所有顶点都在同一球面上，该球称为外接球。球心到各顶点距离相等。\n\n#### 内切球\n\n一个球与几何体各面都相切，称为内切球。球心到各面的距离相等。\n\n#### 高频二级结论\n\n正方体：\n\n若棱长为 $a$，外接球半径：\n\n$$\nR=\\frac{\\sqrt3}{2}a\n$$\n\n内切球半径：\n\n$$\nr=\\frac a2\n$$\n\n长方体：\n\n若长、宽、高分别为 $a,b,c$，外接球半径：\n\n$$\nR=\\frac12\\sqrt{a^2+b^2+c^2}\n$$\n\n正四面体：\n\n若棱长为 $a$，外接球半径：\n\n$$\nR=\\frac{\\sqrt6}{4}a\n$$\n\n内切球半径：\n\n$$\nr=\\frac{\\sqrt6}{12}a\n$$\n\n且：\n\n$$\nR=3r\n$$\n\n直棱柱：\n\n若底面外接圆半径为 $r_0$，高为 $h$，则外接球半径：\n\n$$\nR=\\sqrt{r_0^2+\\left(\\frac h2\\right)^2}\n$$\n\n圆柱：\n\n若底面半径为 $r$，高为 $h$，则外接球半径：\n\n$$\nR=\\sqrt{r^2+\\left(\\frac h2\\right)^2}\n$$\n\n圆锥：\n\n若底面半径为 $r$，高为 $h$，则外接球半径：\n\n$$\nR=\\frac{r^2+h^2}{2h}\n$$\n\n多面体内切球：\n\n若内切球半径为 $r$，多面体体积为 $V$，表面积为 $S$，则：\n\n$$\nV=\\frac13Sr\n$$\n\n所以：\n\n$$\nr=\\frac{3V}{S}\n$$\n\n#### 高频考点\n\n- 外接球半径求法。\n- 内切球半径求法。\n- 几何体体积与球体积结合。\n- 利用对称性找球心。\n\n#### 易错提醒\n\n不是所有几何体都有内切球；外接球问题关键是找球心和等距条件。\n\n---",
+    "tags": [
+      "公式",
+      "考点",
+      "易错",
+      "二级结论"
+    ],
+    "facets": [
+      "外接球",
+      "内切球",
+      "高频二级结论",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 39,
+    "content_md5": "bdf84bbe9668fe93cf746d367bc700d4",
+    "legacy_id_formula": "必修第二册-第八章 立体几何初步-8.7 外接球与内切球-39",
+    "updated_at": "2026-05-28T03:03:23.016328+00:00"
+  },
+  {
+    "id": "k-f8rxf4",
+    "book": "必修第二册",
+    "chapter": "第九章 统计",
+    "section": "9.1 随机抽样",
+    "title": "9.1 随机抽样",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 总体、个体、样本、样本量\n\n- 总体：研究对象的全体。\n- 个体：总体中的每一个对象。\n- 样本：从总体中抽取的一部分个体。\n- 样本量：样本中个体的数量。\n\n#### 简单随机抽样\n\n每个个体被抽到的机会相等。常用方法：\n\n- 抽签法\n- 随机数法\n\n#### 分层随机抽样\n\n当总体由差异明显的几个部分组成时，先把总体分层，再按比例从各层抽取样本。\n\n若总体容量为 $N$，样本量为 $n$，某层容量为 $N_i$，则该层抽取：\n\n$$\nn_i=\\frac{N_i}{N}n\n$$\n\n#### 获取数据的途径\n\n- 调查\n- 试验\n- 观察\n- 查询资料\n\n#### 高频考点\n\n- 判断抽样方法。\n- 分层抽样计算。\n- 样本代表性分析。\n\n#### 易错提醒\n\n分层抽样要按各层比例抽取，不能每层抽相同人数，除非各层容量相同。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "总体、个体、样本、样本量",
+      "简单随机抽样",
+      "分层随机抽样",
+      "获取数据的途径",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 40,
+    "content_md5": "530c199aaa4e9ca95539d4da2b93b3e9",
+    "legacy_id_formula": "必修第二册-第九章 统计-9.1 随机抽样-40",
+    "updated_at": "2026-05-28T03:03:23.016355+00:00"
+  },
+  {
+    "id": "k-w93oaf",
+    "book": "必修第二册",
+    "chapter": "第九章 统计",
+    "section": "9.2 用样本估计总体",
+    "title": "9.2 用样本估计总体",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 频率分布表与直方图\n\n基本步骤：\n\n1. 求极差。\n2. 确定组距和组数。\n3. 分组。\n4. 统计频数。\n5. 计算频率。\n6. 作频率分布直方图。\n\n频率分布直方图中：\n\n$$\n\\text{小矩形面积}=\\text{组距}\\times\\frac{\\text{频率}}{\\text{组距}}=\\text{频率}\n$$\n\n所有小矩形面积和为 $1$。\n\n#### 百分位数\n\n第 $p$ 百分位数表示有大约 $p\\%$ 的数据不大于该数。\n\n#### 集中趋势\n\n平均数：\n\n$$\n\\bar x=\\frac{x_1+x_2+\\cdots+x_n}{n}\n$$\n\n中位数：按大小排列后处于中间位置的数；若数据个数为偶数，则取中间两个数的平均数。\n\n众数：出现次数最多的数据。\n\n频率分布直方图中的近似：\n\n- 众数约为最高矩形底边中点。\n- 中位数使左右面积各约为 $0.5$。\n- 平均数约为各组中点乘频率之和。\n\n#### 离散程度\n\n方差：\n\n$$\ns^2=\\frac1n[(x_1-\\bar x)^2+(x_2-\\bar x)^2+\\cdots+(x_n-\\bar x)^2]\n$$\n\n标准差：\n\n$$\ns=\\sqrt{s^2}\n$$\n\n#### 数据变换\n\n若一组数据 $x_1,x_2,\\ldots,x_n$ 的平均数为 $\\bar x$，方差为 $s^2$，则数据：\n\n$$\nax_i+b\n$$\n\n的平均数为：\n\n$$\na\\bar x+b\n$$\n\n方差为：\n\n$$\na^2s^2\n$$\n\n标准差为：\n\n$$\n|a|s\n$$\n\n#### 高频考点\n\n- 频率分布直方图补全。\n- 平均数、中位数、众数估计。\n- 方差、标准差比较稳定性。\n- 数据变换后的数字特征。\n\n#### 易错提醒\n\n频率分布直方图的纵轴通常是“频率/组距”，不是频率。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "频率分布表与直方图",
+      "百分位数",
+      "集中趋势",
+      "离散程度",
+      "数据变换",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 41,
+    "content_md5": "c8737e457eee880279eb02f42d859c98",
+    "legacy_id_formula": "必修第二册-第九章 统计-9.2 用样本估计总体-41",
+    "updated_at": "2026-05-28T03:03:23.016393+00:00"
+  },
+  {
+    "id": "k-kb7h7v",
+    "book": "必修第二册",
+    "chapter": "第九章 统计",
+    "section": "9.3 统计案例与数据分析意识",
+    "title": "9.3 统计案例与数据分析意识",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 基本思路\n\n1. 明确调查问题。\n2. 确定总体和样本。\n3. 选择合理抽样方法。\n4. 整理数据。\n5. 用图表和数字特征分析。\n6. 得出结论并说明局限。\n\n#### 高频考点\n\n- 判断统计结论是否合理。\n- 根据图表提取信息。\n- 分析样本是否具有代表性。\n\n#### 易错提醒\n\n样本估计总体时，样本偏差会影响结论，不能把样本结论绝对化。\n\n---",
+    "tags": [
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "基本思路",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 42,
+    "content_md5": "d5ff0a1fcf15e975f8573bb1bb53f31b",
+    "legacy_id_formula": "必修第二册-第九章 统计-9.3 统计案例与数据分析意识-42",
+    "updated_at": "2026-05-28T03:03:23.016412+00:00"
+  },
+  {
+    "id": "k-tkxquc",
+    "book": "必修第二册",
+    "chapter": "第十章 概率",
+    "section": "10.1 随机事件与概率",
+    "title": "10.1 随机事件与概率",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 样本空间与样本点\n\n随机试验所有可能结果组成的集合叫样本空间，记作 $\\Omega$。\n\n样本空间中的每个元素叫样本点，通常记作 $\\omega$。\n\n事件是样本空间的子集。\n\n#### 事件关系\n\n包含：\n\n$$\nA\\subseteq B\n$$\n\n表示事件 $A$ 发生必然导致事件 $B$ 发生。\n\n并事件：\n\n$$\nA\\cup B\n$$\n\n表示 $A$ 与 $B$ 至少有一个发生。\n\n交事件：\n\n$$\nA\\cap B\n$$\n\n表示 $A$ 与 $B$ 同时发生。\n\n互斥事件：\n\n$$\nA\\cap B=\\varnothing\n$$\n\n对立事件：\n\n$$\nA\\cap B=\\varnothing,\\quad A\\cup B=\\Omega\n$$\n\n#### 概率基本性质\n\n$$\n0\\le P(A)\\le1\n$$\n\n$$\nP(\\Omega)=1\n$$\n\n$$\nP(\\varnothing)=0\n$$\n\n若 $A,B$ 互斥，则：\n\n$$\nP(A\\cup B)=P(A)+P(B)\n$$\n\n对立事件：\n\n$$\nP(\\bar A)=1-P(A)\n$$\n\n一般加法公式：\n\n$$\nP(A\\cup B)=P(A)+P(B)-P(A\\cap B)\n$$\n\n#### 高频考点\n\n- 判断事件关系。\n- 互斥与对立。\n- 概率加法公式。\n\n#### 易错提醒\n\n对立事件一定互斥，但互斥事件不一定对立。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "样本空间与样本点",
+      "事件关系",
+      "概率基本性质",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 43,
+    "content_md5": "a38cc905286bdb52aa4fec1fc4a7c781",
+    "legacy_id_formula": "必修第二册-第十章 概率-10.1 随机事件与概率-43",
+    "updated_at": "2026-05-28T03:03:23.016449+00:00"
+  },
+  {
+    "id": "k-jh50zo",
+    "book": "必修第二册",
+    "chapter": "第十章 概率",
+    "section": "10.2 古典概型",
+    "title": "10.2 古典概型",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 古典概型条件\n\n- 样本空间有限。\n- 每个样本点发生可能性相等。\n\n概率公式：\n\n$$\nP(A)=\\frac{m}{n}\n$$\n\n其中 $n$ 是样本点总数，$m$ 是事件 $A$ 包含的样本点数。\n\n#### 常用计数方法\n\n- 列举法\n- 树状图\n- 表格法\n- 分类计数\n- 分步计数\n\n#### 高频考点\n\n- 掷骰子、摸球、抽卡类问题。\n- 有序与无序样本点区分。\n- “至少”“至多”事件求概率。\n\n#### 易错提醒\n\n使用古典概型前必须确认样本点等可能。样本点设计不合理会导致概率错误。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "古典概型条件",
+      "常用计数方法",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 44,
+    "content_md5": "9cfcd28ac33d291a2116131f25bf6324",
+    "legacy_id_formula": "必修第二册-第十章 概率-10.2 古典概型-44",
+    "updated_at": "2026-05-28T03:03:23.016468+00:00"
+  },
+  {
+    "id": "k-7c2awq",
+    "book": "必修第二册",
+    "chapter": "第十章 概率",
+    "section": "10.3 事件的相互独立性",
+    "title": "10.3 事件的相互独立性",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 定义\n\n若事件 $A$ 的发生不影响事件 $B$ 发生的概率，则称 $A$ 与 $B$ 相互独立。\n\n判定公式：\n\n$$\nP(A\\cap B)=P(A)P(B)\n$$\n\n若 $A,B$ 相互独立，则：\n\n$$\nA \\text{ 与 } \\bar B,\\quad \\bar A \\text{ 与 } B,\\quad \\bar A \\text{ 与 } \\bar B\n$$\n\n也相互独立。\n\n#### 多个独立事件\n\n若事件 $A_1,A_2,\\ldots,A_n$ 相互独立，则它们同时发生的概率：\n\n$$\nP(A_1A_2\\cdots A_n)=P(A_1)P(A_2)\\cdots P(A_n)\n$$\n\n#### 常见公式\n\n若 $A,B$ 相互独立：\n\n同时发生：\n\n$$\nP(AB)=P(A)P(B)\n$$\n\n同时不发生：\n\n$$\nP(\\bar A\\bar B)=[1-P(A)][1-P(B)]\n$$\n\n至少有一个发生：\n\n$$\nP(A\\cup B)=1-P(\\bar A\\bar B)\n$$\n\n恰有一个发生：\n\n$$\nP(A\\bar B+\\bar AB)=P(A)[1-P(B)]+[1-P(A)]P(B)\n$$\n\n#### 高频考点\n\n- 判断独立事件。\n- 独立重复试验的初步计算。\n- 至少一次发生问题。\n\n#### 易错提醒\n\n互斥与独立是不同概念。若两个非零概率事件互斥，则它们不独立。",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "定义",
+      "多个独立事件",
+      "常见公式",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 45,
+    "content_md5": "4f537323a0da228e6c3fd3a562c541a4",
+    "legacy_id_formula": "必修第二册-第十章 概率-10.3 事件的相互独立性-45",
+    "updated_at": "2026-05-28T03:03:23.016501+00:00"
+  },
+  {
+    "id": "k-vl279g",
+    "book": "必修第二册",
+    "chapter": "第十章 概率",
+    "section": "10.4 频率与概率",
+    "title": "10.4 频率与概率",
+    "level": 3,
+    "parent_id": null,
+    "content_md": "#### 频率稳定性\n\n在相同条件下大量重复同一随机试验，事件 $A$ 发生的频率会在某个常数附近摆动，这个常数可作为概率的估计。\n\n频率：\n\n$$\n\\frac{\\text{事件 }A\\text{ 发生次数}}{\\text{试验总次数}}\n$$\n\n#### 随机模拟\n\n用随机数或计算机模拟随机试验，用频率估计概率。\n\n#### 高频考点\n\n- 用频率估计概率。\n- 判断模拟方案是否合理。\n- 随机数区间设计。\n\n#### 易错提醒\n\n频率不等于概率；试验次数越多，频率通常越接近概率。\n\n---",
+    "tags": [
+      "公式",
+      "考点",
+      "易错"
+    ],
+    "facets": [
+      "频率稳定性",
+      "随机模拟",
+      "高频考点",
+      "易错提醒"
+    ],
+    "order_index": 46,
+    "content_md5": "53a78563a66a7b40945fa90efb7d5726",
+    "legacy_id_formula": "必修第二册-第十章 概率-10.4 频率与概率-46",
+    "updated_at": "2026-05-28T03:03:23.016525+00:00"
+  },
+  {
+    "id": "k-9s2h5e",
+    "book": "附录",
+    "chapter": "附录一：高频公式速查",
+    "section": "集合与逻辑",
+    "title": "集合与逻辑",
+    "level": 2,
+    "parent_id": null,
+    "content_md": "$$\nA\\subseteq B \\Longleftrightarrow A\\cap B=A \\Longleftrightarrow A\\cup B=B\n$$\n\n$$\nn(A\\cup B)=n(A)+n(B)-n(A\\cap B)\n$$\n\n$$\n\\neg(\\forall x,\\ p(x))\\Longleftrightarrow \\exists x,\\ \\neg p(x)\n$$\n\n$$\n\\neg(\\exists x,\\ p(x))\\Longleftrightarrow \\forall x,\\ \\neg p(x)\n$$",
+    "tags": [
+      "公式"
+    ],
+    "facets": [],
+    "order_index": 47,
+    "content_md5": "4676a71b45fa8edb94b67821fdf27bd4",
+    "legacy_id_formula": "附录-附录一：高频公式速查-集合与逻辑-47",
+    "updated_at": "2026-05-28T03:03:23.016541+00:00"
+  },
+  {
+    "id": "k-z1k3ii",
+    "book": "附录",
+    "chapter": "附录一：高频公式速查",
+    "section": "不等式与二次函数",
+    "title": "不等式与二次函数",
+    "level": 2,
+    "parent_id": null,
+    "content_md": "$$\n\\frac{a+b}{2}\\ge\\sqrt{ab}\\quad (a,b>0)\n$$\n\n$$\n\\Delta=b^2-4ac\n$$\n\n$$\nx=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}\n$$\n\n$$\nx_1+x_2=-\\frac ba,\\quad x_1x_2=\\frac ca\n$$",
+    "tags": [
+      "公式"
+    ],
+    "facets": [],
+    "order_index": 48,
+    "content_md5": "a38b82a8d2777378f78251bcec3702a0",
+    "legacy_id_formula": "附录-附录一：高频公式速查-不等式与二次函数-48",
+    "updated_at": "2026-05-28T03:03:23.016555+00:00"
+  },
+  {
+    "id": "k-s8pnae",
+    "book": "附录",
+    "chapter": "附录一：高频公式速查",
+    "section": "指数与对数",
+    "title": "指数与对数",
+    "level": 2,
+    "parent_id": null,
+    "content_md": "$$\na^m a^n=a^{m+n}\n$$\n\n$$\n\\log_a(MN)=\\log_a M+\\log_a N\n$$\n\n$$\n\\log_a\\frac MN=\\log_a M-\\log_a N\n$$\n\n$$\n\\log_a b=\\frac{\\log_c b}{\\log_c a}\n$$",
+    "tags": [
+      "公式"
+    ],
+    "facets": [],
+    "order_index": 49,
+    "content_md5": "0164e4a7c42fb8d058c23bc045185c01",
+    "legacy_id_formula": "附录-附录一：高频公式速查-指数与对数-49",
+    "updated_at": "2026-05-28T03:03:23.016568+00:00"
+  },
+  {
+    "id": "k-a11sgo",
+    "book": "附录",
+    "chapter": "附录一：高频公式速查",
+    "section": "三角函数",
+    "title": "三角函数",
+    "level": 2,
+    "parent_id": null,
+    "content_md": "$$\n\\sin^2\\alpha+\\cos^2\\alpha=1\n$$\n\n$$\n\\tan\\alpha=\\frac{\\sin\\alpha}{\\cos\\alpha}\n$$\n\n$$\n\\sin(\\alpha\\pm\\beta)=\\sin\\alpha\\cos\\beta\\pm\\cos\\alpha\\sin\\beta\n$$\n\n$$\n\\cos(\\alpha\\pm\\beta)=\\cos\\alpha\\cos\\beta\\mp\\sin\\alpha\\sin\\beta\n$$\n\n$$\n\\sin2\\alpha=2\\sin\\alpha\\cos\\alpha\n$$\n\n$$\n\\cos2\\alpha=2\\cos^2\\alpha-1=1-2\\sin^2\\alpha\n$$\n\n$$\nT=\\frac{2\\pi}{\\omega}\n$$",
+    "tags": [
+      "公式"
+    ],
+    "facets": [],
+    "order_index": 50,
+    "content_md5": "9bd2de55afa4048b541c37d503829b2e",
+    "legacy_id_formula": "附录-附录一：高频公式速查-三角函数-50",
+    "updated_at": "2026-05-28T03:03:23.016585+00:00"
+  },
+  {
+    "id": "k-yp9x7c",
+    "book": "附录",
+    "chapter": "附录一：高频公式速查",
+    "section": "平面向量",
+    "title": "平面向量",
+    "level": 2,
+    "parent_id": null,
+    "content_md": "$$\n\\vec a\\cdot\\vec b=|\\vec a||\\vec b|\\cos\\theta\n$$\n\n$$\n\\vec a\\cdot\\vec b=x_1x_2+y_1y_2\n$$\n\n$$\n\\vec a\\parallel\\vec b\\Longleftrightarrow x_1y_2-x_2y_1=0\n$$\n\n$$\n\\vec a\\perp\\vec b\\Longleftrightarrow x_1x_2+y_1y_2=0\n$$\n\n$$\n\\vec a\\cdot\\vec b=\\frac{|\\vec a+\\vec b|^2-|\\vec a-\\vec b|^2}{4}\n$$",
+    "tags": [
+      "公式"
+    ],
+    "facets": [],
+    "order_index": 51,
+    "content_md5": "aea7197cf6536b1dd991c56d1d823579",
+    "legacy_id_formula": "附录-附录一：高频公式速查-平面向量-51",
+    "updated_at": "2026-05-28T03:03:23.016599+00:00"
+  },
+  {
+    "id": "k-qownk",
+    "book": "附录",
+    "chapter": "附录一：高频公式速查",
+    "section": "解三角形",
+    "title": "解三角形",
+    "level": 2,
+    "parent_id": null,
+    "content_md": "$$\n\\frac a{\\sin A}=\\frac b{\\sin B}=\\frac c{\\sin C}=2R\n$$\n\n$$\na^2=b^2+c^2-2bc\\cos A\n$$\n\n$$\nS=\\frac12bc\\sin A\n$$\n\n$$\nS=\\frac{abc}{4R}\n$$\n\n$$\nS=pr\n$$",
+    "tags": [
+      "公式"
+    ],
+    "facets": [],
+    "order_index": 52,
+    "content_md5": "b0db2a684bd7b2ac7445f55a1f93f2a0",
+    "legacy_id_formula": "附录-附录一：高频公式速查-解三角形-52",
+    "updated_at": "2026-05-28T03:03:23.016612+00:00"
+  },
+  {
+    "id": "k-v3q804",
+    "book": "附录",
+    "chapter": "附录一：高频公式速查",
+    "section": "复数",
+    "title": "复数",
+    "level": 2,
+    "parent_id": null,
+    "content_md": "$$\ni^2=-1\n$$\n\n$$\n|a+bi|=\\sqrt{a^2+b^2}\n$$\n\n$$\nz\\bar z=|z|^2\n$$",
+    "tags": [
+      "公式"
+    ],
+    "facets": [],
+    "order_index": 53,
+    "content_md5": "5e3ede026e4621e31fa7f75874ce61c0",
+    "legacy_id_formula": "附录-附录一：高频公式速查-复数-53",
+    "updated_at": "2026-05-28T03:03:23.016623+00:00"
+  },
+  {
+    "id": "k-ooabv9",
+    "book": "附录",
+    "chapter": "附录一：高频公式速查",
+    "section": "立体几何",
+    "title": "立体几何",
+    "level": 2,
+    "parent_id": null,
+    "content_md": "$$\nV_{\\text{柱}}=S_{\\text{底}}h\n$$\n\n$$\nV_{\\text{锥}}=\\frac13S_{\\text{底}}h\n$$\n\n$$\nV_{\\text{球}}=\\frac43\\pi R^3\n$$\n\n$$\nS_{\\text{球}}=4\\pi R^2\n$$",
+    "tags": [
+      "公式"
+    ],
+    "facets": [],
+    "order_index": 54,
+    "content_md5": "0bfba2ecffd7f43af1a9196816e98d00",
+    "legacy_id_formula": "附录-附录一：高频公式速查-立体几何-54",
+    "updated_at": "2026-05-28T03:03:23.016636+00:00"
+  },
+  {
+    "id": "k-4z7ig0",
+    "book": "附录",
+    "chapter": "附录一：高频公式速查",
+    "section": "统计与概率",
+    "title": "统计与概率",
+    "level": 2,
+    "parent_id": null,
+    "content_md": "$$\n\\bar x=\\frac{x_1+x_2+\\cdots+x_n}{n}\n$$\n\n$$\ns^2=\\frac1n\\sum_{i=1}^n(x_i-\\bar x)^2\n$$\n\n$$\nP(A\\cup B)=P(A)+P(B)-P(A\\cap B)\n$$\n\n$$\nP(A)=\\frac mn\n$$\n\n$$\nP(A\\cap B)=P(A)P(B)\n$$\n\n---",
+    "tags": [
+      "公式"
+    ],
+    "facets": [],
+    "order_index": 55,
+    "content_md5": "d18c6f739b5d63e354807d4ff5260a95",
+    "legacy_id_formula": "附录-附录一：高频公式速查-统计与概率-55",
+    "updated_at": "2026-05-28T03:03:23.016655+00:00"
+  }
+]

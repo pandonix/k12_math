@@ -203,8 +203,8 @@ CREATE TABLE knowledge_points (
 
 CREATE INDEX idx_kp_book_chapter ON knowledge_points(book, chapter, section);
 
--- 题型字典
-CREATE TABLE question_types (
+-- 题目形式字典：选择 / 填空 / 解答等。注意：训练意义上的“题型”使用 question_patterns。
+CREATE TABLE question_formats (
   id   INTEGER PRIMARY KEY,
   name TEXT NOT NULL UNIQUE              -- 选择 / 填空 / 解答 / 证明 / 作图
 );
@@ -213,10 +213,11 @@ CREATE TABLE question_types (
 CREATE TABLE questions (
   id            INTEGER PRIMARY KEY AUTOINCREMENT,
   source        TEXT,                    -- 试卷名/页码：'2024 期中卷-第3题'
-  type_id       INTEGER REFERENCES question_types(id),
+  format_id     INTEGER REFERENCES question_formats(id),
   difficulty    INTEGER,                 -- 1-5
   stem_md       TEXT NOT NULL,           -- 题干 markdown + LaTeX
   options_json  TEXT,                    -- 选择题：[{"key":"A","text":"..."}, ...]
+  answer_key_json TEXT,                  -- 结构化答案；客观题自动判分用，如 {"kind":"single","value":"A"}
   answer_md     TEXT,                    -- 标准答案
   solution_md   TEXT,                    -- 解析
   image_path    TEXT,                    -- 原图（若 OCR 来）
@@ -518,10 +519,11 @@ md 文件 → parse_markdown() → diff vs DB → upsert knowledge_points
 ```json
 {
   "source": "2024 春季月考第3题",
-  "type_id": 1,
+  "format_id": 1,
   "difficulty": 3,
   "stem_md": "已知 $f(x)=\\log_2(x-1)$，求定义域。",
   "options_json": null,
+  "answer_key_json": null,
   "answer_md": "$\\{x \\mid x > 1\\}$",
   "solution_md": "...",
   "kp_ids": [
@@ -794,11 +796,39 @@ POST /api/graph/patterns              # 手动维护题型
 POST /api/graph/edges                 # 手动/LLM 校正图谱边
 ```
 
+`POST /api/graph/edges` 使用统一 payload，但后端只允许白名单组合，并落到具体关系表：
+
+```json
+{
+  "from_type": "pattern",
+  "from_id": 12,
+  "to_type": "kp",
+  "to_id": "k-qhiyx0",
+  "relation": "tests",
+  "weight": 0.9
+}
+```
+
+v1 白名单：
+
+| from_type | to_type | relation | 落表 |
+|---|---|---|---|
+| pattern | kp | tests / requires / extends | `pattern_kp` |
+| pattern | skill | uses | `pattern_skills` |
+| pattern | pitfall | has_pitfall | `pattern_pitfalls` |
+| question | kp | tests | `question_kp` |
+| question | pattern | belongs_to | `question_patterns_map` |
+| question | skill | uses | `question_skills` |
+| question | pitfall | has_pitfall | `question_pitfalls` |
+
+非法组合返回 400，不写通用 `graph_edges` 表。这样保留统一 API，同时保持数据库 schema 可约束、可 join。
+
 ### 7.4 录题 / OCR
 ```
-POST /api/intake/upload                 # multipart: pdf 或 image
+POST /api/intake/upload                 # multipart: pdf / image / docx；返回 upload_id + detected_kind
 POST /api/intake/parse                  # { upload_id, schema: "question"|"mistake" } → 异步任务 id
 GET  /api/intake/parse/{task_id}        # 拉取解析结果（ParsedQuestion[] 或 ParsedMistake[]）
+POST /api/intake/import/docx            # DOCX 讲义结构化导入：upload_id → ParsedLearningMaterial 预览数据
 POST /api/intake/questions/commit       # 新题入库（schema=question 走此处）
 POST /api/intake/mistakes/commit        # 错题沉淀（schema=mistake 走此处）：
                                          #   body: ParsedMistake[]（含 question, user_answer_md?,
@@ -957,9 +987,9 @@ math/
 **交付**
 - `backend/` 目录与 venv
 - FastAPI + SQLModel + SQLite 跑通
-- `migrations/0001_initial.sql` 建全表
+- `migrations/0001_initial.sql` 建 §5.2 全部表、索引、约束（M0 只实现其中一部分服务逻辑，但 schema 一次落稳，减少 M1/M2 迁移噪声）
 - `services/kp_sync.py` 把 md 解析入 `knowledge_points`
-- 建立基础图谱最小 schema：`question_patterns`、`skills`、`common_pitfalls`、`pattern_kp`、`question_patterns_map`
+- 基础图谱相关表在 `0001_initial.sql` 中一并创建；M0 的 API 可只返回空邻接
 - 保留 POC 脚本作为验收工具：知识点 md 结构化 + docx 题型抽取 + Top-K 关联报告
 - `GET /api/kp`、`GET /api/kp/tree` 通
 - `GET /api/graph/kp/{id}` 返回知识点局部邻接（M0 可先为空边）
@@ -1222,6 +1252,11 @@ POC 工具方法可复用：
 | 薄弱度更新公式 | 三类事件 wrong/correct/master 统一通过 NODE_WEIGHT + 固定 delta 应用，详见 §16；v1 不做时间衰减 | 2026-05-28 |
 | 错题拍照沉淀 | 作为一等公民流程（§6.3.3），`[录题]` tab 内 sub-tab `错题沉淀` 与 `新题入库` 并列，共享 OCR provider 与预览组件，独立 commit 端点；attempts.source 区分 `practice` / `photo_intake`，错因仍走 §6.4 三档归因模型 | 2026-05-28 |
 | 手写体 OCR | 列为 M3 前置项；provider 通过 `supports_handwriting` 能力位声明；不支持手写时 user_answer_md 留空，错题沉淀主流程不卡 | 2026-05-28 |
+| 客观题判分 | `questions.answer_key_json` 存结构化答案，M2 自动判分只依赖该字段；`answer_md` 仍作为展示用标准答案 | 2026-05-28 |
+| 题目形式命名 | 选择/填空/解答等命名为 `question_formats` / `format_id`；训练意义上的题型统一用 `question_patterns`，避免混淆 | 2026-05-28 |
+| M0 schema 范围 | `0001_initial.sql` 建 §5.2 全部表、索引、约束；M0 只实现知识点同步和最小 API，后续 milestone 逐步启用表 | 2026-05-28 |
+| 图谱边 API | `POST /api/graph/edges` 用统一 payload + 白名单组合，落到具体边表，不建立无约束通用 `graph_edges` 表 | 2026-05-28 |
+| DOCX 导入 API | `/api/intake/upload` 支持 docx，`POST /api/intake/import/docx` 生成 `ParsedLearningMaterial` 预览数据 | 2026-05-28 |
 
 ---
 
