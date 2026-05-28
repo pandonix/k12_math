@@ -1,0 +1,283 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#1c262c" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .bg { fill: #f7f8f6; }
+      .panel { fill: #fff; stroke: #d9e0dc; stroke-width: 1.4; }
+      .soft { fill: #f4f7f6; }
+      .ink { fill: #1e2528; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .muted { fill: #68737a; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .small { font-size: 13px; }
+      .body { font-size: 15px; }
+      .h1 { font-size: 34px; font-weight: 850; }
+      .h2 { font-size: 21px; font-weight: 800; }
+      .h3 { font-size: 16px; font-weight: 780; }
+      .tab { font-size: 14px; font-weight: 700; }
+      .blue { fill: #2563eb; }
+      .green { fill: #12805c; }
+      .amber { fill: #b7791f; }
+      .red { fill: #c2413b; }
+      .chipText { font-size: 12px; font-weight: 700; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .edge { fill: none; stroke-width: 2.6; stroke-linecap: round; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#f7f8f6"/>
+  <g opacity="0.32">
+    <path d="M0 118 H1600 M0 236 H1600 M0 354 H1600 M0 472 H1600 M0 590 H1600 M0 708 H1600 M0 826 H1600 M0 944 H1600" stroke="#dfe7e2"/>
+    <path d="M120 0 V1000 M240 0 V1000 M360 0 V1000 M480 0 V1000 M600 0 V1000 M720 0 V1000 M840 0 V1000 M960 0 V1000 M1080 0 V1000 M1200 0 V1000 M1320 0 V1000 M1440 0 V1000 M1560 0 V1000" stroke="#e9eef0"/>
+  </g>
+
+  <g transform="translate(44 34)">
+    <rect x="0" y="0" width="54" height="54" rx="8" fill="#fefce8" stroke="#1f2937" stroke-width="2.4"/>
+    <text x="27" y="36" text-anchor="middle" class="ink" font-size="26" font-weight="850" fill="#0f5132">函</text>
+    <text x="76" y="28" class="ink h1">高一数学个人薄弱图谱</text>
+    <text x="76" y="58" class="muted body">从知识点检索，升级为“错题证据 → 错因诊断 → 个人薄弱点 → 下一组训练”的本地学习驾驶舱</text>
+    <rect x="980" y="3" width="520" height="62" rx="8" fill="#ffffff" stroke="#cfe0d8"/>
+    <text x="1000" y="28" class="ink body" font-weight="800" fill="#375045">北极星</text>
+    <text x="1000" y="50" class="muted small">我真正弱在哪里？证据是什么？为什么练这组题？练完如何更新？</text>
+  </g>
+
+  <g transform="translate(44 120)" filter="url(#shadow)">
+    <rect x="0" y="0" width="1512" height="824" rx="8" class="panel"/>
+
+    <rect x="0" y="0" width="1512" height="68" rx="8" fill="#ffffff"/>
+    <line x1="0" y1="68" x2="1512" y2="68" stroke="#d9e0dc"/>
+    <rect x="32" y="17" width="34" height="34" rx="8" fill="#def7ec"/>
+    <text x="49" y="40" text-anchor="middle" class="ink h3" fill="#103d31">数</text>
+    <text x="80" y="40" class="ink h2">个人强化复习台</text>
+
+    <g transform="translate(370 17)">
+      <rect x="0" y="0" width="72" height="34" rx="8" class="panel"/>
+      <text x="36" y="22" text-anchor="middle" class="muted tab">知识点</text>
+      <rect x="84" y="0" width="62" height="34" rx="8" class="panel"/>
+      <text x="115" y="22" text-anchor="middle" class="muted tab">题库</text>
+      <rect x="158" y="0" width="62" height="34" rx="8" class="panel"/>
+      <text x="189" y="22" text-anchor="middle" class="muted tab">录题</text>
+      <rect x="232" y="0" width="94" height="34" rx="8" class="panel"/>
+      <text x="279" y="22" text-anchor="middle" class="muted tab">练习/错题</text>
+      <rect x="338" y="0" width="62" height="34" rx="8" class="panel"/>
+      <text x="369" y="22" text-anchor="middle" class="muted tab">图谱</text>
+      <rect x="412" y="0" width="62" height="34" rx="8" fill="#e7efff" stroke="#9bb8ff"/>
+      <text x="443" y="22" text-anchor="middle" class="blue tab">学情</text>
+    </g>
+    <text x="1310" y="40" class="muted small">本地 SQLite · 最近同步 2 分钟前</text>
+
+    <g transform="translate(0 68)">
+      <rect x="0" y="0" width="246" height="756" fill="#f8faf8"/>
+      <line x1="246" y1="0" x2="246" y2="756" stroke="#d9e0dc"/>
+
+      <g transform="translate(16 18)">
+        <rect width="214" height="172" rx="8" class="panel"/>
+        <text x="14" y="30" class="ink h3">数据底座</text>
+        <line x1="0" y1="45" x2="214" y2="45" stroke="#d9e0dc"/>
+        <line x1="107" y1="45" x2="107" y2="172" stroke="#d9e0dc"/>
+        <line x1="0" y1="108" x2="214" y2="108" stroke="#d9e0dc"/>
+        <text x="18" y="82" class="green" font-size="30" font-weight="850">56</text>
+        <text x="18" y="102" class="muted small">知识点</text>
+        <text x="125" y="82" class="green" font-size="30" font-weight="850">8</text>
+        <text x="125" y="102" class="muted small">题型</text>
+        <text x="18" y="145" class="green" font-size="30" font-weight="850">24</text>
+        <text x="18" y="165" class="muted small">讲义典例</text>
+        <text x="125" y="145" class="green" font-size="30" font-weight="850">87%</text>
+        <text x="125" y="165" class="muted small">Top-K 命中</text>
+      </g>
+
+      <g transform="translate(16 210)">
+        <rect width="214" height="196" rx="8" class="panel"/>
+        <text x="14" y="30" class="ink h3">今日入口</text>
+        <g transform="translate(14 50)">
+          <rect width="186" height="31" rx="7" class="soft"/>
+          <text x="10" y="21" class="ink small" font-weight="800">拍照沉淀错题</text>
+          <text x="136" y="21" class="muted small">3 张</text>
+          <rect y="39" width="186" height="31" rx="7" class="soft"/>
+          <text x="10" y="60" class="ink small" font-weight="800">智能练习</text>
+          <text x="148" y="60" class="muted small">10 题</text>
+          <rect y="78" width="186" height="31" rx="7" class="soft"/>
+          <text x="10" y="99" class="ink small" font-weight="800">错因复盘</text>
+          <text x="136" y="99" class="muted small">5 条</text>
+          <rect y="117" width="186" height="31" rx="7" class="soft"/>
+          <text x="10" y="138" class="ink small" font-weight="800">已掌握建议</text>
+          <text x="148" y="138" class="muted small">2 题</text>
+        </g>
+      </g>
+
+      <g transform="translate(16 426)">
+        <rect width="214" height="238" rx="8" class="panel"/>
+        <text x="14" y="30" class="ink h3">产品阶段感</text>
+        <g transform="translate(14 50)" class="small">
+          <rect width="186" height="31" rx="7" class="soft"/><text x="10" y="21" class="ink" font-weight="850">M1</text><text x="92" y="21" class="muted">题库 + 手动录题</text>
+          <rect y="39" width="186" height="31" rx="7" class="soft"/><text x="10" y="60" class="ink" font-weight="850">M2</text><text x="105" y="60" class="muted">做题 + 错题集</text>
+          <rect y="78" width="186" height="31" rx="7" class="soft"/><text x="10" y="99" class="ink" font-weight="850">M3</text><text x="88" y="99" class="muted">OCR 错题沉淀</text>
+          <rect y="117" width="186" height="31" rx="7" class="soft"/><text x="10" y="138" class="ink" font-weight="850">M4</text><text x="104" y="138" class="muted">学情仪表盘</text>
+          <rect y="156" width="186" height="31" rx="7" class="soft"/><text x="10" y="177" class="ink" font-weight="850">M5</text><text x="104" y="177" class="muted">自适应推荐</text>
+        </g>
+      </g>
+    </g>
+
+    <g transform="translate(264 88)">
+      <rect width="858" height="112" rx="8" class="panel"/>
+      <text x="20" y="30" class="green small" font-weight="850">今天最该补</text>
+      <text x="20" y="62" class="ink h2">平面向量共线参数题中，反复忽略“非零向量”和系数关系条件</text>
+      <text x="20" y="90" class="muted body">来自 4 次错题、2 条手动错因、1 个通用易错点。下一组训练集中补“条件校验 + 参数求解”。</text>
+      <rect x="690" y="30" width="142" height="42" rx="8" fill="#1d4ed8"/>
+      <text x="761" y="57" text-anchor="middle" fill="#fff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="850">开始针对训练</text>
+
+      <g transform="translate(874 0)">
+        <rect width="356" height="112" rx="8" class="panel"/>
+        <text x="16" y="30" class="ink h3">本周变化</text>
+        <text x="16" y="59" class="muted small">薄弱强度</text><rect x="95" y="48" width="162" height="8" rx="4" fill="#edf2f0"/><rect x="95" y="48" width="118" height="8" rx="4" fill="#c2413b"/><text x="276" y="59" class="ink small" font-weight="850">0.72</text>
+        <text x="16" y="85" class="muted small">掌握度</text><rect x="95" y="74" width="162" height="8" rx="4" fill="#edf2f0"/><rect x="95" y="74" width="75" height="8" rx="4" fill="#12805c"/><text x="276" y="85" class="ink small" font-weight="850">46%</text>
+      </g>
+
+      <g transform="translate(0 132)">
+        <rect width="344" height="470" rx="8" class="panel"/>
+        <rect width="344" height="52" rx="8" fill="#fff"/>
+        <line x1="0" y1="52" x2="344" y2="52" stroke="#d9e0dc"/>
+        <text x="16" y="32" class="ink h3">个人薄弱 Top 10</text>
+        <text x="202" y="32" class="muted small">跨图谱节点</text>
+
+        <g transform="translate(14 68)">
+          <rect width="316" height="90" rx="8" class="panel"/>
+          <text x="12" y="24" class="ink body" font-weight="850">忽略非零条件</text>
+          <text x="12" y="47" class="muted small">易错点 · 4 次错误 · 最近见于共线向量参数</text>
+          <rect x="12" y="62" width="292" height="8" rx="4" fill="#edf2f0"/><rect x="12" y="62" width="252" height="8" rx="4" fill="#c2413b"/>
+          <rect x="12" y="76" width="82" height="24" rx="12" fill="#fde8e5"/><text x="53" y="92" text-anchor="middle" class="red chipText">强度 0.86</text>
+        </g>
+        <g transform="translate(14 170)">
+          <rect width="316" height="90" rx="8" class="panel"/>
+          <text x="12" y="24" class="ink body" font-weight="850">利用共线向量基本定理求参数</text>
+          <text x="12" y="47" class="muted small">题型 · 横跨 6.1/6.2/6.3/6.4</text>
+          <rect x="12" y="62" width="292" height="8" rx="4" fill="#edf2f0"/><rect x="12" y="62" width="216" height="8" rx="4" fill="#b7791f"/>
+          <rect x="12" y="76" width="74" height="24" rx="12" fill="#fff3d6"/><text x="49" y="92" text-anchor="middle" class="amber chipText">证据 3</text>
+        </g>
+        <g transform="translate(14 272)">
+          <rect width="316" height="76" rx="8" class="panel"/>
+          <text x="12" y="24" class="ink body" font-weight="850">系数比较与同起点转化</text>
+          <text x="12" y="47" class="muted small">技巧 · 解析中反复漏一步</text>
+          <rect x="12" y="60" width="292" height="8" rx="4" fill="#edf2f0"/><rect x="12" y="60" width="184" height="8" rx="4" fill="#b7791f"/>
+        </g>
+        <g transform="translate(14 360)">
+          <rect width="316" height="76" rx="8" class="panel"/>
+          <text x="12" y="24" class="ink body" font-weight="850">函数定义域中的端点检验</text>
+          <text x="12" y="47" class="muted small">知识点 · 连续对 2 次，强度下降</text>
+          <rect x="12" y="60" width="292" height="8" rx="4" fill="#edf2f0"/><rect x="12" y="60" width="124" height="8" rx="4" fill="#12805c"/>
+        </g>
+      </g>
+
+      <g transform="translate(360 132)">
+        <rect width="520" height="470" rx="8" class="panel"/>
+        <text x="16" y="30" class="ink h3">证据链图谱</text>
+        <text x="140" y="30" class="muted small">不是章节树，而是“错因连接训练”</text>
+        <rect x="14" y="52" width="492" height="404" rx="8" fill="#f8faf8" stroke="#d8e2de"/>
+
+        <path class="edge" d="M100 118 C180 135 220 182 250 226" stroke="#8aa4c9" stroke-dasharray="6 6"/>
+        <path class="edge" d="M420 118 C352 142 320 180 272 226" stroke="#8aa4c9" stroke-dasharray="6 6"/>
+        <path class="edge" d="M260 270 C196 304 140 342 98 385" stroke="#d08770"/>
+        <path class="edge" d="M282 268 C350 300 390 342 424 386" stroke="#d08770"/>
+        <path class="edge" d="M292 252 C350 252 384 238 426 232" stroke="#7cb99b"/>
+        <path class="edge" d="M264 285 C266 324 266 356 266 386" stroke="#7cb99b"/>
+
+        <g class="node">
+          <rect x="40" y="76" width="132" height="62" rx="8" class="panel"/>
+          <text x="54" y="100" class="ink small" font-weight="850">证据错题 A</text>
+          <text x="54" y="121" class="muted small">月考第 12 题</text>
+          <rect x="350" y="76" width="132" height="62" rx="8" class="panel"/>
+          <text x="364" y="100" class="ink small" font-weight="850">证据错题 B</text>
+          <text x="364" y="121" class="muted small">拍照沉淀</text>
+
+          <rect x="182" y="198" width="168" height="84" rx="8" fill="#fde8e5" stroke="#e6b5af"/>
+          <text x="204" y="226" class="red body" font-weight="850">个人薄弱点</text>
+          <text x="204" y="250" class="muted small">忽略非零条件</text>
+          <text x="204" y="270" class="muted small">strength 0.86 · evidence 4</text>
+
+          <rect x="34" y="356" width="144" height="64" rx="8" class="panel"/>
+          <text x="48" y="381" class="ink small" font-weight="850">知识点</text>
+          <text x="48" y="402" class="muted small">6.2 向量基本定理</text>
+          <rect x="194" y="356" width="144" height="64" rx="8" class="panel"/>
+          <text x="208" y="381" class="ink small" font-weight="850">解题技巧</text>
+          <text x="208" y="402" class="muted small">系数比较</text>
+          <rect x="354" y="356" width="144" height="64" rx="8" class="panel"/>
+          <text x="368" y="381" class="ink small" font-weight="850">推荐题组</text>
+          <text x="368" y="402" class="muted small">10 题 · 练后回写</text>
+          <rect x="354" y="202" width="144" height="64" rx="8" class="panel"/>
+          <text x="368" y="227" class="ink small" font-weight="850">通用易错点</text>
+          <text x="368" y="248" class="muted small">零向量不能作基底</text>
+        </g>
+      </g>
+
+      <g transform="translate(896 132)">
+        <rect width="334" height="470" rx="8" class="panel"/>
+        <rect width="334" height="52" rx="8" fill="#fff"/>
+        <line x1="0" y1="52" x2="334" y2="52" stroke="#d9e0dc"/>
+        <text x="16" y="32" class="ink h3">下一组训练推荐</text>
+        <text x="228" y="32" class="muted small">必须可解释</text>
+
+        <g transform="translate(14 68)">
+          <rect width="306" height="132" rx="8" class="panel"/>
+          <text x="12" y="25" class="ink body" font-weight="850">共线向量参数基础题 · 3 题</text>
+          <text x="12" y="50" class="muted small">先补核心条件，避免综合题错因不清。</text>
+          <line x1="12" y1="68" x2="294" y2="68" stroke="#d9e0dc" stroke-dasharray="4 4"/>
+          <text x="12" y="92" class="ink small" font-weight="850">命中薄弱</text><text x="92" y="92" class="muted small">非零条件、系数关系判断</text>
+          <text x="12" y="115" class="ink small" font-weight="850">证据来源</text><text x="92" y="115" class="muted small">错题 #18/#23，手动错因</text>
+        </g>
+        <g transform="translate(14 214)">
+          <rect width="306" height="96" rx="8" class="panel"/>
+          <text x="12" y="25" class="ink body" font-weight="850">典例变式 · 向量模长/最值 · 4 题</text>
+          <text x="12" y="50" class="muted small">覆盖跨章节关联，避免只按 6.2 复习。</text>
+          <rect x="12" y="64" width="82" height="24" rx="12" fill="#e7efff"/><text x="53" y="80" text-anchor="middle" class="blue chipText">Top-K</text>
+          <rect x="102" y="64" width="82" height="24" rx="12" fill="#fff3d6"/><text x="143" y="80" text-anchor="middle" class="amber chipText">题型缺口</text>
+        </g>
+        <g transform="translate(14 324)">
+          <rect width="306" height="96" rx="8" class="panel"/>
+          <text x="12" y="25" class="ink body" font-weight="850">错题重做 · 到期复习 · 3 题</text>
+          <text x="12" y="50" class="muted small">来自 review_queue，优先安排未复习错题。</text>
+          <rect x="12" y="64" width="66" height="24" rx="12" fill="#fde8e5"/><text x="45" y="80" text-anchor="middle" class="red chipText">到期</text>
+          <rect x="86" y="64" width="92" height="24" rx="12" fill="#def7ec"/><text x="132" y="80" text-anchor="middle" class="green chipText">可标掌握</text>
+        </g>
+      </g>
+
+      <g transform="translate(0 630)">
+        <g>
+          <rect width="232" height="104" rx="8" class="panel"/>
+          <circle cx="28" cy="28" r="14" fill="#e7efff"/><text x="28" y="33" text-anchor="middle" class="blue small" font-weight="850">1</text>
+          <text x="50" y="33" class="ink h3">录题/错题沉淀</text>
+          <text x="18" y="66" class="muted small">手录或拍照上传</text>
+          <text x="18" y="86" class="muted small">校对结构化字段后入库</text>
+        </g>
+        <g transform="translate(250 0)">
+          <rect width="232" height="104" rx="8" class="panel"/>
+          <circle cx="28" cy="28" r="14" fill="#e7efff"/><text x="28" y="33" text-anchor="middle" class="blue small" font-weight="850">2</text>
+          <text x="50" y="33" class="ink h3">错因诊断</text>
+          <text x="18" y="66" class="muted small">“我错在...”为主</text>
+          <text x="18" y="86" class="muted small">规则/LLM 只做建议</text>
+        </g>
+        <g transform="translate(500 0)">
+          <rect width="232" height="104" rx="8" class="panel"/>
+          <circle cx="28" cy="28" r="14" fill="#e7efff"/><text x="28" y="33" text-anchor="middle" class="blue small" font-weight="850">3</text>
+          <text x="50" y="33" class="ink h3">个人薄弱图谱</text>
+          <text x="18" y="66" class="muted small">错误扩散到知识点、题型</text>
+          <text x="18" y="86" class="muted small">技巧、易错点与个人问题</text>
+        </g>
+        <g transform="translate(750 0)">
+          <rect width="232" height="104" rx="8" class="panel"/>
+          <circle cx="28" cy="28" r="14" fill="#e7efff"/><text x="28" y="33" text-anchor="middle" class="blue small" font-weight="850">4</text>
+          <text x="50" y="33" class="ink h3">自适应推荐</text>
+          <text x="18" y="66" class="muted small">综合薄弱强度、复习到期</text>
+          <text x="18" y="86" class="muted small">题型缺口与难度匹配</text>
+        </g>
+        <g transform="translate(1000 0)">
+          <rect width="230" height="104" rx="8" class="panel"/>
+          <circle cx="28" cy="28" r="14" fill="#e7efff"/><text x="28" y="33" text-anchor="middle" class="blue small" font-weight="850">5</text>
+          <text x="50" y="33" class="ink h3">练后回写</text>
+          <text x="18" y="66" class="muted small">做对、做错、标掌握</text>
+          <text x="18" y="86" class="muted small">都会更新图谱强度</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <text x="1556" y="982" text-anchor="end" class="muted small">基于 PLAN.md v2 · 本地优先 · Vanilla JS + MathJax · FastAPI + SQLModel + SQLite</text>
+</svg>

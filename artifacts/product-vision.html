@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>数学个人薄弱图谱产品视觉图</title>
+    <style>
+      :root {
+        --paper: #f7f8f6;
+        --ink: #1e2528;
+        --muted: #68737a;
+        --line: #d9e0dc;
+        --panel: #ffffff;
+        --panel-soft: #f4f7f6;
+        --blue: #2563eb;
+        --blue-soft: #e7efff;
+        --green: #12805c;
+        --green-soft: #def7ec;
+        --amber: #b7791f;
+        --amber-soft: #fff3d6;
+        --red: #c2413b;
+        --red-soft: #fde8e5;
+        --violet: #6d5bd0;
+        --violet-soft: #efeafd;
+        --shadow: 0 18px 44px rgba(28, 38, 44, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 248, 246, 0.96)),
+          repeating-linear-gradient(90deg, rgba(37, 99, 235, 0.04) 0 1px, transparent 1px 42px);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+
+      .sheet {
+        width: min(1600px, 100%);
+        margin: 0 auto;
+        padding: 28px;
+      }
+
+      .titlebar {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 18px;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .mark {
+        display: grid;
+        place-items: center;
+        width: 54px;
+        height: 54px;
+        border: 2px solid #1f2937;
+        border-radius: 8px;
+        color: #0f5132;
+        background: #fefce8;
+        font-size: 26px;
+        font-weight: 850;
+      }
+
+      .titlebar h1 {
+        margin: 0;
+        font-size: 31px;
+        line-height: 1.18;
+        letter-spacing: 0;
+      }
+
+      .titlebar p {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      .north-star {
+        max-width: 510px;
+        padding: 12px 14px;
+        border: 1px solid #cfe0d8;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.82);
+        color: #375045;
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .app-frame {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: var(--shadow);
+      }
+
+      .app-top {
+        display: grid;
+        grid-template-columns: 260px 1fr auto;
+        gap: 18px;
+        align-items: center;
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.94);
+      }
+
+      .product-name {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 17px;
+        font-weight: 800;
+      }
+
+      .mini-mark {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        color: #103d31;
+        background: var(--green-soft);
+      }
+
+      .tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .tab {
+        min-height: 34px;
+        padding: 7px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        color: #48535a;
+        font-size: 13px;
+      }
+
+      .tab.active {
+        border-color: rgba(37, 99, 235, 0.36);
+        background: var(--blue-soft);
+        color: #1d4ed8;
+        font-weight: 700;
+      }
+
+      .sync {
+        color: var(--muted);
+        font-size: 13px;
+        white-space: nowrap;
+      }
+
+      .app-body {
+        display: grid;
+        grid-template-columns: 252px minmax(0, 1fr);
+        min-height: 890px;
+      }
+
+      .rail {
+        border-right: 1px solid var(--line);
+        background: #f8faf8;
+        padding: 16px;
+      }
+
+      .rail-section {
+        margin-bottom: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .rail-section h2,
+      .panel h2,
+      .panel h3 {
+        margin: 0;
+        font-size: 13px;
+        letter-spacing: 0;
+      }
+
+      .rail-section h2 {
+        padding: 12px 12px 4px;
+        color: #384247;
+      }
+
+      .metric-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .metric {
+        padding: 12px;
+        border-top: 1px solid var(--line);
+      }
+
+      .metric:nth-child(odd) {
+        border-right: 1px solid var(--line);
+      }
+
+      .metric strong {
+        display: block;
+        color: var(--green);
+        font-size: 25px;
+        line-height: 1;
+      }
+
+      .metric span {
+        display: block;
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .rail-list {
+        display: grid;
+        gap: 8px;
+        padding: 10px 12px 12px;
+      }
+
+      .rail-item {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        min-height: 32px;
+        padding: 7px 8px;
+        border-radius: 7px;
+        background: var(--panel-soft);
+        color: #445058;
+        font-size: 12px;
+      }
+
+      .rail-item b {
+        color: var(--ink);
+      }
+
+      .workspace {
+        padding: 18px;
+        background:
+          radial-gradient(circle at 70% 4%, rgba(37, 99, 235, 0.08), transparent 28%),
+          linear-gradient(180deg, #fbfcfb, #f4f7f6);
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) 340px;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .focus {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 18px;
+        align-items: center;
+        padding: 18px 20px;
+        border: 1px solid #cfe0d8;
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .focus small {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--green);
+        font-weight: 800;
+      }
+
+      .focus h2 {
+        margin: 0;
+        font-size: 25px;
+        line-height: 1.28;
+        letter-spacing: 0;
+      }
+
+      .focus p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .primary-action {
+        min-width: 150px;
+        padding: 12px 14px;
+        border: 0;
+        border-radius: 8px;
+        background: #1d4ed8;
+        color: #fff;
+        font-weight: 750;
+        text-align: center;
+      }
+
+      .secondary-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .secondary-actions span {
+        padding: 8px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        color: #4b5563;
+        font-size: 12px;
+        text-align: center;
+      }
+
+      .status-card {
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .status-card h2 {
+        margin: 0 0 12px;
+        font-size: 14px;
+      }
+
+      .trend-row {
+        display: grid;
+        grid-template-columns: 74px 1fr 46px;
+        gap: 8px;
+        align-items: center;
+        margin-top: 10px;
+        color: #4b5563;
+        font-size: 12px;
+      }
+
+      .bar {
+        overflow: hidden;
+        height: 8px;
+        border-radius: 99px;
+        background: #edf2f0;
+      }
+
+      .bar i {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+      }
+
+      .red-bar {
+        background: var(--red);
+      }
+
+      .amber-bar {
+        background: var(--amber);
+      }
+
+      .green-bar {
+        background: var(--green);
+      }
+
+      .main-grid {
+        display: grid;
+        grid-template-columns: 360px minmax(0, 1fr) 340px;
+        gap: 16px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.98);
+        overflow: hidden;
+      }
+
+      .panel-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        min-height: 48px;
+        padding: 13px 14px;
+        border-bottom: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .panel-head span {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .weak-list {
+        display: grid;
+        gap: 10px;
+        padding: 12px;
+      }
+
+      .weak-card {
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .weak-card strong {
+        display: block;
+        font-size: 15px;
+        line-height: 1.35;
+      }
+
+      .weak-card p {
+        margin: 5px 0 10px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .chip {
+        padding: 4px 7px;
+        border-radius: 999px;
+        background: #eef2f7;
+        color: #49535a;
+        font-size: 11px;
+      }
+
+      .chip.red {
+        background: var(--red-soft);
+        color: var(--red);
+      }
+
+      .chip.amber {
+        background: var(--amber-soft);
+        color: var(--amber);
+      }
+
+      .chip.blue {
+        background: var(--blue-soft);
+        color: var(--blue);
+      }
+
+      .chip.green {
+        background: var(--green-soft);
+        color: var(--green);
+      }
+
+      .graph-panel {
+        position: relative;
+        min-height: 530px;
+        padding: 14px;
+      }
+
+      .graph-title {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .graph-title h2 {
+        font-size: 14px;
+      }
+
+      .graph-title span {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .graph-board {
+        position: relative;
+        height: 470px;
+        border: 1px solid #d8e2de;
+        border-radius: 8px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 250, 248, 0.96)),
+          repeating-linear-gradient(0deg, rgba(18, 128, 92, 0.05) 0 1px, transparent 1px 36px),
+          repeating-linear-gradient(90deg, rgba(37, 99, 235, 0.04) 0 1px, transparent 1px 36px);
+        overflow: hidden;
+      }
+
+      .edge-layer {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .node {
+        position: absolute;
+        width: 148px;
+        min-height: 68px;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 8px 18px rgba(28, 38, 44, 0.08);
+        font-size: 12px;
+        line-height: 1.35;
+      }
+
+      .node b {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 13px;
+      }
+
+      .node small {
+        color: var(--muted);
+      }
+
+      .node.center {
+        width: 178px;
+        min-height: 86px;
+        border-color: rgba(194, 65, 59, 0.42);
+        background: var(--red-soft);
+      }
+
+      .node.center b {
+        color: var(--red);
+      }
+
+      .n1 { left: 28px; top: 34px; }
+      .n2 { right: 34px; top: 34px; }
+      .n3 { left: 42%; top: 178px; transform: translateX(-50%); }
+      .n4 { right: 34px; top: 185px; }
+      .n5 { left: 36px; bottom: 44px; }
+      .n6 { left: 48%; bottom: 34px; transform: translateX(-50%); }
+      .n7 { right: 40px; bottom: 44px; }
+
+      .recommend-list {
+        display: grid;
+        gap: 10px;
+        padding: 12px;
+      }
+
+      .rec-card {
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .rec-card strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        line-height: 1.35;
+      }
+
+      .rec-card p {
+        margin: 0 0 10px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .explain {
+        display: grid;
+        gap: 7px;
+        padding-top: 10px;
+        border-top: 1px dashed #d7dedb;
+      }
+
+      .explain div {
+        display: grid;
+        grid-template-columns: 76px 1fr;
+        gap: 8px;
+        color: #4b5563;
+        font-size: 12px;
+        line-height: 1.4;
+      }
+
+      .explain b {
+        color: #22303a;
+      }
+
+      .workflow {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .step {
+        min-height: 126px;
+        padding: 13px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .step-num {
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        margin-bottom: 8px;
+        border-radius: 999px;
+        background: var(--blue-soft);
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      .step strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+      }
+
+      .step p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.55;
+      }
+
+      .footnote {
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.5;
+        text-align: right;
+      }
+
+      @media (max-width: 1100px) {
+        .titlebar,
+        .app-top,
+        .app-body,
+        .hero-grid,
+        .main-grid,
+        .workflow {
+          grid-template-columns: 1fr;
+        }
+
+        .rail {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .graph-board {
+          height: 560px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="sheet">
+      <header class="titlebar">
+        <div class="mark">函</div>
+        <div>
+          <h1>高一数学个人薄弱图谱</h1>
+          <p>从知识点检索，升级为“错题证据 → 错因诊断 → 个人薄弱点 → 下一组训练”的本地学习驾驶舱</p>
+        </div>
+        <div class="north-star">
+          北极星：回答“我现在真正弱在哪里、证据是什么、下一组题为什么值得练、练完图谱如何更新”。
+        </div>
+      </header>
+
+      <section class="app-frame" aria-label="产品主屏视觉稿">
+        <div class="app-top">
+          <div class="product-name">
+            <span class="mini-mark">数</span>
+            个人强化复习台
+          </div>
+          <nav class="tabs" aria-label="主导航">
+            <span class="tab">知识点</span>
+            <span class="tab">题库</span>
+            <span class="tab">录题</span>
+            <span class="tab">练习/错题</span>
+            <span class="tab">图谱</span>
+            <span class="tab active">学情</span>
+          </nav>
+          <div class="sync">本地 SQLite · 最近同步 2 分钟前</div>
+        </div>
+
+        <div class="app-body">
+          <aside class="rail" aria-label="侧边概览">
+            <section class="rail-section">
+              <h2>数据底座</h2>
+              <div class="metric-grid">
+                <div class="metric"><strong>56</strong><span>知识点</span></div>
+                <div class="metric"><strong>8</strong><span>题型</span></div>
+                <div class="metric"><strong>24</strong><span>讲义典例</span></div>
+                <div class="metric"><strong>87%</strong><span>Top-K 命中</span></div>
+              </div>
+            </section>
+
+            <section class="rail-section">
+              <h2>今日入口</h2>
+              <div class="rail-list">
+                <div class="rail-item"><b>拍照沉淀错题</b><span>3 张待校对</span></div>
+                <div class="rail-item"><b>智能练习</b><span>10 题</span></div>
+                <div class="rail-item"><b>错因复盘</b><span>5 条待补</span></div>
+                <div class="rail-item"><b>已掌握建议</b><span>2 题</span></div>
+              </div>
+            </section>
+
+            <section class="rail-section">
+              <h2>产品阶段感</h2>
+              <div class="rail-list">
+                <div class="rail-item"><b>M1</b><span>题库 + 手动录题</span></div>
+                <div class="rail-item"><b>M2</b><span>做题 + 错题集</span></div>
+                <div class="rail-item"><b>M3</b><span>OCR 错题沉淀</span></div>
+                <div class="rail-item"><b>M4</b><span>学情仪表盘</span></div>
+                <div class="rail-item"><b>M5</b><span>自适应推荐</span></div>
+              </div>
+            </section>
+          </aside>
+
+          <section class="workspace">
+            <div class="hero-grid">
+              <section class="focus">
+                <div>
+                  <small>今天最该补</small>
+                  <h2>平面向量共线参数题中，反复忽略“非零向量”和系数关系条件</h2>
+                  <p>系统从 4 次错题、2 条手动错因、1 个通用易错点中汇总出这个薄弱节点。下一组训练将集中在“共线向量基本定理 + 参数求解 + 条件校验”。</p>
+                </div>
+                <div>
+                  <div class="primary-action">开始针对训练</div>
+                  <div class="secondary-actions">
+                    <span>查看证据</span>
+                    <span>修正错因</span>
+                  </div>
+                </div>
+              </section>
+
+              <section class="status-card">
+                <h2>本周变化</h2>
+                <div class="trend-row"><span>薄弱强度</span><div class="bar"><i class="red-bar" style="width: 72%"></i></div><b>0.72</b></div>
+                <div class="trend-row"><span>掌握度</span><div class="bar"><i class="green-bar" style="width: 46%"></i></div><b>46%</b></div>
+                <div class="trend-row"><span>证据密度</span><div class="bar"><i class="amber-bar" style="width: 64%"></i></div><b>7 条</b></div>
+                <div class="trend-row"><span>复习到期</span><div class="bar"><i class="red-bar" style="width: 58%"></i></div><b>10 题</b></div>
+              </section>
+            </div>
+
+            <div class="main-grid">
+              <section class="panel">
+                <div class="panel-head">
+                  <h2>个人薄弱 Top 10</h2>
+                  <span>跨知识点/题型/技巧/易错点</span>
+                </div>
+                <div class="weak-list">
+                  <article class="weak-card">
+                    <strong>忽略非零条件</strong>
+                    <p>易错点 · 4 次错误 · 最近见于“共线向量参数”</p>
+                    <div class="bar"><i class="red-bar" style="width: 86%"></i></div>
+                    <div class="chips" style="margin-top:10px"><span class="chip red">strength 0.86</span><span class="chip">证据 4</span><span class="chip blue">建议 6 题</span></div>
+                  </article>
+
+                  <article class="weak-card">
+                    <strong>利用共线向量基本定理求参数</strong>
+                    <p>题型 · 同时关联 6.1/6.2/6.3/6.4，不能只归到单章节</p>
+                    <div class="bar"><i class="amber-bar" style="width: 74%"></i></div>
+                    <div class="chips" style="margin-top:10px"><span class="chip amber">strength 0.74</span><span class="chip">证据 3</span><span class="chip green">技巧 2</span></div>
+                  </article>
+
+                  <article class="weak-card">
+                    <strong>系数比较与同起点转化</strong>
+                    <p>技巧 · 主观题自评低，解析中反复漏一步</p>
+                    <div class="bar"><i class="amber-bar" style="width: 63%"></i></div>
+                    <div class="chips" style="margin-top:10px"><span class="chip amber">strength 0.63</span><span class="chip">证据 2</span><span class="chip blue">到期复习</span></div>
+                  </article>
+
+                  <article class="weak-card">
+                    <strong>函数定义域中的端点检验</strong>
+                    <p>知识点 · 对数/根式混合题中出现</p>
+                    <div class="bar"><i class="green-bar" style="width: 42%"></i></div>
+                    <div class="chips" style="margin-top:10px"><span class="chip green">下降中</span><span class="chip">连续对 2 次</span></div>
+                  </article>
+                </div>
+              </section>
+
+              <section class="panel graph-panel">
+                <div class="graph-title">
+                  <h2>证据链图谱：不是章节树，而是“错因连接训练”</h2>
+                  <span>只展示 Top 相关边，保留 source / confidence / evidence</span>
+                </div>
+                <div class="graph-board">
+                  <svg class="edge-layer" viewBox="0 0 600 470" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M115 80 C210 95 250 170 285 220" fill="none" stroke="#8aa4c9" stroke-width="2" stroke-dasharray="6 6" />
+                    <path d="M500 82 C420 120 375 170 310 225" fill="none" stroke="#8aa4c9" stroke-width="2" stroke-dasharray="6 6" />
+                    <path d="M294 270 C205 300 155 355 112 397" fill="none" stroke="#d08770" stroke-width="2.5" />
+                    <path d="M330 270 C410 300 452 350 500 398" fill="none" stroke="#d08770" stroke-width="2.5" />
+                    <path d="M330 250 C410 242 455 238 500 230" fill="none" stroke="#7cb99b" stroke-width="2.5" />
+                    <path d="M300 286 C305 340 305 374 305 406" fill="none" stroke="#7cb99b" stroke-width="2.5" />
+                  </svg>
+                  <div class="node n1"><b>证据错题 A</b><small>2026 春季月考第 12 题<br />source: practice</small></div>
+                  <div class="node n2"><b>证据错题 B</b><small>拍照沉淀 · 手写作答<br />source: photo_intake</small></div>
+                  <div class="node center n3"><b>个人薄弱点</b><small>忽略非零条件<br />strength 0.86 · evidence 4</small></div>
+                  <div class="node n4"><b>通用易错点</b><small>零向量不能作为基底<br />confidence 0.78</small></div>
+                  <div class="node n5"><b>知识点</b><small>6.2 平面向量基本定理<br />weight 0.62</small></div>
+                  <div class="node n6"><b>解题技巧</b><small>系数比较 · 同起点转化<br />weight 0.74</small></div>
+                  <div class="node n7"><b>推荐题组</b><small>10 题 · 难度 2-4<br />练后回写图谱</small></div>
+                </div>
+              </section>
+
+              <section class="panel">
+                <div class="panel-head">
+                  <h2>下一组训练推荐</h2>
+                  <span>必须可解释</span>
+                </div>
+                <div class="recommend-list">
+                  <article class="rec-card">
+                    <strong>共线向量参数基础题 · 3 题</strong>
+                    <p>先补核心条件，避免一上来刷综合题导致错因不清。</p>
+                    <div class="explain">
+                      <div><b>命中薄弱</b><span>忽略非零条件，系数关系判断</span></div>
+                      <div><b>证据来源</b><span>错题 #18、#23，手动错因 2 条</span></div>
+                      <div><b>练后更新</b><span>做对降低 strength，做错新增 diagnosis</span></div>
+                    </div>
+                  </article>
+
+                  <article class="rec-card">
+                    <strong>典例变式 · 平面向量模长/最值 · 4 题</strong>
+                    <p>覆盖跨章节关联，避免只按“6.2”复习造成漏项。</p>
+                    <div class="chips"><span class="chip blue">Top-K 关联</span><span class="chip amber">题型缺口</span><span class="chip">难度 3</span></div>
+                  </article>
+
+                  <article class="rec-card">
+                    <strong>错题重做 · 到期复习 · 3 题</strong>
+                    <p>来自 review_queue，优先安排上次错后 3 天未复习的题。</p>
+                    <div class="chips"><span class="chip red">到期</span><span class="chip green">可标已掌握</span></div>
+                  </article>
+                </div>
+              </section>
+            </div>
+
+            <section class="workflow" aria-label="核心流程">
+              <article class="step">
+                <span class="step-num">1</span>
+                <strong>录题/错题沉淀</strong>
+                <p>手动录题或拍照上传，左原图右结构化字段，强制预览校对后入库。</p>
+              </article>
+              <article class="step">
+                <span class="step-num">2</span>
+                <strong>错因诊断</strong>
+                <p>用户勾选“我错在...”，规则/LLM 只做可修改建议，保留 source 与 confidence。</p>
+              </article>
+              <article class="step">
+                <span class="step-num">3</span>
+                <strong>个人薄弱图谱</strong>
+                <p>错题不止落到知识点，还扩散到题型、技巧、易错点和自定义个人问题。</p>
+              </article>
+              <article class="step">
+                <span class="step-num">4</span>
+                <strong>自适应推荐</strong>
+                <p>按 personal weakness、到期复习、题型缺口、难度匹配综合排序。</p>
+              </article>
+              <article class="step">
+                <span class="step-num">5</span>
+                <strong>练后回写</strong>
+                <p>做对、做错、标记已掌握都会更新 mastery 与 strength，形成长期轨迹。</p>
+              </article>
+            </section>
+          </section>
+        </div>
+      </section>
+
+      <p class="footnote">基于 PLAN.md v2：单设备本地优先 · Vanilla JS + MathJax · FastAPI + SQLModel + SQLite · 个人薄弱图谱优先于通用章节统计</p>
+    </main>
+  </body>
+</html>

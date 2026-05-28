@@ -888,7 +888,7 @@ GET /api/stats/personal_pitfalls      # 个人反复易错模式
 | 题库 | `views/questions.js` | 列表 + 多维筛选 + 详情抽屉 + 全文搜 |
 | 录题 | `views/intake.js` | 顶部 sub-tab `新题入库` / `错题沉淀`。共享 OCR provider 与预览组件（左原图右结构化字段），但 commit 路径分流：前者走 `POST /api/intake/questions/commit`（仅进题库），后者走 `POST /api/intake/mistakes/commit`（同时构造 attempts + mistakes + 触发 weakness_engine，§6.3.3） |
 | 练习 | `views/practice.js` | 错题列表 + 智能练习模式 + 单题作答 UI + 错因标注 |
-| 图谱 | `views/graph.js` | 基础学习图谱局部邻接查看：知识点 ⇄ 题型 ⇄ 技巧/易错点 ⇄ 题目 |
+| 图谱 | `views/graph.js` | 基础学习图谱局部邻接查看：知识点 ⇄ 题型 ⇄ 技巧/易错点 ⇄ 题目。v1 不做全量知识图谱总览，避免边过多导致不可读；全量概览作为最低优先级可选演进（见 §13） |
 | 学情 | `views/dashboard.js` | 个人薄弱 Top10 + 题型掌握度 + 个人易错模式 + 训练入口 |
 
 ### 8.3 公共模块
@@ -1230,6 +1230,7 @@ POC 工具方法可复用：
 - **错题导出**：错题集导出为 PDF / Anki 牌组
 - **学习计划**：基于薄弱点 + 考试日期生成周计划
 - **移动端**：PWA 化（标记图标 + 离线缓存）
+- **全量知识图谱展示（最低优先级）**：在现有局部图谱页之外，增加全局概览层，用于查看全部知识点、题型、技巧、通用易错点与题目的关系。为避免变成不可读的大图，默认只展示章节/知识点群、题型群和薄弱热度等聚合节点；点击后再逐层展开到局部邻接，并可叠加个人薄弱强度、证据错题和推荐训练覆盖。该能力不影响 M0-M5 主线，排在自适应推荐闭环稳定之后。
 
 ---
 
@@ -1257,6 +1258,7 @@ POC 工具方法可复用：
 | M0 schema 范围 | `0001_initial.sql` 建 §5.2 全部表、索引、约束；M0 只实现知识点同步和最小 API，后续 milestone 逐步启用表 | 2026-05-28 |
 | 图谱边 API | `POST /api/graph/edges` 用统一 payload + 白名单组合，落到具体边表，不建立无约束通用 `graph_edges` 表 | 2026-05-28 |
 | DOCX 导入 API | `/api/intake/upload` 支持 docx，`POST /api/intake/import/docx` 生成 `ParsedLearningMaterial` 预览数据 | 2026-05-28 |
+| 全量知识图谱展示 | 当前 PLAN 仅实现局部邻接图谱；全量知识图谱总览作为最低优先级可选演进，不进入 M0-M5 主线，且必须采用聚合概览 + 局部展开 + 个人薄弱叠加，避免不可读的大图 | 2026-05-28 |
 
 ---
 
