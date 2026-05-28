@@ -1,9 +1,12 @@
 .DS_Store
 .omx/
 .runtime/
+data/
+.venv/
 *.log
 __pycache__/
 *.pyc
+backend/.env
 node_modules/
 dist/
 build/

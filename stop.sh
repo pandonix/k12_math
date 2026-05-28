@@ -3,8 +3,12 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 RUNTIME_DIR="$ROOT_DIR/.runtime/dev"
-PID_FILE="$RUNTIME_DIR/web.pid"
+
+WEB_PID_FILE="$RUNTIME_DIR/web.pid"
+BACKEND_PID_FILE="$RUNTIME_DIR/backend.pid"
+
 PORT="${PORT:-8000}"
+BACKEND_PORT="${BACKEND_PORT:-8001}"
 
 is_pid_running() {
   local pid="$1"
@@ -36,9 +40,11 @@ stop_pid_tree() {
 }
 
 stop_port_listener() {
+  local port="$1"
+  local label="$2"
   local pids
 
-  pids="$(lsof -tiTCP:"$PORT" -sTCP:LISTEN || true)"
+  pids="$(lsof -tiTCP:"$port" -sTCP:LISTEN || true)"
   if [[ -z "$pids" ]]; then
     return 1
   fi
@@ -47,34 +53,40 @@ stop_port_listener() {
     stop_pid_tree "$pid"
   done
 
-  printf 'Web listener on port %s stopped.\n' "$PORT"
+  printf '%s listener on port %s stopped.\n' "$label" "$port"
   return 0
 }
 
-if [[ ! -f "$PID_FILE" ]]; then
-  if stop_port_listener; then
-    exit 0
+stop_from_pid_file() {
+  local pid_file="$1"
+  local port="$2"
+  local label="$3"
+
+  if [[ ! -f "$pid_file" ]]; then
+    if stop_port_listener "$port" "$label"; then
+      return 0
+    fi
+    printf '%s is not running.\n' "$label"
+    return 0
   fi
-  printf 'Web server is not running.\n'
-  exit 0
-fi
 
-pid="$(<"$PID_FILE")"
+  local pid
+  pid="$(<"$pid_file")"
 
-if ! is_pid_running "$pid"; then
-  rm -f "$PID_FILE"
-  if stop_port_listener; then
-    exit 0
+  if is_pid_running "$pid"; then
+    stop_pid_tree "$pid"
+  else
+    printf '%s pid file was stale and has been removed.\n' "$label"
   fi
-  printf 'Web pid file was stale and has been removed.\n'
-  exit 0
-fi
 
-stop_pid_tree "$pid"
+  rm -f "$pid_file"
 
-if stop_port_listener >/dev/null 2>&1; then
-  true
-fi
+  if stop_port_listener "$port" "$label" >/dev/null 2>&1; then
+    true
+  fi
 
-rm -f "$PID_FILE"
-printf 'Web server stopped.\n'
+  printf '%s stopped.\n' "$label"
+}
+
+stop_from_pid_file "$BACKEND_PID_FILE" "$BACKEND_PORT" "Backend server"
+stop_from_pid_file "$WEB_PID_FILE" "$PORT" "Web server"

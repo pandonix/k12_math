@@ -1,6 +1,6 @@
 # 高一数学知识库 → 个人薄弱图谱 + 题库 + 自适应训练 重构实施方案
 
-> 状态：方案稿（v2） · M0 POC 已完成 · 待执行
+> 状态：方案稿（v2） · M0 后端骨架 + 知识点同步已完成 · M1 待执行
 > 决策：单设备自用 / 基础学习图谱 + 个人薄弱图谱 / PDF 图片 OCR 录题 / 本地后端 / 自适应推荐 / 暂无 ANTHROPIC_API_KEY（M3 提供降级）
 
 ---
@@ -1001,6 +1001,27 @@ math/
 - DB 中知识点数 == 旧前端解析出的条目数
 - POC 报告仍能证明 md → `knowledge_points` 稳定，无重复 ID
 - docx 讲义样本能抽出题型/典例，并生成可审的 Top-K 关联结果
+
+**实际结果（2026-05-28）**
+- 已新增 `backend/`：FastAPI app、SQLModel 运行时模型、SQLite migration runner、`services/kp_sync.py`、`/api/kp`、`/api/kp/tree`、`/api/graph/kp/{id}`、`/api/admin/sync-kp`。
+- 已新增 `backend/migrations/0001_initial.sql`：一次性创建 §5.2 主 schema、FTS5 表与触发器；M0 只启用知识点同步和空邻接图 API。
+- 已创建本地 `.venv` 并安装 `backend/requirements.txt`；`start.sh` / `stop.sh` 已改为同时管理前端 `8000` 与后端 `8001`。
+- 知识点同步结果：`knowledge_points = 56`，`schema_migrations = [('0001')]`，`POST /api/admin/sync-kp` 再次执行为 `skipped_unchanged = 56`。
+
+**实际验证（2026-05-28）**
+- `.venv/bin/python -m pytest backend/tests -q` → 2 passed。
+- `.venv/bin/python -m compileall backend` → passed。
+- `curl http://127.0.0.1:8001/api/health` → `{"status":"ok", ...}`。
+- `curl http://127.0.0.1:8001/api/kp/tree` → `count = 56`。
+- `curl http://127.0.0.1:8001/api/graph/kp/k-lrltj6` → 返回知识点详情 + 空 `patterns/skills/pitfalls/questions/edges`。
+- `curl http://127.0.0.1:8000/index.html` → 旧静态页面正常返回。
+- `python3 poc/m0_kg_poc.py --out /tmp/math-m0-after-dev` → 知识点 56、重复 ID 0、样例题 Top3 命中率 0.9231。
+- `python3 poc/docx_typical_questions.py --out /tmp/math-docx-after-dev/docx_typical_questions.md --summary /tmp/math-docx-after-dev/docx_typical_questions_summary.json` → 380 段、24 题、8 个题型。
+
+**剩余风险 / M1 注意**
+- `knowledge_points` 在 M0 增加了 `facets_json`、`content_md5`、`legacy_id_formula` 三个实现列，用于保持 POC 证据和同步可审计；后续 `models.py` 仍需以 migration 为权威，避免 ORM 自行建表。
+- M0 的 `GET /api/graph/kp/{id}` 按计划先返回空邻接；M1 录题和题型导入后再填充真实边。
+- 旧前端尚未接入 `/api/kp`，仍从 markdown 读取；这是 M1 `views/kp.js` 改造项。
 
 **预计**：0.5 天
 
