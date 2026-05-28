@@ -1,6 +1,6 @@
 # 高一数学知识库 → 个人薄弱图谱 + 题库 + 自适应训练 重构实施方案
 
-> 状态：方案稿（v2） · M1 题库 + 手动录题已完成 · M2 待执行
+> 状态：方案稿（v2） · M2 做题 + 错题集已完成 · M3 待执行
 > 决策：单设备自用 / 基础学习图谱 + 个人薄弱图谱 / PDF 图片 OCR 录题 / 本地后端 / 自适应推荐 / 暂无 ANTHROPIC_API_KEY（M3 提供降级）
 
 ---
@@ -1087,6 +1087,27 @@ math/
 - 手动标注错因后，相关 `personal_weaknesses.strength` 上升
 - 连续做对或标"已掌握"后，相关薄弱点强度下降、掌握度上升
 - 标"已掌握"后从默认列表消失，但可在"已掌握"tab 翻出
+
+**实际结果（2026-05-28）**
+- 已新增 `services/weakness_engine.py`：按 §16 的 NODE_WEIGHT 与 wrong/correct/master delta 更新 `personal_weaknesses`，并保留 custom_label 展示节点。
+- 已新增 `services/practice_store.py` 与 `routers/practice.py`：支持 `POST /api/attempts`、`GET/POST /api/attempts/{id}/diagnoses`、`GET /api/mistakes`、`PATCH /api/mistakes/{question_id}`。
+- 错题事务链已落地：做错写 `attempts`、upsert `mistakes`、写 `mistake_diagnoses`、更新 `personal_weaknesses`；做对更新 `mastered_streak` 并降低关联薄弱点；手动标掌握触发 master event。
+- 前端 `[练习/错题]` 已从占位改为可用流程：选择题目、提交作答、勾选“我错在...”、查看错题集、标记已掌握。
+
+**实际验证（2026-05-28）**
+- `.venv/bin/python -m pytest backend/tests -q` → 12 passed。
+- `.venv/bin/python -m compileall backend` → passed。
+- `node --check app.js` → passed。
+- `POST /api/attempts {"is_correct": false}` → 返回 attempt id，生成 4 条 rule diagnoses。
+- `GET /api/mistakes` → `total = 1`，`wrong_count = 1`，关联 4 个 weakness。
+- `POST /api/attempts {"is_correct": true}` → 正确作答写入，错题 `mastered_streak` 增加。
+- `PATCH /api/mistakes/{qid} {"mastered": true}` → 写入 `mastered_at`，默认 `GET /api/mistakes` 隐藏，`include_mastered=true` 可翻出。
+- 前端资源 `index.html` / `app.js` 正常返回，包含 `renderPracticeView` / `/attempts` / `/mistakes` 练习入口。
+
+**剩余风险 / M3 注意**
+- M2 作答流程只处理题库内已有题；M3 的错题拍照沉淀需要复用同一 attempts/mistakes/diagnoses/weakness_engine 事务链。
+- `suggest_mastered` 当前按连续正确次数判断，未实现跨 24 小时跨度限制；后续如果需要更严格建议提示，应补齐 §16.4 的时间跨度判定。
+- 前端仍是单文件 SPA；M3 再扩 intake 时应优先抽出 API/渲染辅助，降低继续堆叠风险。
 
 **预计**：1–2 天
 

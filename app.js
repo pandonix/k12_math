@@ -25,11 +25,14 @@ const state = {
   questions: [],
   questionTotal: 0,
   patterns: [],
+  mistakes: [],
+  includeMastered: false,
   query: "",
   book: "全部",
   type: "全部",
   activeId: "",
   activeQuestionId: 0,
+  activePracticeQuestionId: 0,
   activePatternId: 0,
   questionFilters: { kp: "", difficulty: "" },
   favorites: new Set(JSON.parse(localStorage.getItem("mathFavorites") || "[]")),
@@ -69,6 +72,10 @@ async function bootstrap() {
   await loadKnowledgePoints();
   await loadPatterns();
   if (state.tab === "questions") await loadQuestions();
+  if (state.tab === "practice") {
+    await loadQuestions();
+    await loadMistakes();
+  }
 }
 
 function bindEvents() {
@@ -114,6 +121,7 @@ function parseRoute() {
   state.tab = tabs.some(tab => tab.key === parts[0]) ? parts[0] : "kp";
   if (state.tab === "kp" && parts[1]) state.activeId = parts[1];
   if (state.tab === "questions" && parts[1]) state.activeQuestionId = Number(parts[1]);
+  if (state.tab === "practice" && parts[1]) state.activePracticeQuestionId = Number(parts[1]);
   if (state.tab === "graph" && parts[1]) state.activePatternId = Number(parts[1]);
 }
 
@@ -169,16 +177,25 @@ async function loadPatterns() {
   state.activePatternId = state.activePatternId || state.patterns[0]?.id || 0;
 }
 
+async function loadMistakes() {
+  const data = await api(`/mistakes?include_mastered=${state.includeMastered ? "true" : "false"}`);
+  state.mistakes = data.items;
+}
+
 async function render() {
   renderTabs();
   if (state.tab === "questions") await loadQuestions();
+  if (state.tab === "practice") {
+    await loadQuestions();
+    await loadMistakes();
+  }
   if (state.tab === "graph") await loadPatterns();
 
   if (state.tab === "kp") renderKpView();
   if (state.tab === "questions") renderQuestionsView();
   if (state.tab === "intake") renderIntakeView();
   if (state.tab === "graph") renderGraphView();
-  if (state.tab === "practice") renderPlaceholder("练习/错题", "M2 会在这里接入做题、错题集和错因标注。");
+  if (state.tab === "practice") renderPracticeView();
   if (state.tab === "dashboard") renderPlaceholder("学情", "M4 会在这里展示个人薄弱 Top、证据链和训练入口。");
 }
 
@@ -434,6 +451,184 @@ function renderQuestionReader(question) {
     </div>
   `;
   typeset(els.reader);
+}
+
+function renderPracticeView() {
+  resetShell();
+  renderPracticeSidebar();
+  els.typeFilters.innerHTML = `<button class="segment active" type="button">做题</button><button class="segment" type="button" data-mistakes>错题集</button>`;
+  els.typeFilters.querySelector("[data-mistakes]").addEventListener("click", () => {
+    document.querySelector("#mistakeList")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  els.resultCount.textContent = `${state.questions.length} 道可练习题 · ${state.mistakes.length} 条错题`;
+  renderPracticeQuestionList();
+  const active = state.questions.find(question => question.id === state.activePracticeQuestionId) || state.questions[0];
+  state.activePracticeQuestionId = active?.id || 0;
+  renderPracticeReader(active);
+}
+
+function renderPracticeSidebar() {
+  els.sidebar.innerHTML = `
+    <section class="panel summary-panel">
+      <div class="stat"><strong>${state.questions.length}</strong><span>题库</span></div>
+      <div class="stat"><strong>${state.mistakes.length}</strong><span>${state.includeMastered ? "全部错题" : "未掌握"}</span></div>
+    </section>
+    <section class="panel">
+      <h2>错题显示</h2>
+      <div class="chip-group">
+        <button class="chip ${!state.includeMastered ? "active" : ""}" type="button" data-mastered="0">未掌握</button>
+        <button class="chip ${state.includeMastered ? "active" : ""}" type="button" data-mastered="1">含已掌握</button>
+      </div>
+    </section>
+    <section class="panel" id="mistakeList">
+      <h2>错题集</h2>
+      <div class="mistake-list">
+        ${state.mistakes.map(renderMistakeSummary).join("") || `<div class="side-note">暂无错题。</div>`}
+      </div>
+    </section>
+  `;
+  els.sidebar.querySelectorAll("[data-mastered]").forEach(button => {
+    button.addEventListener("click", async () => {
+      state.includeMastered = button.dataset.mastered === "1";
+      await loadMistakes();
+      renderPracticeView();
+    });
+  });
+  els.sidebar.querySelectorAll("[data-practice-question]").forEach(button => {
+    button.addEventListener("click", () => {
+      state.activePracticeQuestionId = Number(button.dataset.practiceQuestion);
+      route(`/practice/${state.activePracticeQuestionId}`);
+    });
+  });
+  els.sidebar.querySelectorAll("[data-master-question]").forEach(button => {
+    button.addEventListener("click", async () => {
+      await api(`/mistakes/${button.dataset.masterQuestion}`, {
+        method: "PATCH",
+        body: JSON.stringify({ mastered: true })
+      });
+      state.message = "已标记掌握";
+      await loadMistakes();
+      renderPracticeView();
+    });
+  });
+}
+
+function renderMistakeSummary(mistake) {
+  return `
+    <div class="mistake-row">
+      <button type="button" data-practice-question="${mistake.question.id}">
+        ${escapeHtml(mistake.question.source || `题目 #${mistake.question.id}`)}
+      </button>
+      <span>错 ${mistake.wrong_count} 次 · 连对 ${mistake.mastered_streak}</span>
+      ${mistake.mastered_at ? `<span>已掌握</span>` : `<button type="button" data-master-question="${mistake.question.id}">标掌握</button>`}
+    </div>
+  `;
+}
+
+function renderPracticeQuestionList() {
+  if (!state.questions.length) {
+    els.results.innerHTML = `<div class="no-results">题库为空。先到录题页添加题目。</div>`;
+    return;
+  }
+  els.results.innerHTML = state.questions.map(question => `
+    <button class="result-card ${question.id === state.activePracticeQuestionId ? "active" : ""}" type="button" data-id="${question.id}">
+      <h3>${escapeHtml(question.source || `题目 #${question.id}`)}</h3>
+      <span class="path">${escapeHtml([question.format_name, question.difficulty ? `难度 ${question.difficulty}` : ""].filter(Boolean).join(" / "))}</span>
+      <p class="snippet">${escapeHtml(buildSummary(stripMarkdown(question.stem_md)))}</p>
+      <div class="tags">${renderTags([...question.knowledge_points.slice(0, 2).map(kp => kp.title), ...question.patterns.slice(0, 2).map(pattern => pattern.name)])}</div>
+    </button>
+  `).join("");
+  els.results.querySelectorAll("[data-id]").forEach(button => {
+    button.addEventListener("click", () => {
+      state.activePracticeQuestionId = Number(button.dataset.id);
+      route(`/practice/${button.dataset.id}`);
+    });
+  });
+}
+
+function renderPracticeReader(question) {
+  if (!question) {
+    els.reader.innerHTML = `<div class="empty-state"><strong>暂无练习题</strong><span>先从录题页添加题目。</span></div>`;
+    return;
+  }
+  els.reader.innerHTML = `
+    <header class="article-head">
+      <span class="path">${escapeHtml([question.format_name, question.difficulty ? `难度 ${question.difficulty}` : "", question.source].filter(Boolean).join(" / "))}</span>
+      <h2>${escapeHtml(question.source || `题目 #${question.id}`)}</h2>
+      <div class="tags">${renderTags([...question.knowledge_points.map(kp => kp.title), ...question.patterns.map(pattern => pattern.name)])}</div>
+      ${state.message ? `<p class="filter-note">${escapeHtml(state.message)}</p>` : ""}
+      ${state.error ? `<p class="filter-note">${escapeHtml(state.error)}</p>` : ""}
+    </header>
+    <div class="article-body">
+      <h4>题干</h4>
+      ${renderMarkdown(question.stem_md)}
+      <form id="attemptForm" class="question-form compact-form">
+        <label>我的作答<textarea name="user_answer_md" rows="4"></textarea></label>
+        <div class="form-grid">
+          <label>结果<select name="is_correct"><option value="0">错</option><option value="1">对</option></select></label>
+          <label>自评<select name="self_rating"><option value="">未评</option>${[1,2,3,4,5].map(n => `<option value="${n}">${n}</option>`).join("")}</select></label>
+          <label>用时（秒）<input name="time_spent_sec" type="number" min="0" step="1"></label>
+        </div>
+        <fieldset class="diagnosis-fieldset">
+          <legend>我错在...</legend>
+          ${renderDiagnosisChecks(question)}
+          <label>自定义错因<input name="custom_label" placeholder="例如：忽略非零条件"></label>
+        </fieldset>
+        <div class="article-actions">
+          <button type="submit">提交作答</button>
+        </div>
+      </form>
+      ${(question.answer_md || question.solution_md) ? `<h4>答案与解析</h4>${question.answer_md ? renderMarkdown(question.answer_md) : ""}${question.solution_md ? renderMarkdown(question.solution_md) : ""}` : ""}
+    </div>
+  `;
+  document.querySelector("#attemptForm").addEventListener("submit", event => submitAttempt(event, question));
+  typeset(els.reader);
+}
+
+function renderDiagnosisChecks(question) {
+  const groups = [
+    ["kp", "知识点", question.knowledge_points],
+    ["pattern", "题型", question.patterns],
+    ["skill", "技巧", question.skills],
+    ["pitfall", "易错点", question.pitfalls]
+  ];
+  return groups.map(([type, label, nodes]) => `
+    <div class="diagnosis-group">
+      <strong>${label}</strong>
+      ${nodes.map(node => `<label><input type="checkbox" name="diagnosis" value="${type}:${node.id}"> ${escapeHtml(node.title || node.name)}</label>`).join("") || `<span>暂无</span>`}
+    </div>
+  `).join("");
+}
+
+async function submitAttempt(event, question) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const data = new FormData(form);
+  const isCorrect = data.get("is_correct") === "1";
+  const diagnoses = [...form.querySelectorAll("input[name='diagnosis']:checked")].map(input => {
+    const [target_type, target_id] = input.value.split(":");
+    return { target_type, target_id: target_type === "kp" ? target_id : Number(target_id), source: "manual" };
+  });
+  const customLabel = String(data.get("custom_label") || "").trim();
+  if (!isCorrect && customLabel) diagnoses.push({ target_type: "custom", custom_label: customLabel, source: "manual" });
+  const payload = {
+    question_id: question.id,
+    is_correct: isCorrect,
+    self_rating: data.get("self_rating") ? Number(data.get("self_rating")) : null,
+    time_spent_sec: data.get("time_spent_sec") ? Number(data.get("time_spent_sec")) : null,
+    user_answer_md: data.get("user_answer_md") || null,
+    diagnoses
+  };
+  try {
+    const attempt = await api("/attempts", { method: "POST", body: JSON.stringify(payload) });
+    state.message = isCorrect ? `已记录正确作答 #${attempt.id}` : `已加入错题集 #${attempt.id}`;
+    state.error = "";
+    await loadMistakes();
+    renderPracticeView();
+  } catch (error) {
+    state.error = `提交失败：${error.message}`;
+    renderPracticeView();
+  }
 }
 
 function renderIntakeView() {

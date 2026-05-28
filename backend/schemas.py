@@ -191,3 +191,86 @@ class ParsedLearningMaterial(BaseModel):
     question_count: int
     patterns: list[dict]
     questions: list[ParsedQuestionPreview]
+
+
+class DiagnosisInput(BaseModel):
+    target_type: str
+    target_id: str | int | None = None
+    custom_label: str | None = None
+    note_md: str | None = None
+    confidence: float = 1.0
+    source: str = "manual"
+
+
+class DiagnosisRead(BaseModel):
+    id: int
+    attempt_id: int
+    target_type: str
+    target_id: str | int | None
+    title: str
+    note_md: str | None
+    confidence: float
+    source: str
+    created_at: datetime
+
+
+class AttemptCreate(BaseModel):
+    question_id: int
+    is_correct: bool
+    self_rating: int | None = None
+    time_spent_sec: int | None = None
+    user_answer_md: str | None = None
+    answer_image_path: str | None = None
+    source: str = "practice"
+    attempted_at: datetime | None = None
+    diagnoses: list[DiagnosisInput] = []
+
+
+class AttemptRead(BaseModel):
+    id: int
+    question_id: int
+    is_correct: bool
+    self_rating: int | None
+    time_spent_sec: int | None
+    user_answer_md: str | None
+    answer_image_path: str | None
+    source: str
+    attempted_at: datetime
+    diagnoses: list[DiagnosisRead]
+
+
+class MistakePatch(BaseModel):
+    note_md: str | None = None
+    mastered: bool | None = None
+
+
+class WeaknessRead(BaseModel):
+    id: int
+    target_type: str
+    target_id: str | int | None
+    title: str
+    strength: float
+    mastery: float
+    evidence_count: int
+    last_seen_at: datetime | None
+    updated_at: datetime
+
+
+class MistakeRead(BaseModel):
+    question: QuestionRead
+    first_wrong_at: datetime
+    last_wrong_at: datetime
+    wrong_count: int
+    last_attempt_id: int | None
+    note_md: str | None
+    mastered_at: datetime | None
+    mastered_source: str | None
+    mastered_streak: int
+    suggest_mastered: bool
+    diagnoses: list[DiagnosisRead]
+    weaknesses: list[WeaknessRead]
+
+
+class MistakeListResponse(BaseModel):
+    total: int
+    items: list[MistakeRead]

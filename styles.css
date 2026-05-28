@@ -527,6 +527,72 @@ textarea {
   min-height: 34px;
 }
 
+.compact-form {
+  margin-top: 16px;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.diagnosis-fieldset {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.diagnosis-fieldset legend {
+  padding: 0 6px;
+  color: #384247;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.diagnosis-group {
+  display: grid;
+  gap: 6px;
+}
+
+.diagnosis-group strong {
+  font-size: 13px;
+}
+
+.diagnosis-group label {
+  display: block;
+  color: #526069;
+  font-weight: 400;
+}
+
+.mistake-list {
+  display: grid;
+  gap: 8px;
+  padding: 0 10px 12px;
+}
+
+.mistake-row {
+  display: grid;
+  gap: 5px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.mistake-row button {
+  border: 0;
+  padding: 0;
+  color: #1d4ed8;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mistake-row span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .article-head {
   padding: 22px 24px 16px;
   border-bottom: 1px solid var(--line);
