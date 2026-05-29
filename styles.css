@@ -921,6 +921,60 @@ textarea {
   margin: 10px 0;
 }
 
+.question-options {
+  margin: 14px 0 18px;
+}
+
+.question-options p {
+  margin: 12px 0 12px 2.2em;
+  text-indent: -2.2em;
+}
+
+.question-images {
+  display: grid;
+  gap: 12px;
+  margin: 14px 0 18px;
+}
+
+.question-figure {
+  margin: 0;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.question-figure img {
+  display: block;
+  max-width: 100%;
+  max-height: 520px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.docx-inline-wrap {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.docx-inline-image {
+  display: block;
+  width: auto;
+  max-width: none;
+  height: auto;
+  max-height: 120px;
+  margin: 0 3px;
+  object-fit: contain;
+}
+/* Rendered equations carry their true print size inline; show at that scale
+   (the underlying PNG is hi-DPI, so it stays crisp when downscaled). */
+.docx-equation {
+  max-height: none;
+}
+
 .article-body ul,
 .article-body ol {
   margin: 10px 0 16px 1.2em;

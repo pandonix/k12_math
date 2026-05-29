@@ -277,6 +277,7 @@ function renderKpView() {
   renderKpResults(filtered);
   renderKpReader(state.items.find(item => item.id === state.activeId));
   updateActiveNav();
+  keepActiveKpContextVisible();
   els.resultCount.textContent = `${filtered.length} 个结果`;
 }
 
@@ -451,14 +452,17 @@ function renderQuestionResults() {
     els.results.innerHTML = `<div class="no-results">还没有题目，先到录题页添加 5-10 道真题。</div>`;
     return;
   }
-  els.results.innerHTML = state.questions.map(question => `
-    <button class="result-card ${question.id === state.activeQuestionId ? "active" : ""}" type="button" data-id="${question.id}">
-      <h3>${escapeHtml(question.source || `题目 #${question.id}`)}</h3>
-      <span class="path">${escapeHtml([question.format_name, question.difficulty ? `难度 ${question.difficulty}` : ""].filter(Boolean).join(" / "))}</span>
-      <p class="snippet">${highlight(escapeHtml(buildSummary(stripMarkdown(question.stem_md))))}</p>
-      <div class="tags">${renderTags([...question.tags, ...question.knowledge_points.slice(0, 2).map(kp => kp.title)])}</div>
-    </button>
-  `).join("");
+  els.results.innerHTML = state.questions.map(question => {
+    const display = questionDisplay(question);
+    return `
+      <button class="result-card ${question.id === state.activeQuestionId ? "active" : ""}" type="button" data-id="${question.id}" title="${escapeAttr(display.fullSource)}">
+        <h3>${highlight(escapeHtml(display.title))}</h3>
+        <span class="path">${escapeHtml(questionMetaPath(question, display))}</span>
+        <p class="snippet">${highlight(escapeHtml(buildSummary(stripMarkdown(question.stem_md))))}</p>
+        <div class="tags">${renderTags([...question.tags, ...question.knowledge_points.slice(0, 2).map(kp => kp.title)])}</div>
+      </button>
+    `;
+  }).join("");
   els.results.querySelectorAll("[data-id]").forEach(button => {
     button.addEventListener("click", () => {
       state.activeQuestionId = Number(button.dataset.id);
@@ -472,15 +476,18 @@ function renderQuestionReader(question) {
     els.reader.innerHTML = `<div class="empty-state"><strong>题库为空</strong><span>从录题页添加第一道真题。</span></div>`;
     return;
   }
+  const display = questionDisplay(question);
+  const usedImages = questionRichContent(question);
   els.reader.innerHTML = `
     <header class="article-head">
-      <span class="path">${escapeHtml([question.format_name, question.difficulty ? `难度 ${question.difficulty}` : "", question.source].filter(Boolean).join(" / "))}</span>
-      <h2>${escapeHtml(question.source || `题目 #${question.id}`)}</h2>
+      <span class="path">${escapeHtml(questionMetaPath(question, display))}</span>
+      <h2>${escapeHtml(display.title)}</h2>
       <div class="tags">${renderTags([...question.tags, ...question.patterns.map(p => p.name), ...question.skills.map(s => s.name), ...question.pitfalls.map(p => p.name)])}</div>
     </header>
     <div class="article-body">
       <h4>题干</h4>
       ${renderMarkdown(question.stem_md)}
+      ${renderQuestionImages(question.image_path, usedImages)}
       ${question.answer_md ? `<h4>答案</h4>${renderMarkdown(question.answer_md)}` : ""}
       ${question.solution_md ? `<h4>解析</h4>${renderMarkdown(question.solution_md)}` : ""}
       <h4>关联知识点</h4>
@@ -554,7 +561,7 @@ function renderMistakeSummary(mistake) {
   return `
     <div class="mistake-row">
       <button type="button" data-practice-question="${mistake.question.id}">
-        ${escapeHtml(mistake.question.source || `题目 #${mistake.question.id}`)}
+        ${escapeHtml(questionDisplay(mistake.question).title)}
       </button>
       <span>错 ${mistake.wrong_count} 次 · 连对 ${mistake.mastered_streak}</span>
       ${mistake.mastered_at ? `<span>已掌握</span>` : `<button type="button" data-master-question="${mistake.question.id}">标掌握</button>`}
@@ -567,14 +574,17 @@ function renderPracticeQuestionList() {
     els.results.innerHTML = `<div class="no-results">题库为空。先到录题页添加题目。</div>`;
     return;
   }
-  els.results.innerHTML = state.questions.map(question => `
-    <button class="result-card ${question.id === state.activePracticeQuestionId ? "active" : ""}" type="button" data-id="${question.id}">
-      <h3>${escapeHtml(question.source || `题目 #${question.id}`)}</h3>
-      <span class="path">${escapeHtml([question.format_name, question.difficulty ? `难度 ${question.difficulty}` : ""].filter(Boolean).join(" / "))}</span>
-      <p class="snippet">${escapeHtml(buildSummary(stripMarkdown(question.stem_md)))}</p>
-      <div class="tags">${renderTags([...question.knowledge_points.slice(0, 2).map(kp => kp.title), ...question.patterns.slice(0, 2).map(pattern => pattern.name)])}</div>
-    </button>
-  `).join("");
+  els.results.innerHTML = state.questions.map(question => {
+    const display = questionDisplay(question);
+    return `
+      <button class="result-card ${question.id === state.activePracticeQuestionId ? "active" : ""}" type="button" data-id="${question.id}" title="${escapeAttr(display.fullSource)}">
+        <h3>${escapeHtml(display.title)}</h3>
+        <span class="path">${escapeHtml(questionMetaPath(question, display))}</span>
+        <p class="snippet">${escapeHtml(buildSummary(stripMarkdown(question.stem_md)))}</p>
+        <div class="tags">${renderTags([...question.knowledge_points.slice(0, 2).map(kp => kp.title), ...question.patterns.slice(0, 2).map(pattern => pattern.name)])}</div>
+      </button>
+    `;
+  }).join("");
   els.results.querySelectorAll("[data-id]").forEach(button => {
     button.addEventListener("click", () => {
       state.activePracticeQuestionId = Number(button.dataset.id);
@@ -588,10 +598,12 @@ function renderPracticeReader(question) {
     els.reader.innerHTML = `<div class="empty-state"><strong>暂无练习题</strong><span>先从录题页添加题目。</span></div>`;
     return;
   }
+  const display = questionDisplay(question);
+  const usedImages = questionRichContent(question);
   els.reader.innerHTML = `
     <header class="article-head">
-      <span class="path">${escapeHtml([question.format_name, question.difficulty ? `难度 ${question.difficulty}` : "", question.source].filter(Boolean).join(" / "))}</span>
-      <h2>${escapeHtml(question.source || `题目 #${question.id}`)}</h2>
+      <span class="path">${escapeHtml(questionMetaPath(question, display))}</span>
+      <h2>${escapeHtml(display.title)}</h2>
       <div class="tags">${renderTags([...question.knowledge_points.map(kp => kp.title), ...question.patterns.map(pattern => pattern.name)])}</div>
       ${state.message ? `<p class="filter-note">${escapeHtml(state.message)}</p>` : ""}
       ${state.error ? `<p class="filter-note">${escapeHtml(state.error)}</p>` : ""}
@@ -599,6 +611,7 @@ function renderPracticeReader(question) {
     <div class="article-body">
       <h4>题干</h4>
       ${renderMarkdown(question.stem_md)}
+      ${renderQuestionImages(question.image_path, usedImages)}
       <form id="attemptForm" class="question-form compact-form">
         <label>我的作答<textarea name="user_answer_md" rows="4"></textarea></label>
         <div class="form-grid">
@@ -993,7 +1006,7 @@ function renderWeaknessDetail(detail) {
         ${detail.evidence.map(renderEvidenceItem).join("") || "<p>暂无可展开证据。</p>"}
         <h4>建议训练入口</h4>
         <ul>
-          ${detail.related_questions.map(question => `<li><button class="inline-link" type="button" data-train-question="${question.id}">${escapeHtml(question.source || `题目 #${question.id}`)}</button> ${escapeHtml(buildSummary(stripMarkdown(question.stem_md)))}</li>`).join("") || "<li>先补充关联题目，再生成训练入口。</li>"}
+          ${detail.related_questions.map(question => `<li><button class="inline-link" type="button" data-train-question="${question.id}">${escapeHtml(questionDisplay(question).title)}</button> ${escapeHtml(buildSummary(stripMarkdown(question.stem_md)))}</li>`).join("") || "<li>先补充关联题目，再生成训练入口。</li>"}
         </ul>
       </div>
     </article>
@@ -1003,7 +1016,7 @@ function renderWeaknessDetail(detail) {
 function renderEvidenceItem(item) {
   return `
     <div class="evidence-item">
-      <strong>${escapeHtml(item.question.source || `题目 #${item.question.id}`)}</strong>
+      <strong>${escapeHtml(questionDisplay(item.question).title)}</strong>
       <span>${formatDate(item.attempted_at)} · ${escapeHtml(item.source)} · 置信度 ${percent(item.confidence)}</span>
       <p>${escapeHtml(buildSummary(stripMarkdown(item.question.stem_md)))}</p>
       ${item.user_answer_md ? `<p><b>我的作答：</b>${escapeHtml(buildSummary(stripMarkdown(item.user_answer_md)))}</p>` : ""}
@@ -1202,17 +1215,27 @@ function renderMarkdown(markdown = "") {
       html.push(`<ol>${list.map(text => `<li>${formatInline(text)}</li>`).join("")}</ol>`);
       continue;
     }
+    if (isChoiceLine(line)) {
+      const choices = [];
+      while (i < lines.length && isChoiceLine(lines[i])) { choices.push(lines[i].trim()); i += 1; }
+      html.push(`<div class="question-options">${choices.map(text => `<p>${formatInline(text)}</p>`).join("")}</div>`);
+      continue;
+    }
     const paragraph = [line];
     i += 1;
     while (i < lines.length && lines[i].trim() && !isBlockStart(lines, i)) { paragraph.push(lines[i]); i += 1; }
-    html.push(`<p>${formatInline(paragraph.join(" "))}</p>`);
+    html.push(`<p>${paragraph.map(formatInline).join("<br>")}</p>`);
   }
   return html.join("");
 }
 
 function isBlockStart(lines, index) {
   const line = lines[index] || "";
-  return /^####\s+/.test(line) || line.trim() === "---" || line.trim() === "$$" || /^\s*-\s+/.test(line) || /^\s*\d+\.\s+/.test(line) || isTableStart(lines, index);
+  return /^####\s+/.test(line) || line.trim() === "---" || line.trim() === "$$" || /^\s*-\s+/.test(line) || /^\s*\d+\.\s+/.test(line) || isChoiceLine(line) || isTableStart(lines, index);
+}
+
+function isChoiceLine(line) {
+  return /^\s*[A-H][．.、]\s*/.test(line || "");
 }
 
 function isTableStart(lines, index) {
@@ -1249,12 +1272,92 @@ function updateActiveNav() {
   });
 }
 
+function keepActiveKpContextVisible() {
+  const activeCard = els.results?.querySelector(".result-card.active");
+  if (activeCard && els.results) {
+    const resultsRect = els.results.getBoundingClientRect();
+    const activeRect = activeCard.getBoundingClientRect();
+    els.results.scrollTop += activeRect.top - resultsRect.top - 12;
+  }
+
+  const activeChapter = els.chapterNav?.querySelector(".chapter-link.active");
+  if (!activeChapter || !els.sidebar || window.matchMedia("(max-width: 1040px)").matches) return;
+
+  const sidebarRect = els.sidebar.getBoundingClientRect();
+  const chapterRect = activeChapter.getBoundingClientRect();
+  if (chapterRect.top < sidebarRect.top || chapterRect.bottom > sidebarRect.bottom) {
+    els.sidebar.scrollTop += chapterRect.top - sidebarRect.top - 18;
+  }
+}
+
 function splitText(value) {
   return String(value || "").replace("，", ",").split(",").map(item => item.trim()).filter(Boolean);
 }
 
 function splitNodes(value, primaryFirst = false) {
   return splitText(value).map((name, index) => ({ name, weight: index === 0 ? 1 : 0.75, is_primary: primaryFirst && index === 0 }));
+}
+
+function questionDisplay(question) {
+  const fallbackTitle = `题目 #${question.id}`;
+  const source = String(question.source || "").trim();
+  if (!source) {
+    return { title: fallbackTitle, meta: [], fullSource: fallbackTitle };
+  }
+
+  const parts = splitQuestionSource(source);
+  if (parts.length >= 3) {
+    const collection = compactQuestionCollection(parts[0]);
+    const section = parts[1];
+    const labels = parts.slice(2).join(" · ");
+    return {
+      title: [questionSectionTitle(section), labels].filter(Boolean).join(" · "),
+      meta: [collection, questionSectionMarker(section)].filter(Boolean),
+      fullSource: source
+    };
+  }
+
+  if (parts.length === 2) {
+    return {
+      title: questionSectionTitle(parts[1]) || parts[1],
+      meta: [compactQuestionCollection(parts[0])].filter(Boolean),
+      fullSource: source
+    };
+  }
+
+  return { title: source || fallbackTitle, meta: [], fullSource: source || fallbackTitle };
+}
+
+function questionMetaPath(question, display = questionDisplay(question)) {
+  return [
+    question.format_name,
+    question.difficulty ? `难度 ${question.difficulty}` : "",
+    ...display.meta
+  ].filter(Boolean).join(" / ");
+}
+
+function splitQuestionSource(source) {
+  return String(source || "").split(/[|｜]/).map(part => part.trim()).filter(Boolean);
+}
+
+function compactQuestionCollection(collection) {
+  return collection.replace(/[（(]\s*解析版\s*[）)]/g, "").trim();
+}
+
+function questionSectionTitle(section) {
+  const title = String(section || "")
+    .replace(/^(方法技巧|易混易错)\s*\d+\s*/, "")
+    .replace(/^题型[一二三四五六七八九十百\d]+\s*/, "")
+    .trim();
+  return title || section;
+}
+
+function questionSectionMarker(section) {
+  const method = String(section || "").match(/^(方法技巧|易混易错)\s*(\d+)/);
+  if (method) return `${method[1]}${method[2]}`;
+
+  const type = String(section || "").match(/^(题型[一二三四五六七八九十百\d]+)/);
+  return type ? type[1] : "";
 }
 
 function renderTags(tags) {
@@ -1264,8 +1367,60 @@ function renderTags(tags) {
   }).join("");
 }
 
+function renderQuestionImages(rawPaths, usedContent = "") {
+  const paths = questionImagePaths(rawPaths).filter(path => !usedContent.includes(`[[img:${path}]]`));
+  if (!paths.length) return "";
+  return `
+    <div class="question-images" aria-label="题目配图">
+      ${paths.map((path, index) => `
+        <figure class="question-figure">
+          <img src="${escapeAttr(imageUrl(path))}" alt="题目配图 ${index + 1}" loading="lazy">
+        </figure>
+      `).join("")}
+    </div>
+  `;
+}
+
+function questionRichContent(question) {
+  return [question?.stem_md, question?.answer_md, question?.solution_md].filter(Boolean).join("\n");
+}
+
+function questionImagePaths(rawPaths) {
+  if (!rawPaths) return [];
+  if (Array.isArray(rawPaths)) return rawPaths.filter(Boolean);
+  const value = String(rawPaths).trim();
+  if (!value) return [];
+  if (value.startsWith("[")) {
+    try {
+      const parsed = JSON.parse(value);
+      if (Array.isArray(parsed)) return parsed.filter(Boolean);
+    } catch {}
+  }
+  return value.split(/\n+/).map(path => path.trim()).filter(Boolean);
+}
+
+function imageUrl(path) {
+  if (/^https?:\/\//i.test(path) || path.startsWith("/")) return path;
+  const normalized = path.replace(/^\/+/, "");
+  const version = normalized.startsWith("data/uploads/extracted/") ? "?v=docx-readable-7" : "";
+  return `/${normalized}${version}`;
+}
+
 function formatInline(text) {
-  return escapeHtml(text).replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  return String(text).split(/(\[\[img:[^\]]+\]\])/g).map(part => {
+    const image = part.match(/^\[\[img:([^\]]+)\]\]$/);
+    if (image) {
+      let path = image[1];
+      let sizeStyle = "";
+      const sized = path.match(/^(.*)\|(\d+)x(\d+)$/);
+      if (sized) {
+        path = sized[1];
+        sizeStyle = ` style="width:${sized[2]}px;height:${sized[3]}px"`;
+      }
+      return `<span class="docx-inline-wrap"><img class="docx-inline-image${sized ? " docx-equation" : ""}" src="${escapeAttr(imageUrl(path))}" alt="公式或配图" loading="lazy"${sizeStyle}></span>`;
+    }
+    return escapeHtml(part).replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  }).join("");
 }
 
 function highlight(text) {
@@ -1278,7 +1433,7 @@ function buildSummary(text) {
 }
 
 function stripMarkdown(text) {
-  return String(text || "").replace(/```[\s\S]*?```/g, " ").replace(/\$\$([\s\S]*?)\$\$/g, " $1 ").replace(/[#>*_|`[\](){}\\]/g, " ").replace(/\s+/g, " ").trim();
+  return String(text || "").replace(/\[\[img:[^\]]+\]\]/g, "公式").replace(/```[\s\S]*?```/g, " ").replace(/\$\$([\s\S]*?)\$\$/g, " $1 ").replace(/[#>*_|`[\](){}\\]/g, " ").replace(/\s+/g, " ").trim();
 }
 
 function normalize(text) {
