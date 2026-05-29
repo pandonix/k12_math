@@ -70,7 +70,8 @@ def extract_docx(docx_path: Path) -> tuple[list[Paragraph], dict[str, str]]:
         for rel in rels
         if rel.attrib.get("Id") and rel.attrib.get("Target", "").startswith("media/")
     }
-    image_path_by_rel_id = export_all_images(docx_path, media_by_rel_id)
+    shape_sizes = parse_shape_display_sizes(root)
+    image_path_by_rel_id = export_all_images(docx_path, media_by_rel_id, shape_sizes)
     paragraphs: list[Paragraph] = []
     for para in root.iter(f"{{{W_NS}}}p"):
         parts: list[str] = []
@@ -185,6 +186,36 @@ def block_image_paths(docx_path: Path, media_by_rel_id: dict[str, str], block: l
     return export_images(docx_path, media_by_rel_id, rel_ids)
 
 
+def _style_len_px(style: str, prop: str) -> int | None:
+    match = re.search(rf"(?:^|;)\s*{prop}\s*:\s*([0-9.]+)(pt|px|in|cm|mm)?", style)
+    if not match:
+        return None
+    value = float(match.group(1))
+    unit = match.group(2) or "pt"
+    factor = {"pt": 96 / 72, "px": 1.0, "in": 96.0, "cm": 96 / 2.54, "mm": 96 / 25.4}[unit]
+    return max(1, round(value * factor))
+
+
+def parse_shape_display_sizes(root: ET.Element) -> dict[str, tuple[int, int]]:
+    """Map equation rel_id -> (css_w, css_h) from the VML shape's declared size.
+
+    Word renders MathType/OLE equation objects at the v:shape's pt size, not at
+    the WMF's intrinsic extent — so this is the size they must display at.
+    """
+    sizes: dict[str, tuple[int, int]] = {}
+    for shape in root.iter(f"{{{V_NS}}}shape"):
+        style = shape.attrib.get("style", "")
+        width = _style_len_px(style, "width")
+        height = _style_len_px(style, "height")
+        if not (width and height):
+            continue
+        for imagedata in shape.iter(f"{{{V_NS}}}imagedata"):
+            rel_id = imagedata.attrib.get(f"{{{R_NS}}}id")
+            if rel_id:
+                sizes[rel_id] = (width, height)
+    return sizes
+
+
 def export_images(docx_path: Path, media_by_rel_id: dict[str, str], rel_ids: list[str]) -> tuple[str, ...]:
     if not rel_ids:
         return ()
@@ -195,7 +226,12 @@ def export_images(docx_path: Path, media_by_rel_id: dict[str, str], rel_ids: lis
 _EXPORTED_IMAGE_CACHE: dict[str, dict[str, str]] = {}
 
 
-def export_all_images(docx_path: Path, media_by_rel_id: dict[str, str]) -> dict[str, str]:
+def export_all_images(
+    docx_path: Path,
+    media_by_rel_id: dict[str, str],
+    display_px_by_rel_id: dict[str, tuple[int, int]] | None = None,
+) -> dict[str, str]:
+    display_px_by_rel_id = display_px_by_rel_id or {}
     cache_key = str(docx_path.resolve())
     if cache_key in _EXPORTED_IMAGE_CACHE:
         return _EXPORTED_IMAGE_CACHE[cache_key]
@@ -223,7 +259,9 @@ def export_all_images(docx_path: Path, media_by_rel_id: dict[str, str]) -> dict[
     for rel_id, (png_path, css_w, css_h) in rendered.items():
         rel_path = str(Path(png_path).relative_to(ROOT))
         exported[rel_id] = rel_path
-        IMG_DISPLAY_SIZES[rel_path] = (css_w, css_h)
+        # Prefer the document's declared display size; fall back to the
+        # crop-derived size only when the shape size is unavailable.
+        IMG_DISPLAY_SIZES[rel_path] = display_px_by_rel_id.get(rel_id, (css_w, css_h))
 
     _EXPORTED_IMAGE_CACHE[cache_key] = exported
     return exported
