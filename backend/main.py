@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import Session
 
 from backend.db import engine, get_db_path, run_migrations
-from backend.routers import admin, graph, intake, kp, practice, questions
+from backend.routers import admin, graph, intake, kp, practice, questions, stats
 from backend.services.kp_sync import sync_knowledge_points
 
 
@@ -48,6 +48,7 @@ app.include_router(admin.router)
 app.include_router(questions.router)
 app.include_router(intake.router)
 app.include_router(practice.router)
+app.include_router(stats.router)
 
 
 @app.get("/api/health")

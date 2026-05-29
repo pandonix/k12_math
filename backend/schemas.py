@@ -256,6 +256,60 @@ class WeaknessRead(BaseModel):
     updated_at: datetime
 
 
+class StatsWeaknessItem(WeaknessRead):
+    score: float
+    question_count: int = 0
+
+
+class StatsKpHeatmapItem(BaseModel):
+    kp_id: str
+    title: str
+    book: str
+    chapter: str | None
+    section: str | None
+    strength: float
+    mastery: float
+    evidence_count: int
+    wrong_count: int
+    question_count: int
+
+
+class StatsTypeRadarItem(BaseModel):
+    pattern_id: int
+    name: str
+    strength: float
+    mastery: float
+    evidence_count: int
+    wrong_count: int
+    question_count: int
+
+
+class StatsTrendPoint(BaseModel):
+    date: str
+    attempt_count: int
+    wrong_count: int
+    correct_count: int
+    diagnosis_count: int
+
+
+class StatsEvidenceItem(BaseModel):
+    attempt_id: int
+    question: QuestionRead
+    attempted_at: datetime
+    user_answer_md: str | None
+    answer_image_path: str | None
+    note_md: str | None
+    confidence: float
+    source: str
+
+
+class StatsWeaknessDetail(BaseModel):
+    weakness: StatsWeaknessItem
+    evidence: list[StatsEvidenceItem]
+    related_questions: list[QuestionRead]
+    suggested_target: dict
+
+
 class MistakeRead(BaseModel):
     question: QuestionRead
     first_wrong_at: datetime

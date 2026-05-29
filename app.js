@@ -26,6 +26,14 @@ const state = {
   questionTotal: 0,
   patterns: [],
   mistakes: [],
+  dashboard: {
+    weakTop: [],
+    heatmap: [],
+    typeRadar: [],
+    pitfalls: [],
+    trend: [],
+    detail: null
+  },
   includeMastered: false,
   query: "",
   book: "全部",
@@ -33,6 +41,7 @@ const state = {
   activeId: "",
   activeQuestionId: 0,
   activePracticeQuestionId: 0,
+  activeWeaknessId: 0,
   activePatternId: 0,
   questionFilters: { kp: "", difficulty: "" },
   favorites: new Set(JSON.parse(localStorage.getItem("mathFavorites") || "[]")),
@@ -122,6 +131,7 @@ function parseRoute() {
   if (state.tab === "kp" && parts[1]) state.activeId = parts[1];
   if (state.tab === "questions" && parts[1]) state.activeQuestionId = Number(parts[1]);
   if (state.tab === "practice" && parts[1]) state.activePracticeQuestionId = Number(parts[1]);
+  if (state.tab === "dashboard" && parts[1]) state.activeWeaknessId = Number(parts[1]);
   if (state.tab === "graph" && parts[1]) state.activePatternId = Number(parts[1]);
 }
 
@@ -182,6 +192,32 @@ async function loadMistakes() {
   state.mistakes = data.items;
 }
 
+async function loadDashboard() {
+  const [weakTop, heatmapData, typeRadarData, pitfalls, trendData] = await Promise.all([
+    api("/stats/weak_top?limit=10"),
+    api("/stats/heatmap"),
+    api("/stats/type_radar?limit=12"),
+    api("/stats/personal_pitfalls?limit=10"),
+    api("/stats/trend?period=week")
+  ]);
+  state.dashboard.weakTop = weakTop;
+  state.dashboard.heatmap = heatmapData;
+  state.dashboard.typeRadar = typeRadarData;
+  state.dashboard.pitfalls = pitfalls;
+  state.dashboard.trend = trendData;
+  if (!state.activeWeaknessId && weakTop[0]) state.activeWeaknessId = weakTop[0].id;
+  try {
+    state.dashboard.detail = state.activeWeaknessId
+      ? await api(`/stats/weaknesses/${state.activeWeaknessId}`)
+      : null;
+  } catch {
+    state.activeWeaknessId = weakTop[0]?.id || 0;
+    state.dashboard.detail = state.activeWeaknessId
+      ? await api(`/stats/weaknesses/${state.activeWeaknessId}`)
+      : null;
+  }
+}
+
 async function render() {
   renderTabs();
   if (state.tab === "questions") await loadQuestions();
@@ -190,13 +226,14 @@ async function render() {
     await loadMistakes();
   }
   if (state.tab === "graph") await loadPatterns();
+  if (state.tab === "dashboard") await loadDashboard();
 
   if (state.tab === "kp") renderKpView();
   if (state.tab === "questions") renderQuestionsView();
   if (state.tab === "intake") renderIntakeView();
   if (state.tab === "graph") renderGraphView();
   if (state.tab === "practice") renderPracticeView();
-  if (state.tab === "dashboard") renderPlaceholder("学情", "M4 会在这里展示个人薄弱 Top、证据链和训练入口。");
+  if (state.tab === "dashboard") renderDashboardView();
 }
 
 function renderTabs() {
@@ -859,6 +896,213 @@ function renderPatternReader(pattern) {
       <h4>通用易错点</h4><ul>${pattern.pitfalls.map(node => `<li>${escapeHtml(node.name)}</li>`).join("") || "<li>暂无</li>"}</ul>
     </div>
   `;
+}
+
+function renderDashboardView() {
+  renderDashboardSidebar();
+  const detail = state.dashboard.detail;
+  const topWeakness = state.dashboard.weakTop[0];
+  els.workspace.innerHTML = `
+    <div class="toolbar">
+      <div class="segmented" aria-label="学情视图">
+        <button class="segment active" type="button">个人薄弱图谱</button>
+      </div>
+      <div class="result-meta">${state.dashboard.weakTop.length} 个薄弱点 · 最近 7 天 ${sumTrend("wrong_count")} 次错误</div>
+    </div>
+    <section class="dashboard-surface">
+      <header class="dashboard-head">
+        <span class="path">基于 attempts / mistakes / diagnoses / personal_weaknesses</span>
+        <h2>${topWeakness ? `现在最该补：${escapeHtml(topWeakness.title)}` : "还没有足够的个人练习证据"}</h2>
+        <p>${topWeakness ? escapeHtml(weaknessReason(topWeakness)) : "先完成几次练习或错题沉淀，系统会在这里聚合个人薄弱证据。"}</p>
+      </header>
+      <div class="dashboard-grid">
+        <section class="dashboard-main">
+          ${detail ? renderWeaknessDetail(detail) : renderDashboardEmpty()}
+          ${renderTrendPanel()}
+        </section>
+        <aside class="dashboard-aside">
+          ${renderHeatmapPanel()}
+          ${renderTypeRadarPanel()}
+          ${renderPitfallPanel()}
+        </aside>
+      </div>
+    </section>
+  `;
+  els.workspace.querySelectorAll("[data-train-question]").forEach(button => {
+    button.addEventListener("click", () => route(`/practice/${button.dataset.trainQuestion}`));
+  });
+  els.workspace.querySelectorAll("[data-weakness]").forEach(button => {
+    button.addEventListener("click", () => {
+      state.activeWeaknessId = Number(button.dataset.weakness);
+      route(`/dashboard/${state.activeWeaknessId}`);
+    });
+  });
+}
+
+function renderDashboardSidebar() {
+  const totalAttempts = sumTrend("attempt_count");
+  const wrongCount = sumTrend("wrong_count");
+  els.sidebar.innerHTML = `
+    <section class="panel summary-panel">
+      <div class="stat"><strong>${state.dashboard.weakTop.length}</strong><span>薄弱点</span></div>
+      <div class="stat"><strong>${wrongCount}</strong><span>近 7 天错题</span></div>
+    </section>
+    <section class="panel">
+      <h2>个人薄弱 Top 10</h2>
+      <div class="weakness-list">
+        ${state.dashboard.weakTop.map(renderWeaknessButton).join("") || `<div class="side-note">暂无个人薄弱证据。</div>`}
+      </div>
+    </section>
+    <section class="panel">
+      <h2>证据状态</h2>
+      <div class="side-note">${totalAttempts ? `最近 7 天记录 ${totalAttempts} 次作答，错误率 ${Math.round((wrongCount / totalAttempts) * 100)}%。` : "最近 7 天暂无作答记录。"}</div>
+    </section>
+  `;
+  els.sidebar.querySelectorAll("[data-weakness]").forEach(button => {
+    button.addEventListener("click", () => {
+      state.activeWeaknessId = Number(button.dataset.weakness);
+      route(`/dashboard/${state.activeWeaknessId}`);
+    });
+  });
+}
+
+function renderWeaknessButton(item) {
+  return `
+    <button class="weakness-button ${item.id === state.activeWeaknessId ? "active" : ""}" type="button" data-weakness="${item.id}">
+      <span>${escapeHtml(item.title)}</span>
+      <small>${targetLabel(item.target_type)} · 证据 ${item.evidence_count} · 强度 ${percent(item.strength)}</small>
+      <i style="width:${Math.min(100, Math.max(4, Math.round((item.score || item.strength) * 20)))}%"></i>
+    </button>
+  `;
+}
+
+function renderWeaknessDetail(detail) {
+  const firstQuestion = detail.related_questions[0] || detail.evidence[0]?.question;
+  return `
+    <article class="reader dashboard-detail">
+      <header class="article-head">
+        <span class="path">${targetLabel(detail.weakness.target_type)} · 证据 ${detail.weakness.evidence_count} · 掌握度 ${percent(detail.weakness.mastery)}</span>
+        <h2>${escapeHtml(detail.weakness.title)}</h2>
+        <p class="filter-note">${escapeHtml(weaknessReason(detail.weakness))}</p>
+        <div class="article-actions">
+          ${firstQuestion ? `<button type="button" data-train-question="${firstQuestion.id}">一键针对训练</button>` : ""}
+        </div>
+      </header>
+      <div class="article-body">
+        <h4>证据错题</h4>
+        ${detail.evidence.map(renderEvidenceItem).join("") || "<p>暂无可展开证据。</p>"}
+        <h4>建议训练入口</h4>
+        <ul>
+          ${detail.related_questions.map(question => `<li><button class="inline-link" type="button" data-train-question="${question.id}">${escapeHtml(question.source || `题目 #${question.id}`)}</button> ${escapeHtml(buildSummary(stripMarkdown(question.stem_md)))}</li>`).join("") || "<li>先补充关联题目，再生成训练入口。</li>"}
+        </ul>
+      </div>
+    </article>
+  `;
+}
+
+function renderEvidenceItem(item) {
+  return `
+    <div class="evidence-item">
+      <strong>${escapeHtml(item.question.source || `题目 #${item.question.id}`)}</strong>
+      <span>${formatDate(item.attempted_at)} · ${escapeHtml(item.source)} · 置信度 ${percent(item.confidence)}</span>
+      <p>${escapeHtml(buildSummary(stripMarkdown(item.question.stem_md)))}</p>
+      ${item.user_answer_md ? `<p><b>我的作答：</b>${escapeHtml(buildSummary(stripMarkdown(item.user_answer_md)))}</p>` : ""}
+      ${item.note_md ? `<p><b>复盘：</b>${escapeHtml(item.note_md)}</p>` : ""}
+    </div>
+  `;
+}
+
+function renderDashboardEmpty() {
+  return `<article class="reader"><div class="empty-state"><strong>暂无学情证据</strong><span>完成练习或错题拍照沉淀后，这里会显示个人薄弱链路。</span></div></article>`;
+}
+
+function renderHeatmapPanel() {
+  return `
+    <section class="dashboard-panel">
+      <h3>知识点热力图</h3>
+      <div class="heatmap-list">
+        ${state.dashboard.heatmap.slice(0, 12).map(item => `
+          <div class="heatmap-row">
+            <span>${escapeHtml(item.title)}</span>
+            <meter min="0" max="1" value="${item.strength}"></meter>
+            <small>${escapeHtml(item.chapter || item.book)} · 错 ${item.wrong_count}</small>
+          </div>
+        `).join("") || `<p class="snippet">暂无知识点薄弱记录。</p>`}
+      </div>
+    </section>
+  `;
+}
+
+function renderTypeRadarPanel() {
+  const max = Math.max(1, ...state.dashboard.typeRadar.map(item => item.strength));
+  return `
+    <section class="dashboard-panel">
+      <h3>题型掌握度</h3>
+      <div class="radar-list">
+        ${state.dashboard.typeRadar.slice(0, 8).map(item => `
+          <div class="radar-row">
+            <span>${escapeHtml(item.name)}</span>
+            <i style="width:${Math.round((1 - item.strength / max) * 76 + 12)}%"></i>
+            <small>掌握 ${percent(item.mastery)} · 错 ${item.wrong_count}</small>
+          </div>
+        `).join("") || `<p class="snippet">暂无题型弱点。</p>`}
+      </div>
+    </section>
+  `;
+}
+
+function renderPitfallPanel() {
+  return `
+    <section class="dashboard-panel">
+      <h3>个人易错模式</h3>
+      <div class="pitfall-list">
+        ${state.dashboard.pitfalls.map(item => `
+          <button type="button" data-weakness="${item.id}" class="${item.id === state.activeWeaknessId ? "active" : ""}">
+            <span>${escapeHtml(item.title)}</span>
+            <small>${targetLabel(item.target_type)} · ${percent(item.strength)}</small>
+          </button>
+        `).join("") || `<p class="snippet">暂无反复易错模式。</p>`}
+      </div>
+    </section>
+  `;
+}
+
+function renderTrendPanel() {
+  const max = Math.max(1, ...state.dashboard.trend.map(item => item.attempt_count));
+  return `
+    <section class="dashboard-panel trend-panel">
+      <h3>错题趋势</h3>
+      <div class="trend-bars">
+        ${state.dashboard.trend.map(item => `
+          <div class="trend-bar">
+            <span style="height:${Math.max(4, Math.round((item.wrong_count / max) * 96))}px"></span>
+            <small>${item.date.slice(5)}</small>
+          </div>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function sumTrend(key) {
+  return state.dashboard.trend.reduce((sum, item) => sum + Number(item[key] || 0), 0);
+}
+
+function weaknessReason(item) {
+  return `${targetLabel(item.target_type)}节点，薄弱强度 ${percent(item.strength)}，来自 ${item.evidence_count} 条个人证据，关联 ${item.question_count} 道训练题。`;
+}
+
+function targetLabel(type) {
+  return { kp: "知识点", pattern: "题型", skill: "技巧", pitfall: "易错点", custom: "个人错因" }[type] || type;
+}
+
+function percent(value) {
+  return `${Math.round(Number(value || 0) * 100)}%`;
+}
+
+function formatDate(value) {
+  if (!value) return "";
+  return String(value).slice(0, 10);
 }
 
 function renderPlaceholder(title, text) {

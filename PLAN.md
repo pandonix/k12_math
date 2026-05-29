@@ -1,6 +1,6 @@
 # 高一数学知识库 → 个人薄弱图谱 + 题库 + 自适应训练 重构实施方案
 
-> 状态：方案稿（v2） · M3 OCR 批量录题 + 错题拍照沉淀已完成（manual provider） · M4 待执行
+> 状态：方案稿（v2） · M4 学情仪表盘已完成（本地轻量可视化） · M5 待执行
 > 决策：单设备自用 / 基础学习图谱 + 个人薄弱图谱 / PDF 图片 OCR 录题 / 本地后端 / 自适应推荐 / 暂无 ANTHROPIC_API_KEY（M3 提供降级）
 
 ---
@@ -1190,6 +1190,24 @@ math/
 - 仪表盘文案优先回答“我现在最该补什么”，不是泛泛展示统计图
 
 **预计**：1 天
+
+**实际结果（2026-05-29）**
+- 已新增 `backend/routers/stats.py` 与 `backend/services/stats_store.py`，提供 `weak_top`、`weaknesses/{id}`、`heatmap`、`type_radar`、`personal_pitfalls`、`trend` 六类只读学情端点。
+- 已扩展 `backend/schemas.py`：薄弱 Top、知识点热力、题型掌握、趋势点、弱点详情、证据错题等响应模型。
+- 前端 `app.js` 的学情 tab 已从占位改为可用仪表盘：个人薄弱 Top10、证据链、知识点热力图、题型掌握条、个人易错模式、近 7 天错题趋势和"一键针对训练"入口。
+- 按项目无构建/轻依赖约束，M4 未引入 Chart.js；热力图、雷达摘要和趋势条先用原生 HTML/CSS 实现。后续若需要复杂交互图表，再单独评估依赖。
+- 弱点详情会跳过历史孤儿 attempt/question 证据，避免旧开发库数据导致整个详情端点 404。
+
+**验证证据**
+- `.venv/bin/python -m pytest backend/tests -q` → 18 passed
+- `.venv/bin/python -m compileall backend` → passed
+- `node --check app.js` → passed
+- `curl http://127.0.0.1:8001/api/stats/weak_top?limit=3`、`/heatmap`、`/trend?period=week`、`/weaknesses/1` → 返回真实开发库中的个人薄弱、热力、趋势和证据链数据。
+
+**剩余风险 / M5 注意**
+- M4 的"一键针对训练"只跳转到相关题目，不做完整智能排序；M5 推荐器需要接管 `mode="weakness"` 的训练目标解释和选题策略。
+- 前端仍是单文件 `app.js`，M4 已继续累积复杂度；M5 前建议先拆 `core/api.js` 与 `views/{practice,dashboard}.js`，再实现推荐器交互。
+- 个人易错模式合并仍未实现；相近 custom/pitfall 节点后续需要应用层合并强度、掌握度和 evidence_count。
 
 ---
 
