@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from fastapi import HTTPException
 from sqlmodel import Session, text
@@ -20,9 +20,10 @@ from backend.services.weakness_engine import apply_event, node_from_target, node
 
 
 SUGGEST_MASTERED_MIN_STREAK = 3
+SUGGEST_MASTERED_MIN_SPAN_HOURS = 24
 
 
-def create_attempt(session: Session, payload: AttemptCreate) -> AttemptRead:
+def create_attempt(session: Session, payload: AttemptCreate, commit: bool = True) -> AttemptRead:
     get_question(session, payload.question_id)
     attempted_at = (payload.attempted_at or datetime.now(timezone.utc)).isoformat()
     result = session.exec(
@@ -61,7 +62,8 @@ def create_attempt(session: Session, payload: AttemptCreate) -> AttemptRead:
             _insert_diagnosis(session, attempt_id, diagnosis)
             node = node_from_target(session, diagnosis.target_type, diagnosis.target_id, diagnosis.custom_label)
             apply_event(session, node, "wrong")
-    session.commit()
+    if commit:
+        session.commit()
     return get_attempt(session, attempt_id)
 
 
@@ -288,6 +290,29 @@ def _diagnosis_type(row) -> str:
     return "custom"
 
 
+def _should_suggest_mastered(session: Session, question_id: int, mastered_at, mastered_streak: int) -> bool:
+    """§16.4: suggest "mastered" only when the recent correct streak also spans
+    at least SUGGEST_MASTERED_MIN_SPAN_HOURS, so a single sitting of rapid-fire
+    correct answers does not trip the hint."""
+    if mastered_at is not None or mastered_streak < SUGGEST_MASTERED_MIN_STREAK:
+        return False
+    rows = session.exec(
+        text(
+            """
+            SELECT attempted_at FROM attempts
+            WHERE question_id = :question_id AND is_correct = 1
+            ORDER BY attempted_at DESC
+            LIMIT :limit
+            """
+        ),
+        params={"question_id": question_id, "limit": SUGGEST_MASTERED_MIN_STREAK},
+    ).all()
+    if len(rows) < SUGGEST_MASTERED_MIN_STREAK:
+        return False
+    times = [datetime.fromisoformat(row.attempted_at) for row in rows]
+    return max(times) - min(times) >= timedelta(hours=SUGGEST_MASTERED_MIN_SPAN_HOURS)
+
+
 def _mistake_read(session: Session, question_id: int) -> MistakeRead:
     row = session.exec(
         text("SELECT * FROM mistakes WHERE question_id = :question_id"),
@@ -304,10 +329,15 @@ def _mistake_read(session: Session, question_id: int) -> MistakeRead:
         mastered_at=row.mastered_at,
         mastered_source=row.mastered_source,
         mastered_streak=row.mastered_streak,
-        suggest_mastered=row.mastered_at is None and row.mastered_streak >= SUGGEST_MASTERED_MIN_STREAK,
+        suggest_mastered=_should_suggest_mastered(session, question_id, row.mastered_at, row.mastered_streak),
         diagnoses=diagnoses,
         weaknesses=_weaknesses_for_question(session, question_id),
     )
+
+
+def weaknesses_for_question(session: Session, question_id: int) -> list[WeaknessRead]:
+    """Public accessor for the personal-weakness nodes linked to a question."""
+    return _weaknesses_for_question(session, question_id)
 
 
 def _weaknesses_for_question(session: Session, question_id: int) -> list[WeaknessRead]:

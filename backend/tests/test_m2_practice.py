@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from sqlmodel import Session, create_engine, text
@@ -90,3 +91,41 @@ def test_manual_master_event_hides_default_mistake_and_reduces_strength(tmp_path
     assert after < before
     assert active.total == 0
     assert all_mistakes.total == 1
+
+
+def test_suggest_mastered_requires_24h_span(tmp_path: Path) -> None:
+    now = datetime.now(timezone.utc)
+    with _session(tmp_path) as session:
+        kp_id = session.exec(
+            text("SELECT id FROM knowledge_points ORDER BY order_index LIMIT 1")
+        ).one().id
+
+        def make_question(stem: str) -> int:
+            return create_question(
+                session,
+                QuestionCreate(stem_md=stem, kp_ids=[WeightedKpInput(id=kp_id, is_primary=True)]),
+            ).id
+
+        # Three correct answers within the same sitting must NOT trip the hint.
+        rapid_id = make_question("快速连答题")
+        create_attempt(session, AttemptCreate(question_id=rapid_id, is_correct=False))
+        for minutes in (30, 20, 10):
+            create_attempt(
+                session,
+                AttemptCreate(question_id=rapid_id, is_correct=True, attempted_at=now - timedelta(minutes=minutes)),
+            )
+
+        # A correct streak whose most recent answers span >24h SHOULD trip it.
+        spanned_id = make_question("跨天复习题")
+        create_attempt(session, AttemptCreate(question_id=spanned_id, is_correct=False))
+        for hours in (48, 24, 0):
+            create_attempt(
+                session,
+                AttemptCreate(question_id=spanned_id, is_correct=True, attempted_at=now - timedelta(hours=hours)),
+            )
+
+        mistakes = {item.question.id: item for item in list_mistakes(session, include_mastered=True).items}
+
+    assert mistakes[rapid_id].mastered_streak >= 3
+    assert mistakes[rapid_id].suggest_mastered is False
+    assert mistakes[spanned_id].suggest_mastered is True

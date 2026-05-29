@@ -5,7 +5,7 @@ from pathlib import Path
 from sqlmodel import Session, create_engine, text
 
 from backend.db import run_migrations
-from backend.schemas import ParsedMistakeInput, QuestionCreate
+from backend.schemas import ParsedMistakeInput, QuestionCreate, WeightedKpInput
 from backend.services.intake_store import capabilities, commit_mistakes, commit_questions, parse_upload
 from backend.services.kp_sync import sync_knowledge_points
 from backend.schemas import IntakeParseRequest
@@ -46,7 +46,14 @@ def test_parse_upload_returns_manual_pages(tmp_path: Path, monkeypatch) -> None:
 
 def test_commit_questions_and_mistakes_reuse_question_hash(tmp_path: Path) -> None:
     with _session(tmp_path) as session:
-        question = QuestionCreate(stem_md="M3 题干", answer_md="A")
+        kp_id = session.exec(
+            text("SELECT id FROM knowledge_points ORDER BY order_index LIMIT 1")
+        ).one().id
+        question = QuestionCreate(
+            stem_md="M3 题干",
+            answer_md="A",
+            kp_ids=[WeightedKpInput(id=kp_id, is_primary=True)],
+        )
         question_commit = commit_questions(session, [question])
         mistake_commit = commit_mistakes(
             session,
@@ -66,3 +73,29 @@ def test_commit_questions_and_mistakes_reuse_question_hash(tmp_path: Path) -> No
     assert mistake_commit.attempt_ids
     assert question_count == 1
     assert attempt_count == 1
+    # The commit response surfaces the personal-weakness nodes it just hit so the
+    # frontend can render the "命中个人薄弱点 X/Y/Z" toast (PLAN §6.3.3).
+    assert mistake_commit.matched_weaknesses
+    assert mistake_commit.matched_weaknesses[0].target_type == "kp"
+
+
+def test_commit_mistakes_is_atomic_on_failure(tmp_path: Path) -> None:
+    with _session(tmp_path) as session:
+        good = QuestionCreate(stem_md="可入库题")
+        bad = QuestionCreate(stem_md="   ")  # blank stem → create_question raises
+        try:
+            commit_mistakes(
+                session,
+                [
+                    ParsedMistakeInput(question=good, is_correct=False),
+                    ParsedMistakeInput(question=bad, is_correct=False),
+                ],
+            )
+        except Exception:
+            pass
+        question_count = session.exec(text("SELECT COUNT(*) AS count FROM questions")).one().count
+        attempt_count = session.exec(text("SELECT COUNT(*) AS count FROM attempts")).one().count
+
+    # The first (valid) mistake must not survive once the batch fails.
+    assert question_count == 0
+    assert attempt_count == 0

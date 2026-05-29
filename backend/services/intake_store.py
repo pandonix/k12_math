@@ -19,7 +19,7 @@ from backend.schemas import (
     QuestionCreate,
     UploadResponse,
 )
-from backend.services.practice_store import create_attempt
+from backend.services.practice_store import create_attempt, weaknesses_for_question
 from backend.services.question_store import create_question, get_or_create_question
 
 
@@ -78,40 +78,65 @@ def parse_upload(payload: IntakeParseRequest) -> ManualParseResult:
 
 def commit_questions(session: Session, questions: list[QuestionCreate]) -> IntakeCommitResponse:
     ids: list[int] = []
-    for question in questions:
-        created = create_question(session, question)
-        ids.append(created.id)
+    try:
+        for question in questions:
+            created = create_question(session, question, commit=False)
+            ids.append(created.id)
+        session.commit()
+    except Exception:
+        session.rollback()
+        raise
     return IntakeCommitResponse(committed_n=len(ids), question_ids=ids)
 
 
 def commit_mistakes(session: Session, mistakes: list[ParsedMistakeInput]) -> IntakeCommitResponse:
     question_ids: list[int] = []
     attempt_ids: list[int] = []
-    matched = []
-    for mistake in mistakes:
-        question = get_or_create_question(session, mistake.question)
-        question_ids.append(question.id)
-        attempt = create_attempt(
-            session,
-            AttemptCreate(
-                question_id=question.id,
-                is_correct=mistake.is_correct,
-                user_answer_md=mistake.user_answer_md,
-                answer_image_path=mistake.answer_image_path,
-                source="photo_intake",
-                attempted_at=mistake.attempted_at,
-                diagnoses=mistake.mistake_hints,
-            ),
-        )
-        attempt_ids.append(attempt.id)
-        # create_attempt commits; read the latest mistake response through the API
-        # service is intentionally avoided here to keep this return lightweight.
+    try:
+        for mistake in mistakes:
+            question = get_or_create_question(session, mistake.question, commit=False)
+            question_ids.append(question.id)
+            attempt = create_attempt(
+                session,
+                AttemptCreate(
+                    question_id=question.id,
+                    is_correct=mistake.is_correct,
+                    user_answer_md=mistake.user_answer_md,
+                    answer_image_path=mistake.answer_image_path,
+                    source="photo_intake",
+                    attempted_at=mistake.attempted_at,
+                    diagnoses=mistake.mistake_hints,
+                ),
+                commit=False,
+            )
+            attempt_ids.append(attempt.id)
+        # The whole batch shares one transaction boundary so a later failure
+        # never leaves earlier mistakes (and their weakness deltas) persisted.
+        session.commit()
+    except Exception:
+        session.rollback()
+        raise
     return IntakeCommitResponse(
         committed_n=len(question_ids),
         question_ids=question_ids,
         attempt_ids=attempt_ids,
-        matched_weaknesses=matched,
+        matched_weaknesses=_dedupe_weaknesses(
+            weakness
+            for question_id in question_ids
+            for weakness in weaknesses_for_question(session, question_id)
+        ),
     )
+
+
+def _dedupe_weaknesses(weaknesses) -> list:
+    seen: set[int] = set()
+    unique = []
+    for weakness in weaknesses:
+        if weakness.id in seen:
+            continue
+        seen.add(weakness.id)
+        unique.append(weakness)
+    return unique
 
 
 def _detect_kind(filename: str, content_type: str | None) -> str:

@@ -203,7 +203,7 @@ def _replace_question_edges(session: Session, question_id: int, payload: Questio
             )
 
 
-def create_question(session: Session, payload: QuestionCreate) -> QuestionRead:
+def create_question(session: Session, payload: QuestionCreate, commit: bool = True) -> QuestionRead:
     if not payload.stem_md.strip():
         raise HTTPException(status_code=400, detail="stem_md is required")
 
@@ -246,11 +246,12 @@ def create_question(session: Session, payload: QuestionCreate) -> QuestionRead:
     )
     question_id = int(result.lastrowid)
     _replace_question_edges(session, question_id, payload)
-    session.commit()
+    if commit:
+        session.commit()
     return get_question(session, question_id)
 
 
-def get_or_create_question(session: Session, payload: QuestionCreate) -> QuestionRead:
+def get_or_create_question(session: Session, payload: QuestionCreate, commit: bool = True) -> QuestionRead:
     if not payload.stem_md.strip():
         raise HTTPException(status_code=400, detail="stem_md is required")
     q_hash = stem_hash(payload.stem_md)
@@ -260,7 +261,7 @@ def get_or_create_question(session: Session, payload: QuestionCreate) -> Questio
     ).first()
     if existing:
         return get_question(session, int(existing.id))
-    return create_question(session, payload)
+    return create_question(session, payload, commit=commit)
 
 
 def update_question(session: Session, question_id: int, payload: QuestionUpdate) -> QuestionRead:
