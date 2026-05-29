@@ -1368,7 +1368,7 @@ function renderTags(tags) {
 }
 
 function renderQuestionImages(rawPaths, usedContent = "") {
-  const paths = questionImagePaths(rawPaths).filter(path => !usedContent.includes(`[[img:${path}]]`));
+  const paths = questionImagePaths(rawPaths).filter(path => !usedContent.includes(`[[img:${path}]]`) && !usedContent.includes(`[[img:${path}|`));
   if (!paths.length) return "";
   return `
     <div class="question-images" aria-label="题目配图">
