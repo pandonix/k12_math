@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<title>PDF→题库 OCR POC</title>
+<script>window.MathJax={tex:{inlineMath:[["$","$"]],displayMath:[["$$","$$"]]},svg:{fontCache:"global"}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+ body{font-family:-apple-system,system-ui,sans-serif;max-width:1100px;margin:24px auto;padding:0 16px;color:#1f2937;line-height:1.7}
+ h1{font-size:20px} .sample{border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin:20px 0}
+ .cols{display:flex;gap:16px;flex-wrap:wrap} .col{flex:1;min-width:320px}
+ .cap{font-size:12px;color:#6b7280;margin-bottom:6px}
+ .col img{width:100%;border:1px solid #e5e7eb;border-radius:8px}
+ .rendered{border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#fff}
+ .rendered h4{margin:.6em 0 .2em;color:#059669} .md{white-space:pre-wrap}
+ pre{white-space:pre-wrap;background:#f9fafb;padding:10px;border-radius:8px;font-size:12px;color:#b91c1c}
+ details{margin-top:10px}
+</style></head>
+<body>
+<h1>PDF → 题库：视觉 OCR → LaTeX POC</h1>
+<p>左为 PDF 原页，右为"视觉 OCR 产出的 LaTeX"经现有 MathJax 渲染层显示。底部可展开看朴素文本抽取的乱码对照。</p>
+
+        <section class="sample">
+          <h2>易混易错·典例2</h2>
+          <div class="cols">
+            <div class="col"><div class="cap">① PDF 原页（OCR 输入）</div>
+              <img src="易混易错_典例2.png" alt="pdf page"></div>
+            <div class="col"><div class="cap">② 视觉 OCR→LaTeX 经 MathJax 渲染（现有渲染层）</div>
+              <div class="rendered"><h4>题干</h4><div class='md'>【典例2】（25-26 高三·全国·专题练习）已知角 $\alpha$ 的终边过点 $A(-3,m)$ 且 $\sin\alpha=\dfrac{4}{5}$，则 $m=$（ ）
+A．$3$　B．$4$　C．$\pm 3$　D．$\pm 4$</div><h4>答案</h4><div class='md'>B</div><h4>解析</h4><div class='md'>角 $\alpha$ 的终边过点 $A(-3,m)$ 且 $\sin\alpha=\dfrac{4}{5}$，
+所以 $\dfrac{m}{\sqrt{(-3)^2+m^2}}=\dfrac{4}{5}$ 且 $m&gt;0$，解得 $m=4$。
+故选：B.</div></div></div>
+          </div>
+          <details><summary>③ 对照：朴素文本抽取（乱码，证明不可用）</summary>
+            <pre> 
+ 
+学科网（北京）股份有限公司 
+3 / 
+当角的终边在第四象限时，在角的终边上取一点
+(
+)
+1, 3
+P
+−
+， 
+则点P到原点的距离
+(
+)
+2
+21
+3
+10
+r=
++ −
+=
+，∴
+1
+10
+cos
+10
+10
+=
+=
+． 
+综上，
+10
+cosα
+10
+
+或
+10
+cos
+10
+= −
+． 
+【典例2】(25-26 高三·全国·专题练习)已知角的终边过点( 3, )
+A
+m
+−
+且
+4
+sin
+5
+
+，则m = （   ） 
+A．3 
+B．4 
+C．3
+ 
+D．4
+ 
+【答案】B 
+【解析】角的终边过点( 3, )
+A
+m
+−
+且
+4
+sin
+5
+
+， 
+所以
+2
+2
+4
+5
+( 3)
+m
+m
+=
+−
++
+且
+0
+m 
+，解得
+4
+m =
+. 
+故选：B. 
+【跟踪训练1】（2025·福建福州·模拟预测）以坐标原点为顶点，x 轴非负半轴为始边的角，其终边落
+在直线
+2
+y
+x
+=
+上，则（    ） 
+A．
+2 5
+sin
+5
+= −
+ 
+B．
+5
+cos
+5
+=
+ 
+C．tan
+2
+=
+ 
+D．
+4
+sin2
+5
+= −
+ 
+【答案】C 
+【解析】因为角的终边落在直线
+2
+y
+x
+=
+上， 
+当角的终边在第一象限时，终边过点(1,2) ， 
+此时
+2 5
+sin
+5
+=
+，
+5
+cos
+5
+=
+，tan
+2
+=
+，
+2 5
+5
+4
+sin2
+2sin cos
+2
+5
+5
+5
+
+
+
+=
+= 
+
+=
+， 
+当角的终边在第三象限时，终边过点( 1, 2)
+−−
+， 
+此时
+2 5
+sin
+5
+= −
+，
+5
+cos
+5
+= −
+，tan
+2
+=
+，
+2 5
+5
+4
+sin2
+2sin cos
+2 (
+) (
+)
+5
+5
+5
+
+
+
+=
+= −
+−
+=
+， 
+故选：C. 
+【跟踪训练2】 (多选)（25-26 高三上·湖南郴州·期末）已知角的终边经过点(
+)(
+)
+3 ,
+0
+P
+m m
+m 
+，将角
+的终边绕坐标原点O逆时针旋转π
+3 得到角的终边，则下列说法正确的有（    ） 
+A．
+3
+cos
+2
+=
+ 
+{#{QQABKQit4gI4gIZACT7rQ0naCkmYsIISLAgOhQCYOAwKCAFABCA=}#}
+</pre></details>
+        </section>
+</body></html>
