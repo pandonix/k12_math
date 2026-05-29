@@ -798,7 +798,9 @@ async function commitUploadedMistake(event) {
   const preview = document.querySelector("#uploadPreview");
   try {
     const result = await api("/intake/mistakes/commit", { method: "POST", body: JSON.stringify(payload) });
-    preview.insertAdjacentHTML("beforeend", `<p class="filter-note">已沉淀 ${result.committed_n} 题，attempt #${escapeHtml(result.attempt_ids.join(", "))}</p>`);
+    const hits = (result.matched_weaknesses || []).map((w) => w.title).filter(Boolean);
+    const hitNote = hits.length ? `。命中个人薄弱点：${escapeHtml(hits.join(" / "))}` : "";
+    preview.insertAdjacentHTML("beforeend", `<p class="filter-note">已沉淀 ${result.committed_n} 题${hitNote}（attempt #${escapeHtml(result.attempt_ids.join(", "))}）</p>`);
     await loadQuestions();
     await loadMistakes();
   } catch (error) {
