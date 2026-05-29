@@ -1402,7 +1402,7 @@ function questionImagePaths(rawPaths) {
 function imageUrl(path) {
   if (/^https?:\/\//i.test(path) || path.startsWith("/")) return path;
   const normalized = path.replace(/^\/+/, "");
-  const version = normalized.startsWith("data/uploads/extracted/") ? "?v=docx-readable-7" : "";
+  const version = normalized.startsWith("data/uploads/extracted/") ? "?v=docx-readable-8" : "";
   return `/${normalized}${version}`;
 }
 

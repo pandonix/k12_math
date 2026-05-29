@@ -10,11 +10,26 @@ Requires LibreOffice (headless `soffice`) and Pillow.
 from __future__ import annotations
 
 import shutil
+import struct
 import subprocess
 import tempfile
 from pathlib import Path
 
 from PIL import Image, ImageChops
+
+# MathType fonts LibreOffice lacks -> a substitute it renders with the same
+# single-byte glyph layout. Euclid Extra/MT Extra both map 'V' (0x56) to △;
+# Euclid Symbol is a layout clone of Adobe Symbol. Keeps the original glyphs
+# instead of falling back to a wrong character (e.g. △ rendering as ∨).
+_FONT_REMAP = {
+    b"Euclid Extra": b"MT Extra",
+    b"Euclid Extra Tiger": b"MT Extra",
+    b"MT Extra Tiger": b"MT Extra",
+    b"Euclid Symbol": b"Symbol",
+    b"Euclid Symbol Tiger": b"Symbol",
+    b"Symbol Tiger Expert": b"Symbol",
+    b"Symbol Tiger": b"Symbol",
+}
 
 # A4 at ~300 DPI — gives crisp equations that downscale well on retina.
 _RENDER_DPI = 300
@@ -30,6 +45,32 @@ _PNG_FILTER = (
 _WHITE_THRESHOLD = 245
 _PAD = 8
 _CHUNK = 150  # files per soffice invocation
+
+
+def remap_missing_fonts(data: bytes) -> bytes:
+    """Rewrite CreateFontIndirect facenames for MathType fonts LibreOffice
+    lacks, so glyphs (e.g. the △ triangle) render correctly instead of falling
+    back to a wrong character."""
+    if len(data) < 40 or data[:4] != b"\xd7\xcd\xc6\x9a":
+        return data
+    buf = bytearray(data)
+    cursor = 40  # placeable header (22) + standard WMF header (18)
+    while cursor + 6 <= len(buf):
+        size_words = struct.unpack_from("<I", buf, cursor)[0]
+        function = struct.unpack_from("<H", buf, cursor + 4)[0]
+        if size_words < 3 or function == 0:
+            break
+        if function == 0x02FB:  # META_CREATEFONTINDIRECT
+            name_start = cursor + 6 + 18  # after LOGFONT fixed fields
+            name_end = cursor + size_words * 2
+            field = bytes(buf[name_start:name_end])
+            current = field.split(b"\x00", 1)[0]
+            replacement = _FONT_REMAP.get(current)
+            if replacement:
+                padded = replacement[: name_end - name_start].ljust(name_end - name_start, b"\x00")
+                buf[name_start:name_end] = padded
+        cursor += size_words * 2
+    return bytes(buf)
 
 
 def find_soffice() -> str | None:
@@ -112,7 +153,7 @@ def render_wmf_batch(
         wmf_files: list[Path] = []
         for rel_id, data in wmf_bytes_by_rel_id.items():
             wmf_path = tmp_dir / f"{rel_id}.wmf"
-            wmf_path.write_bytes(data)
+            wmf_path.write_bytes(remap_missing_fonts(data))
             rel_by_stem[rel_id] = rel_id
             wmf_files.append(wmf_path)
 
