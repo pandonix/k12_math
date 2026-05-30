@@ -10,3 +10,8 @@ backend/.env
 node_modules/
 dist/
 build/
+# 20260530 源讲义 docx（约 90MB 二进制，源数据不入库；同目录 .md 索引仍提交）
+20260530/**/*.docx
+20260530/*.docx
+# 浏览器验证产物
+.playwright-mcp/
