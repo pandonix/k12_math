@@ -925,11 +925,16 @@ def attach_edges(
             (question_id, pitfall_id, 1.0),
         )
 
-    pattern_id = upsert_named_node(conn, "question_patterns", question.section, "strategy_md", source="docx_import")
-    conn.execute(
-        "INSERT OR REPLACE INTO question_patterns_map(question_id, pattern_id, weight, is_primary) VALUES (?, ?, ?, ?)",
-        (question_id, pattern_id, 1.0, 1),
-    )
+    # The two source docs are 方法技巧 / 易混易错 collections: the section *is*
+    # the skill / pitfall (already linked above), not a 题型. Only materialise a
+    # question_pattern when the section is a genuine 题型 (neither skill nor
+    # pitfall). See PLAN §3.1/§5.1 — these node types are mutually exclusive.
+    if not question.skill and not question.pitfall:
+        pattern_id = upsert_named_node(conn, "question_patterns", question.section, "strategy_md", source="docx_import")
+        conn.execute(
+            "INSERT OR REPLACE INTO question_patterns_map(question_id, pattern_id, weight, is_primary) VALUES (?, ?, ?, ?)",
+            (question_id, pattern_id, 1.0, 1),
+        )
 
     for tag in question.tags:
         conn.execute(

@@ -860,9 +860,9 @@ async function commitUploadedMistake(event) {
 
 function renderGraphView() {
   resetShell();
+  // 新增题型表单暂时屏蔽：手动维护题型的入口与图谱建模尚未想清楚，待后续设计明确后再恢复（见 PLAN §7.3 / §9）。
   els.sidebar.innerHTML = `
     <section class="panel summary-panel"><div class="stat"><strong>${state.patterns.length}</strong><span>题型</span></div><div class="stat"><strong>${state.items.length}</strong><span>知识点</span></div></section>
-    <section class="panel"><h2>新增题型</h2><form id="patternForm" class="mini-form"><input name="name" placeholder="题型名称" required><textarea name="strategy_md" rows="4" placeholder="解题策略"></textarea><button type="submit">保存题型</button></form></section>
   `;
   els.typeFilters.innerHTML = `<button class="segment active" type="button">局部图谱</button>`;
   els.resultCount.textContent = `${state.patterns.length} 个题型`;
@@ -873,16 +873,23 @@ function renderGraphView() {
     </button>
   `).join("") || `<div class="no-results">还没有题型。录题时输入题型会自动创建。</div>`;
   els.results.querySelectorAll("[data-id]").forEach(button => {
-    button.addEventListener("click", () => {
-      state.activePatternId = Number(button.dataset.id);
-      route(`/graph/${button.dataset.id}`);
-    });
+    button.addEventListener("click", () => selectPattern(Number(button.dataset.id)));
   });
   const pattern = state.patterns.find(item => item.id === state.activePatternId) || state.patterns[0];
   renderPatternReader(pattern);
-  document.querySelector("#patternForm").addEventListener("submit", submitPatternForm);
 }
 
+// 仅切换右侧详情与列表高亮，不整列表重建（避免滚动位置被重置）。
+function selectPattern(id) {
+  state.activePatternId = id;
+  history.replaceState(null, "", `#/graph/${id}`);
+  els.results.querySelectorAll("[data-id]").forEach(card => {
+    card.classList.toggle("active", Number(card.dataset.id) === id);
+  });
+  renderPatternReader(state.patterns.find(item => item.id === id));
+}
+
+// 暂未接线：新增题型表单当前在 renderGraphView 中被屏蔽，恢复表单时重新绑定此处理器。
 async function submitPatternForm(event) {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
