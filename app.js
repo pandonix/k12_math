@@ -1,12 +1,13 @@
-const API_BASE = "http://127.0.0.1:8001/api";
+const apiParam = new URLSearchParams(location.search).get("api");
+const API_BASE = apiParam || window.MATH_API_BASE || `${location.protocol}//${location.hostname}:8001/api`;
 
 const tabs = [
+  { key: "dashboard", label: "学情" },
+  { key: "graph", label: "学习地图" },
   { key: "kp", label: "知识点" },
   { key: "questions", label: "题库" },
   { key: "intake", label: "录题" },
-  { key: "practice", label: "练习/错题" },
-  { key: "graph", label: "图谱" },
-  { key: "dashboard", label: "学情" }
+  { key: "practice", label: "练习/错题" }
 ];
 
 const typeFilters = [
@@ -25,6 +26,11 @@ const state = {
   questions: [],
   questionTotal: 0,
   patterns: [],
+  graphSummary: null,
+  graphNodes: [],
+  graphDetail: null,
+  graphNodeType: "kp",
+  graphFilterOptions: { skills: [], pitfalls: [] },
   mistakes: [],
   dashboard: {
     weakTop: [],
@@ -32,6 +38,7 @@ const state = {
     typeRadar: [],
     pitfalls: [],
     trend: [],
+    readiness: null,
     detail: null
   },
   includeMastered: false,
@@ -43,7 +50,8 @@ const state = {
   activePracticeQuestionId: 0,
   activeWeaknessId: 0,
   activePatternId: 0,
-  questionFilters: { kp: "", difficulty: "" },
+  activeGraphNodeId: "",
+  questionFilters: { kp: "", pattern: "", skill: "", pitfall: "", difficulty: "" },
   favorites: new Set(JSON.parse(localStorage.getItem("mathFavorites") || "[]")),
   message: "",
   error: ""
@@ -80,6 +88,7 @@ async function init() {
 async function bootstrap() {
   await loadKnowledgePoints();
   await loadPatterns();
+  await loadGraphFilterOptions();
   if (state.tab === "questions") await loadQuestions();
   if (state.tab === "practice") {
     await loadQuestions();
@@ -132,7 +141,16 @@ function parseRoute() {
   if (state.tab === "questions" && parts[1]) state.activeQuestionId = Number(parts[1]);
   if (state.tab === "practice" && parts[1]) state.activePracticeQuestionId = Number(parts[1]);
   if (state.tab === "dashboard" && parts[1]) state.activeWeaknessId = Number(parts[1]);
-  if (state.tab === "graph" && parts[1]) state.activePatternId = Number(parts[1]);
+  if (state.tab === "graph") {
+    if (parts[1] && /^\d+$/.test(parts[1])) {
+      state.graphNodeType = "pattern";
+      state.activeGraphNodeId = parts[1];
+      state.activePatternId = Number(parts[1]);
+    } else {
+      state.graphNodeType = parts[1] || state.graphNodeType || "kp";
+      state.activeGraphNodeId = parts[2] || state.activeGraphNodeId || "";
+    }
+  }
 }
 
 function route(path) {
@@ -140,7 +158,8 @@ function route(path) {
 }
 
 async function api(path, options = {}) {
-  const response = await fetch(`${API_BASE}${path}`, {
+  if (!window.fetch) return apiViaXhr(path, options);
+  const response = await window.fetch(`${API_BASE}${path}`, {
     headers: { "Content-Type": "application/json", ...(options.headers || {}) },
     ...options
   });
@@ -150,6 +169,30 @@ async function api(path, options = {}) {
   }
   if (response.status === 204) return null;
   return response.json();
+}
+
+function apiViaXhr(path, options = {}) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open(options.method || "GET", `${API_BASE}${path}`);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    for (const [key, value] of Object.entries(options.headers || {})) {
+      xhr.setRequestHeader(key, value);
+    }
+    xhr.onload = () => {
+      if (xhr.status < 200 || xhr.status >= 300) {
+        reject(new Error(xhr.responseText || `HTTP ${xhr.status}`));
+        return;
+      }
+      if (xhr.status === 204 || !xhr.responseText) {
+        resolve(null);
+        return;
+      }
+      resolve(JSON.parse(xhr.responseText));
+    };
+    xhr.onerror = () => reject(new Error("Network request failed"));
+    xhr.send(options.body || null);
+  });
 }
 
 async function loadKnowledgePoints() {
@@ -174,6 +217,9 @@ async function loadQuestions() {
   const params = new URLSearchParams();
   if (state.query) params.set("q", state.query);
   if (state.questionFilters.kp) params.set("kp", state.questionFilters.kp);
+  if (state.questionFilters.pattern) params.set("pattern", state.questionFilters.pattern);
+  if (state.questionFilters.skill) params.set("skill", state.questionFilters.skill);
+  if (state.questionFilters.pitfall) params.set("pitfall", state.questionFilters.pitfall);
   if (state.questionFilters.difficulty) params.set("difficulty", state.questionFilters.difficulty);
   params.set("page_size", "100");
   const data = await api(`/questions?${params}`);
@@ -187,24 +233,58 @@ async function loadPatterns() {
   state.activePatternId = state.activePatternId || state.patterns[0]?.id || 0;
 }
 
+async function loadGraphSummary() {
+  state.graphSummary = await api("/graph/summary");
+  if (!state.activeGraphNodeId && state.graphSummary?.readiness?.default_entry) {
+    state.graphNodeType = state.graphSummary.readiness.default_entry;
+  }
+}
+
+async function loadGraphNodes() {
+  const params = new URLSearchParams();
+  if (state.query) params.set("q", state.query);
+  params.set("limit", "160");
+  state.graphNodes = await api(`/graph/nodes/${state.graphNodeType}?${params}`);
+  if (!state.graphNodes.some(node => String(node.id) === String(state.activeGraphNodeId))) {
+    state.activeGraphNodeId = String(state.graphNodes[0]?.id || "");
+  }
+}
+
+async function loadGraphDetail() {
+  state.graphDetail = state.activeGraphNodeId
+    ? await api(`/graph/node/${state.graphNodeType}/${encodeURIComponent(state.activeGraphNodeId)}`)
+    : null;
+}
+
+async function loadGraphFilterOptions() {
+  const [skills, pitfalls] = await Promise.all([
+    api("/graph/nodes/skill?limit=200"),
+    api("/graph/nodes/pitfall?limit=200")
+  ]);
+  state.graphFilterOptions.skills = skills;
+  state.graphFilterOptions.pitfalls = pitfalls;
+}
+
 async function loadMistakes() {
   const data = await api(`/mistakes?include_mastered=${state.includeMastered ? "true" : "false"}`);
   state.mistakes = data.items;
 }
 
 async function loadDashboard() {
-  const [weakTop, heatmapData, typeRadarData, pitfalls, trendData] = await Promise.all([
+  const [weakTop, heatmapData, typeRadarData, pitfalls, trendData, graphSummary] = await Promise.all([
     api("/stats/weak_top?limit=10"),
     api("/stats/heatmap"),
     api("/stats/type_radar?limit=12"),
     api("/stats/personal_pitfalls?limit=10"),
-    api("/stats/trend?period=week")
+    api("/stats/trend?period=week"),
+    api("/graph/summary")
   ]);
   state.dashboard.weakTop = weakTop;
   state.dashboard.heatmap = heatmapData;
   state.dashboard.typeRadar = typeRadarData;
   state.dashboard.pitfalls = pitfalls;
   state.dashboard.trend = trendData;
+  state.dashboard.readiness = graphSummary.readiness;
   if (!state.activeWeaknessId && weakTop[0]) state.activeWeaknessId = weakTop[0].id;
   try {
     state.dashboard.detail = state.activeWeaknessId
@@ -225,7 +305,11 @@ async function render() {
     await loadQuestions();
     await loadMistakes();
   }
-  if (state.tab === "graph") await loadPatterns();
+  if (state.tab === "graph") {
+    await loadGraphSummary();
+    await loadGraphNodes();
+    await loadGraphDetail();
+  }
   if (state.tab === "dashboard") await loadDashboard();
 
   if (state.tab === "kp") renderKpView();
@@ -376,14 +460,14 @@ function renderKpReader(item) {
           ${state.favorites.has(item.id) ? "已收藏" : "收藏"}
         </button>
         <button type="button" data-action="copy">复制链接</button>
-        <button type="button" data-action="graph">查看图谱</button>
+        <button type="button" data-action="graph">查看学习地图</button>
       </div>
     </header>
     <div class="article-body">${renderMarkdown(readerContent)}</div>
   `;
   els.reader.querySelector("[data-action='favorite']").addEventListener("click", () => toggleFavorite(item.id));
   els.reader.querySelector("[data-action='copy']").addEventListener("click", () => copyCurrentLink(item.id));
-  els.reader.querySelector("[data-action='graph']").addEventListener("click", () => route("/graph"));
+  els.reader.querySelector("[data-action='graph']").addEventListener("click", () => route(`/graph/kp/${item.id}`));
   typeset(els.reader);
 }
 
@@ -424,6 +508,9 @@ function renderQuestionsView() {
 
 function renderQuestionsSidebar() {
   const kpOptions = state.items.map(item => `<option value="${escapeAttr(item.id)}" ${state.questionFilters.kp === item.id ? "selected" : ""}>${escapeHtml(item.title)}</option>`).join("");
+  const patternOptions = state.patterns.map(item => `<option value="${item.id}" ${String(item.id) === state.questionFilters.pattern ? "selected" : ""}>${escapeHtml(displayNodeName(item))}</option>`).join("");
+  const skillOptions = state.graphFilterOptions.skills.map(item => `<option value="${item.id}" ${String(item.id) === state.questionFilters.skill ? "selected" : ""}>${escapeHtml(item.display_name || item.name)}</option>`).join("");
+  const pitfallOptions = state.graphFilterOptions.pitfalls.map(item => `<option value="${item.id}" ${String(item.id) === state.questionFilters.pitfall ? "selected" : ""}>${escapeHtml(item.display_name || item.name)}</option>`).join("");
   els.sidebar.innerHTML = `
     <section class="panel summary-panel">
       <div class="stat"><strong>${state.questionTotal}</strong><span>题目</span></div>
@@ -432,16 +519,23 @@ function renderQuestionsSidebar() {
     <section class="panel form-panel">
       <h2>题库筛选</h2>
       <label>知识点<select id="questionKpFilter"><option value="">全部知识点</option>${kpOptions}</select></label>
+      <label>题型<select id="questionPatternFilter"><option value="">全部题型</option>${patternOptions}</select></label>
+      <label>技巧<select id="questionSkillFilter"><option value="">全部技巧</option>${skillOptions}</select></label>
+      <label>易错点<select id="questionPitfallFilter"><option value="">全部易错点</option>${pitfallOptions}</select></label>
       <label>难度<select id="difficultyFilter"><option value="">全部难度</option>${[1,2,3,4,5].map(n => `<option value="${n}" ${String(n) === state.questionFilters.difficulty ? "selected" : ""}>${n}</option>`).join("")}</select></label>
     </section>
   `;
-  document.querySelector("#questionKpFilter").addEventListener("change", async event => {
-    state.questionFilters.kp = event.target.value;
-    await loadQuestions();
-    renderQuestionsView();
-  });
-  document.querySelector("#difficultyFilter").addEventListener("change", async event => {
-    state.questionFilters.difficulty = event.target.value;
+  bindQuestionFilter("#questionKpFilter", "kp");
+  bindQuestionFilter("#questionPatternFilter", "pattern");
+  bindQuestionFilter("#questionSkillFilter", "skill");
+  bindQuestionFilter("#questionPitfallFilter", "pitfall");
+  bindQuestionFilter("#difficultyFilter", "difficulty");
+}
+
+function bindQuestionFilter(selector, key) {
+  document.querySelector(selector).addEventListener("change", async event => {
+    state.questionFilters[key] = event.target.value;
+    state.activeQuestionId = 0;
     await loadQuestions();
     renderQuestionsView();
   });
@@ -860,36 +954,85 @@ async function commitUploadedMistake(event) {
 
 function renderGraphView() {
   resetShell();
-  // 新增题型表单暂时屏蔽：手动维护题型的入口与图谱建模尚未想清楚，待后续设计明确后再恢复（见 PLAN §7.3 / §9）。
-  els.sidebar.innerHTML = `
-    <section class="panel summary-panel"><div class="stat"><strong>${state.patterns.length}</strong><span>题型</span></div><div class="stat"><strong>${state.items.length}</strong><span>知识点</span></div></section>
-  `;
-  els.typeFilters.innerHTML = `<button class="segment active" type="button">局部图谱</button>`;
-  els.resultCount.textContent = `${state.patterns.length} 个题型`;
-  els.results.innerHTML = state.patterns.map(pattern => `
-    <button class="result-card ${pattern.id === state.activePatternId ? "active" : ""}" type="button" data-id="${pattern.id}">
-      <h3>${escapeHtml(pattern.name)}</h3>
-      <p class="snippet">${escapeHtml(buildSummary(stripMarkdown(pattern.strategy_md || "暂未记录策略。")))}</p>
+  renderLearningMapSidebar();
+  renderLearningMapToolbar();
+  els.resultCount.textContent = `${state.graphNodes.length} 个${graphTypeLabel(state.graphNodeType)}节点`;
+  els.results.innerHTML = state.graphNodes.map(node => `
+    <button class="result-card ${String(node.id) === String(state.activeGraphNodeId) ? "active" : ""}" type="button" data-node-id="${escapeAttr(node.id)}">
+      <h3>${highlight(escapeHtml(node.display_name || node.name))}</h3>
+      <span class="path">${escapeHtml(node.group_label || graphTypeLabel(node.type))}</span>
+      <p class="snippet">${escapeHtml(graphNodeMeta(node))}</p>
     </button>
-  `).join("") || `<div class="no-results">还没有题型。录题时输入题型会自动创建。</div>`;
-  els.results.querySelectorAll("[data-id]").forEach(button => {
-    button.addEventListener("click", () => selectPattern(Number(button.dataset.id)));
+  `).join("") || `<div class="no-results">当前类型暂无节点。先录入题目或导入材料。</div>`;
+  els.results.querySelectorAll("[data-node-id]").forEach(button => {
+    button.addEventListener("click", () => selectGraphNode(button.dataset.nodeId));
   });
-  const pattern = state.patterns.find(item => item.id === state.activePatternId) || state.patterns[0];
-  renderPatternReader(pattern);
+  renderLearningMapReader(state.graphDetail);
 }
 
-// 仅切换右侧详情与列表高亮，不整列表重建（避免滚动位置被重置）。
-function selectPattern(id) {
-  state.activePatternId = id;
-  history.replaceState(null, "", `#/graph/${id}`);
-  els.results.querySelectorAll("[data-id]").forEach(card => {
-    card.classList.toggle("active", Number(card.dataset.id) === id);
+function renderLearningMapSidebar() {
+  const counts = state.graphSummary?.counts || {};
+  const readiness = state.graphSummary?.readiness;
+  els.sidebar.innerHTML = `
+    <section class="panel summary-panel map-summary">
+      <div class="stat"><strong>${counts.personal_weaknesses || 0}</strong><span>个人薄弱</span></div>
+      <div class="stat"><strong>${counts.knowledge_points || state.items.length}</strong><span>知识点</span></div>
+      <div class="stat"><strong>${counts.question_patterns || state.patterns.length}</strong><span>题型</span></div>
+      <div class="stat"><strong>${counts.skills || 0}</strong><span>技巧</span></div>
+      <div class="stat"><strong>${counts.common_pitfalls || 0}</strong><span>易错点</span></div>
+    </section>
+    <section class="panel">
+      <h2>入口</h2>
+      <div class="map-type-list">
+        ${graphTypeButtons().map(type => `
+          <button class="${state.graphNodeType === type.key ? "active" : ""}" type="button" data-graph-type="${type.key}">
+            <span>${type.label}</span><small>${type.hint}</small>
+          </button>
+        `).join("")}
+      </div>
+    </section>
+    <section class="panel">
+      <h2>证据状态</h2>
+      <div class="side-note">${escapeHtml(readiness?.message || "学习地图会按当前节点展示相关知识点、题型、技巧、易错点和训练题。")}</div>
+    </section>
+  `;
+  els.sidebar.querySelectorAll("[data-graph-type]").forEach(button => {
+    button.addEventListener("click", async () => {
+      state.graphNodeType = button.dataset.graphType;
+      state.activeGraphNodeId = "";
+      await loadGraphNodes();
+      await loadGraphDetail();
+      route(`/graph/${state.graphNodeType}${state.activeGraphNodeId ? `/${state.activeGraphNodeId}` : ""}`);
+    });
   });
-  renderPatternReader(state.patterns.find(item => item.id === id));
 }
 
-// 暂未接线：新增题型表单当前在 renderGraphView 中被屏蔽，恢复表单时重新绑定此处理器。
+function renderLearningMapToolbar() {
+  els.typeFilters.innerHTML = graphTypeButtons().map(type => `
+    <button class="segment ${state.graphNodeType === type.key ? "active" : ""}" type="button" data-graph-type="${type.key}">${type.label}</button>
+  `).join("");
+  els.typeFilters.querySelectorAll("[data-graph-type]").forEach(button => {
+    button.addEventListener("click", async () => {
+      state.graphNodeType = button.dataset.graphType;
+      state.activeGraphNodeId = "";
+      await loadGraphNodes();
+      await loadGraphDetail();
+      route(`/graph/${state.graphNodeType}${state.activeGraphNodeId ? `/${state.activeGraphNodeId}` : ""}`);
+    });
+  });
+}
+
+async function selectGraphNode(id) {
+  state.activeGraphNodeId = String(id);
+  history.replaceState(null, "", `#/graph/${state.graphNodeType}/${state.activeGraphNodeId}`);
+  els.results.querySelectorAll("[data-node-id]").forEach(card => {
+    card.classList.toggle("active", String(card.dataset.nodeId) === String(id));
+  });
+  await loadGraphDetail();
+  renderLearningMapReader(state.graphDetail);
+}
+
+// 暂未接线：新增题型表单当前被学习地图统一节点入口替代，恢复表单时重新绑定此处理器。
 async function submitPatternForm(event) {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
@@ -902,26 +1045,61 @@ async function submitPatternForm(event) {
   route(`/graph/${created.id}`);
 }
 
-function renderPatternReader(pattern) {
-  if (!pattern) {
-    els.reader.innerHTML = `<div class="empty-state"><strong>暂无图谱节点</strong><span>录题时可自动创建题型、技巧和易错点。</span></div>`;
+function renderLearningMapReader(detail) {
+  if (!detail) {
+    els.reader.innerHTML = `<div class="empty-state"><strong>暂无学习地图节点</strong><span>录题或导入材料后，这里会显示局部学习地图。</span></div>`;
     return;
   }
+  const node = detail.node;
   els.reader.innerHTML = `
-    <header class="article-head"><span class="path">${escapeHtml(pattern.source || "manual")}</span><h2>${escapeHtml(pattern.name)}</h2></header>
+    <header class="article-head">
+      <span class="path">${escapeHtml(graphTypeLabel(node.type))} · ${escapeHtml(node.group_label || node.source || "学习地图")}</span>
+      <h2>${escapeHtml(node.display_name || node.name)}</h2>
+      <p class="filter-note">${escapeHtml(learningMapAnswerLine(detail))}</p>
+      <div class="article-actions">
+        ${node.type !== "weakness" ? `<button type="button" data-map-filter="${escapeAttr(node.type)}">筛题训练</button>` : ""}
+        ${detail.recommendations?.[0] ? `<button type="button" data-map-practice="${detail.recommendations[0].id}">开始训练</button>` : ""}
+      </div>
+    </header>
     <div class="article-body">
-      ${pattern.strategy_md ? renderMarkdown(pattern.strategy_md) : "<p>暂未记录策略。</p>"}
-      <h4>关联知识点</h4><ul>${pattern.knowledge_points.map(kp => `<li>${escapeHtml(kp.title)}</li>`).join("") || "<li>暂无</li>"}</ul>
-      <h4>技巧</h4><ul>${pattern.skills.map(node => `<li>${escapeHtml(node.name)}</li>`).join("") || "<li>暂无</li>"}</ul>
-      <h4>通用易错点</h4><ul>${pattern.pitfalls.map(node => `<li>${escapeHtml(node.name)}</li>`).join("") || "<li>暂无</li>"}</ul>
+      ${node.content_md ? renderMarkdown(node.content_md) : node.strategy_md ? renderMarkdown(node.strategy_md) : ""}
+      <div class="learning-map-canvas" id="learningMapCanvas"></div>
+      <div class="map-relation-grid">
+        ${renderRelatedGroup("知识点", detail.related.knowledge_points, "kp")}
+        ${renderRelatedGroup("题型", detail.related.patterns, "pattern")}
+        ${renderRelatedGroup("技巧", detail.related.skills, "skill")}
+        ${renderRelatedGroup("易错点", detail.related.pitfalls, "pitfall")}
+      </div>
+      <h4>我的薄弱</h4>
+      ${renderNodeWeaknesses(detail.weaknesses)}
+      <h4>关联题目</h4>
+      ${renderNodeQuestions(detail.questions)}
+      <h4>建议训练</h4>
+      ${renderNodeQuestions(detail.recommendations)}
     </div>
   `;
+  els.reader.querySelectorAll("[data-related-type]").forEach(button => {
+    button.addEventListener("click", () => route(`/graph/${button.dataset.relatedType}/${button.dataset.relatedId}`));
+  });
+  els.reader.querySelector("[data-map-filter]")?.addEventListener("click", () => {
+    state.questionFilters[node.type === "kp" ? "kp" : node.type] = String(node.id);
+    route("/questions");
+  });
+  els.reader.querySelectorAll("[data-weakness]").forEach(button => {
+    button.addEventListener("click", () => route(`/dashboard/${button.dataset.weakness}`));
+  });
+  els.reader.querySelectorAll("[data-map-practice]").forEach(button => {
+    button.addEventListener("click", () => route(`/practice/${button.dataset.mapPractice}`));
+  });
+  renderLocalGraph(detail);
+  typeset(els.reader);
 }
 
 function renderDashboardView() {
   renderDashboardSidebar();
   const detail = state.dashboard.detail;
   const topWeakness = state.dashboard.weakTop[0];
+  const ready = Boolean(state.dashboard.readiness?.has_enough_personal_data);
   els.workspace.innerHTML = `
     <div class="toolbar">
       <div class="segmented" aria-label="学情视图">
@@ -932,8 +1110,9 @@ function renderDashboardView() {
     <section class="dashboard-surface">
       <header class="dashboard-head">
         <span class="path">基于 attempts / mistakes / diagnoses / personal_weaknesses</span>
-        <h2>${topWeakness ? `现在最该补：${escapeHtml(topWeakness.title)}` : "还没有足够的个人练习证据"}</h2>
-        <p>${topWeakness ? escapeHtml(weaknessReason(topWeakness)) : "先完成几次练习或错题沉淀，系统会在这里聚合个人薄弱证据。"}</p>
+        <h2>${ready && topWeakness ? `现在最该补：${escapeHtml(topWeakness.title)}` : "先从学习地图建立练习证据"}</h2>
+        <p>${ready && topWeakness ? escapeHtml(weaknessReason(topWeakness)) : escapeHtml(state.dashboard.readiness?.message || "先完成几次练习或错题沉淀，系统会在这里聚合个人薄弱证据。")}</p>
+        ${ready ? "" : `<div class="article-actions"><button type="button" data-open-map>打开学习地图</button><button type="button" data-open-practice>先练几题</button></div>`}
       </header>
       <div class="dashboard-grid">
         <section class="dashboard-main">
@@ -951,6 +1130,8 @@ function renderDashboardView() {
   els.workspace.querySelectorAll("[data-train-question]").forEach(button => {
     button.addEventListener("click", () => route(`/practice/${button.dataset.trainQuestion}`));
   });
+  els.workspace.querySelector("[data-open-map]")?.addEventListener("click", () => route("/graph"));
+  els.workspace.querySelector("[data-open-practice]")?.addEventListener("click", () => route("/practice"));
   els.workspace.querySelectorAll("[data-weakness]").forEach(button => {
     button.addEventListener("click", () => {
       state.activeWeaknessId = Number(button.dataset.weakness);
@@ -1114,6 +1295,132 @@ function weaknessReason(item) {
 
 function targetLabel(type) {
   return { kp: "知识点", pattern: "题型", skill: "技巧", pitfall: "易错点", custom: "个人错因" }[type] || type;
+}
+
+function graphTypeButtons() {
+  return [
+    { key: "weakness", label: "个人薄弱", hint: "从真实错因和练习证据进入" },
+    { key: "kp", label: "知识点", hint: "按章节知识节点定位" },
+    { key: "pattern", label: "题型", hint: "看一类题如何考、如何练" },
+    { key: "skill", label: "技巧", hint: "看方法在哪些题里使用" },
+    { key: "pitfall", label: "易错点", hint: "定位通用与个人易错模式" }
+  ];
+}
+
+function graphTypeLabel(type) {
+  return graphTypeButtons().find(item => item.key === type)?.label || targetLabel(type);
+}
+
+function displayNodeName(node) {
+  if (!node) return "";
+  if (node.display_name) return node.display_name;
+  return questionSectionTitle(node.name || node.title || "");
+}
+
+function graphNodeMeta(node) {
+  const parts = [];
+  if (node.question_count) parts.push(`关联 ${node.question_count} 题`);
+  if (node.pattern_count) parts.push(`关联 ${node.pattern_count} 个题型`);
+  if (node.evidence_count) parts.push(`证据 ${node.evidence_count}`);
+  if (node.strength !== undefined) parts.push(`强度 ${percent(node.strength)}`);
+  return parts.join(" · ") || "等待更多题目和练习证据";
+}
+
+function learningMapAnswerLine(detail) {
+  const relatedCount = Object.values(detail.related || {}).reduce((sum, items) => sum + items.length, 0);
+  const questionCount = detail.questions?.length || 0;
+  const weaknessCount = detail.weaknesses?.length || 0;
+  return `关联 ${relatedCount} 个学习节点，${questionCount} 道题目，${weaknessCount ? `已暴露 ${weaknessCount} 个个人薄弱证据` : "暂未暴露个人薄弱"}`;
+}
+
+function renderRelatedGroup(title, items = [], type) {
+  return `
+    <section class="map-relation-group">
+      <h4>${escapeHtml(title)}</h4>
+      <div class="map-node-chips">
+        ${items.map(item => `
+          <button type="button" data-related-type="${type}" data-related-id="${escapeAttr(item.id)}">
+            <span>${escapeHtml(displayNodeName(item))}</span>
+            <small>${escapeHtml(graphNodeMeta(item))}</small>
+          </button>
+        `).join("") || `<p class="snippet">暂无关联${escapeHtml(title)}。</p>`}
+      </div>
+    </section>
+  `;
+}
+
+function renderNodeWeaknesses(items = []) {
+  if (!items.length) return `<p class="snippet">暂未在这个节点上沉淀个人薄弱。继续练习后会自动更新。</p>`;
+  return `
+    <div class="weakness-list inline-weakness-list">
+      ${items.map(item => `
+        <button class="weakness-button" type="button" data-weakness="${item.id}">
+          <span>${escapeHtml(item.title)}</span>
+          <small>${targetLabel(item.target_type)} · 证据 ${item.evidence_count} · 强度 ${percent(item.strength)}</small>
+          <i style="width:${Math.min(100, Math.max(4, Math.round(Number(item.strength || 0) * 100)))}%"></i>
+        </button>
+      `).join("")}
+    </div>
+  `;
+}
+
+function renderNodeQuestions(items = []) {
+  if (!items.length) return `<p class="snippet">暂无可用题目。</p>`;
+  return `
+    <ul class="map-question-list">
+      ${items.map(question => `
+        <li>
+          <button class="inline-link" type="button" data-map-practice="${question.id}">${escapeHtml(questionDisplay(question).title)}</button>
+          <span>${escapeHtml(buildSummary(stripMarkdown(question.stem_md || "")))}</span>
+        </li>
+      `).join("")}
+    </ul>
+  `;
+}
+
+function renderLocalGraph(detail) {
+  const container = document.querySelector("#learningMapCanvas");
+  if (!container || !detail?.node) return;
+  const center = detail.node;
+  const related = [
+    ...detail.related.knowledge_points.map(node => ({ ...node, type: "kp" })),
+    ...detail.related.patterns.map(node => ({ ...node, type: "pattern" })),
+    ...detail.related.skills.map(node => ({ ...node, type: "skill" })),
+    ...detail.related.pitfalls.map(node => ({ ...node, type: "pitfall" }))
+  ].slice(0, 28);
+  if (!related.length || !window.cytoscape) {
+    container.innerHTML = `
+      <div class="map-fallback-graph">
+        <strong>${escapeHtml(displayNodeName(center))}</strong>
+        ${related.map(node => `<span>${escapeHtml(displayNodeName(node))}</span>`).join("") || "<span>等待更多关联边</span>"}
+      </div>
+    `;
+    return;
+  }
+  const elements = [
+    { data: { id: "center", label: displayNodeName(center), kind: center.type } },
+    ...related.map((node, index) => ({ data: { id: `n${index}`, label: displayNodeName(node), kind: node.type, refType: node.type, refId: String(node.id) } })),
+    ...related.map((_, index) => ({ data: { id: `e${index}`, source: "center", target: `n${index}` } }))
+  ];
+  const cy = window.cytoscape({
+    container,
+    elements,
+    wheelSensitivity: 0.18,
+    style: [
+      { selector: "node", style: { "background-color": "#2563eb", label: "data(label)", color: "#1e2528", "font-size": 11, "text-wrap": "wrap", "text-max-width": 96, "text-valign": "bottom", "text-margin-y": 8, width: 26, height: 26 } },
+      { selector: 'node[kind = "kp"]', style: { "background-color": "#15803d" } },
+      { selector: 'node[kind = "pattern"]', style: { "background-color": "#2563eb" } },
+      { selector: 'node[kind = "skill"]', style: { "background-color": "#b45309" } },
+      { selector: 'node[kind = "pitfall"]', style: { "background-color": "#b91c1c" } },
+      { selector: 'node[kind = "weakness"]', style: { "background-color": "#7c3aed" } },
+      { selector: "edge", style: { width: 1.5, "line-color": "#cbd5d1" } }
+    ],
+    layout: { name: "cose", animate: false, padding: 34, nodeRepulsion: 7000, idealEdgeLength: 90 }
+  });
+  cy.on("tap", "node", event => {
+    const data = event.target.data();
+    if (data.refType && data.refId) route(`/graph/${data.refType}/${data.refId}`);
+  });
 }
 
 function percent(value) {

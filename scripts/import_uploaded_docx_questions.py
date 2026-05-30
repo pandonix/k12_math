@@ -115,7 +115,11 @@ def extract_paragraphs(docx_path: Path) -> list[str]:
 
 
 def clean_section_title(line: str) -> str:
-    return re.sub(r"\s*\d+\s*$", "", line).strip()
+    text = re.sub(r"\s*\d+\s*$", "", line).strip()
+    text = re.sub(r"^方法技巧\s*\d+\s*", "", text).strip()
+    text = re.sub(r"^易混易错\s*\d+\s*", "", text).strip()
+    text = re.sub(r"^题型[一二三四五六七八九十百\d]+\s*", "", text).strip()
+    return text or line.strip()
 
 
 def is_method_heading(line: str) -> bool:
@@ -829,12 +833,40 @@ def import_questions(conn: sqlite3.Connection, questions: list[ParsedQuestion]) 
             clear_question_edges(conn, question_id)
         attach_edges(conn, question_id, question, kps)
 
+    sync_pattern_edges_from_question_edges(conn)
     return {
         "parsed": len(questions),
         "inserted": inserted,
         "reused": reused,
         "question_ids": question_ids,
     }
+
+
+def sync_pattern_edges_from_question_edges(conn: sqlite3.Connection) -> None:
+    conn.execute("DELETE FROM pattern_skills")
+    conn.execute("DELETE FROM pattern_pitfalls")
+    conn.execute(
+        """
+        INSERT INTO pattern_skills(pattern_id, skill_id, weight)
+        SELECT qpm.pattern_id,
+               qs.skill_id,
+               MAX(COALESCE(qpm.weight, 1.0) * COALESCE(qs.weight, 1.0)) AS weight
+        FROM question_patterns_map qpm
+        JOIN question_skills qs ON qs.question_id = qpm.question_id
+        GROUP BY qpm.pattern_id, qs.skill_id
+        """
+    )
+    conn.execute(
+        """
+        INSERT INTO pattern_pitfalls(pattern_id, pitfall_id, weight)
+        SELECT qpm.pattern_id,
+               qp.pitfall_id,
+               MAX(COALESCE(qpm.weight, 1.0) * COALESCE(qp.weight, 1.0)) AS weight
+        FROM question_patterns_map qpm
+        JOIN question_pitfalls qp ON qp.question_id = qpm.question_id
+        GROUP BY qpm.pattern_id, qp.pitfall_id
+        """
+    )
 
 
 def cleanup_source_duplicates(conn: sqlite3.Connection, sources: list[str]) -> None:

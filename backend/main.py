@@ -9,6 +9,7 @@ from sqlmodel import Session
 from backend.db import engine, get_db_path, run_migrations
 from backend.routers import admin, graph, intake, kp, practice, questions, stats
 from backend.services.kp_sync import sync_knowledge_points
+from backend.services.learning_map import sync_pattern_edges_from_question_edges
 
 
 @asynccontextmanager
@@ -22,6 +23,8 @@ async def lifespan(app: FastAPI):
                 f"{result.duplicate_ids}. Refusing to start — investigate "
                 "the markdown source before any question or attempt is written."
             )
+        sync_pattern_edges_from_question_edges(session)
+        session.commit()
     yield
 
 
@@ -37,6 +40,7 @@ app.add_middleware(
         "http://127.0.0.1:8000",
         "http://localhost:8000",
     ],
+    allow_origin_regex=r"^http://(127\.0\.0\.1|localhost):\d+$",
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],

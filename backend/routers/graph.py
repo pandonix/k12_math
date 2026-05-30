@@ -7,10 +7,46 @@ from backend.db import get_session
 from backend.models import KnowledgePoint
 from backend.routers.kp import _detail
 from backend.schemas import EdgeCreate, GraphKpResponse, GraphNode, NamedNodeInput, PatternCreate, PatternRead
+from backend.services.learning_map import (
+    learning_map_node_detail,
+    learning_map_summary,
+    list_learning_map_nodes,
+    sync_pattern_edges_from_question_edges,
+)
 from backend.services.question_store import _upsert_pattern, _upsert_pitfall, _upsert_skill, utc_now
 
 
 router = APIRouter(prefix="/api/graph", tags=["graph"])
+
+
+@router.get("/summary")
+def get_learning_map_summary(session: Session = Depends(get_session)) -> dict:
+    return learning_map_summary(session)
+
+
+@router.post("/sync-pattern-edges", status_code=204)
+def sync_pattern_edges(session: Session = Depends(get_session)) -> None:
+    sync_pattern_edges_from_question_edges(session)
+    session.commit()
+
+
+@router.get("/nodes/{node_type}")
+def list_graph_nodes(
+    node_type: str,
+    q: str | None = None,
+    limit: int = 100,
+    session: Session = Depends(get_session),
+) -> list[dict]:
+    return list_learning_map_nodes(session, node_type, q=q, limit=limit)
+
+
+@router.get("/node/{node_type}/{node_id:path}")
+def get_graph_node(
+    node_type: str,
+    node_id: str,
+    session: Session = Depends(get_session),
+) -> dict:
+    return learning_map_node_detail(session, node_type, node_id)
 
 
 @router.get("/kp/{kp_id}", response_model=GraphKpResponse)

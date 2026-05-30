@@ -19,6 +19,7 @@ from backend.schemas import (
     QuestionUpdate,
     WeightedKpInput,
 )
+from backend.services.learning_map import clean_node_name, sync_pattern_edges_from_question_edges
 
 
 def stem_hash(stem_md: str) -> str:
@@ -47,9 +48,10 @@ def _split_names(value: str) -> list[NamedNodeInput]:
 
 
 def _upsert_pattern(session: Session, node: NamedNodeInput, source: str | None = None) -> int:
+    name = clean_node_name("pattern", node.name)
     existing = session.exec(
         text("SELECT id FROM question_patterns WHERE name = :name ORDER BY id LIMIT 1"),
-        params={"name": node.name},
+        params={"name": name},
     ).first()
     if existing:
         return int(existing.id)
@@ -63,7 +65,7 @@ def _upsert_pattern(session: Session, node: NamedNodeInput, source: str | None =
             """
         ),
         params={
-            "name": node.name,
+            "name": name,
             "strategy_md": node.content_md,
             "source": source,
             "created_at": now,
@@ -74,9 +76,10 @@ def _upsert_pattern(session: Session, node: NamedNodeInput, source: str | None =
 
 
 def _upsert_skill(session: Session, node: NamedNodeInput) -> int:
+    name = clean_node_name("skill", node.name)
     existing = session.exec(
         text("SELECT id FROM skills WHERE name = :name"),
-        params={"name": node.name},
+        params={"name": name},
     ).first()
     if existing:
         return int(existing.id)
@@ -90,7 +93,7 @@ def _upsert_skill(session: Session, node: NamedNodeInput) -> int:
             """
         ),
         params={
-            "name": node.name,
+            "name": name,
             "content_md": node.content_md,
             "created_at": now,
             "updated_at": now,
@@ -100,9 +103,10 @@ def _upsert_skill(session: Session, node: NamedNodeInput) -> int:
 
 
 def _upsert_pitfall(session: Session, node: NamedNodeInput) -> int:
+    name = clean_node_name("pitfall", node.name)
     existing = session.exec(
         text("SELECT id FROM common_pitfalls WHERE name = :name"),
-        params={"name": node.name},
+        params={"name": name},
     ).first()
     if existing:
         return int(existing.id)
@@ -116,7 +120,7 @@ def _upsert_pitfall(session: Session, node: NamedNodeInput) -> int:
             """
         ),
         params={
-            "name": node.name,
+            "name": name,
             "content_md": node.content_md,
             "created_at": now,
             "updated_at": now,
@@ -132,6 +136,15 @@ def _validate_kp_ids(session: Session, kp_ids: list[WeightedKpInput]) -> None:
 
 
 def _replace_question_edges(session: Session, question_id: int, payload: QuestionCreate | QuestionUpdate) -> None:
+    affected_pattern_ids = {
+        int(row.pattern_id)
+        for row in session.exec(
+            text(
+                "SELECT pattern_id FROM question_patterns_map WHERE question_id = :question_id"
+            ),
+            params={"question_id": question_id},
+        ).all()
+    }
     for table in ("question_kp", "question_patterns_map", "question_skills", "question_pitfalls", "question_tags"):
         session.exec(text(f"DELETE FROM {table} WHERE question_id = :question_id"), params={"question_id": question_id})
 
@@ -155,6 +168,7 @@ def _replace_question_edges(session: Session, question_id: int, payload: Questio
 
     for node in payload.patterns or []:
         pattern_id = _upsert_pattern(session, node, source="manual")
+        affected_pattern_ids.add(pattern_id)
         session.exec(
             text(
                 """
@@ -201,6 +215,9 @@ def _replace_question_edges(session: Session, question_id: int, payload: Questio
                 text("INSERT INTO question_tags(question_id, tag) VALUES (:question_id, :tag)"),
                 params={"question_id": question_id, "tag": clean_tag},
             )
+
+    if affected_pattern_ids:
+        sync_pattern_edges_from_question_edges(session, affected_pattern_ids)
 
 
 def create_question(session: Session, payload: QuestionCreate, commit: bool = True) -> QuestionRead:

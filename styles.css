@@ -251,6 +251,10 @@ textarea {
   overflow: hidden;
 }
 
+.map-summary {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .stat {
   padding: 14px;
   border-right: 1px solid var(--line);
@@ -690,6 +694,125 @@ textarea {
   background: var(--red);
 }
 
+.map-type-list {
+  display: grid;
+  gap: 8px;
+  padding: 0 10px 12px;
+}
+
+.map-type-list button,
+.map-node-chips button {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  min-height: 46px;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--text);
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+}
+
+.map-type-list button.active,
+.map-node-chips button:hover {
+  border-color: rgba(37, 99, 235, 0.42);
+  background: #eff6ff;
+}
+
+.map-type-list span,
+.map-node-chips span {
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.map-type-list small,
+.map-node-chips small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.learning-map-canvas {
+  height: 330px;
+  margin: 14px 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcfa;
+  overflow: hidden;
+}
+
+.map-fallback-graph {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-content: center;
+  min-height: 100%;
+  padding: 16px;
+}
+
+.map-fallback-graph strong,
+.map-fallback-graph span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 1px solid #cbd5d1;
+  border-radius: 999px;
+  background: #fff;
+}
+
+.map-fallback-graph strong {
+  border-color: rgba(37, 99, 235, 0.42);
+  color: #1d4ed8;
+  background: #dbeafe;
+}
+
+.map-relation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 18px;
+}
+
+.map-relation-group {
+  min-width: 0;
+  border: 1px solid #eef2f7;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+}
+
+.map-relation-group h4 {
+  margin-top: 0;
+}
+
+.map-node-chips {
+  display: grid;
+  gap: 8px;
+}
+
+.inline-weakness-list {
+  padding: 0;
+  margin-bottom: 16px;
+}
+
+.map-question-list {
+  display: grid;
+  gap: 8px;
+  padding-left: 18px;
+}
+
+.map-question-list li {
+  color: #526069;
+  line-height: 1.55;
+}
+
+.map-question-list span {
+  display: block;
+  margin-top: 2px;
+}
+
 .dashboard-surface {
   border: 0;
   background: transparent;
@@ -1048,7 +1171,8 @@ mark {
 @media (max-width: 1040px) {
   .app-shell,
   .content-grid,
-  .dashboard-grid {
+  .dashboard-grid,
+  .map-relation-grid {
     grid-template-columns: 1fr;
   }
 
