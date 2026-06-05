@@ -15,3 +15,14 @@ build/
 20260530/*.docx
 # 浏览器验证产物
 .playwright-mcp/
+# 本地生成的演示文稿
+*.ppt
+*.pptx
+# 个人照片/证书与 PPT 素材（隐私，不入库）
+artifacts/profile/
+artifacts/kg-demo-20260530-screenshot.png
+# 开发过程页面截图
+/dashboard-*.png
+/graph-*.png
+# POC 本地产物
+poc/output/canon_inputs.json
